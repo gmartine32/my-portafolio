@@ -1,0 +1,147 @@
+---
+import { Card, CardContent, CardHeader } from '../ui/card';
+import { Badge } from '../ui/badge';
+
+const experiences = [
+  {
+    position: 'Senior Frontend Developer',
+    company: 'TechCorp Solutions',
+    period: '2022 - Presente',
+    description: 'Lidero el desarrollo de aplicaciones web complejas utilizando React y TypeScript. Implementé un sistema de design system que redujo el tiempo de desarrollo en 40%.',
+    achievements: [
+      'Migración exitosa de aplicación legacy a React',
+      'Implementación de CI/CD reduciendo bugs en producción 60%',
+      'Mentoring de 3 desarrolladores junior'
+    ],
+    tech: ['React', 'TypeScript', 'Next.js', 'GraphQL']
+  },
+  {
+    position: 'Frontend Developer',
+    company: 'Digital Innovations',
+    period: '2021 - 2022',
+    description: 'Desarrollo de interfaces de usuario para aplicaciones B2B y B2C. Colaboración estrecha con equipos de UX/UI para implementar diseños pixel-perfect.',
+    achievements: [
+      'Desarrollo de 15+ componentes reutilizables',
+      'Optimización de performance mejorando Core Web Vitals',
+      'Implementación de testing automatizado'
+    ],
+    tech: ['Vue.js', 'JavaScript', 'SASS', 'Jest']
+  },
+  {
+    position: 'Junior Frontend Developer',
+    company: 'StartupTech',
+    period: '2020 - 2021',
+    description: 'Inicio en el desarrollo frontend trabajando en proyectos diversos. Enfoque en aprendizaje rápido y adaptación a nuevas tecnologías.',
+    achievements: [
+      'Desarrollo completo de landing pages',
+      'Integración con APIs REST',
+      'Participación en code reviews'
+    ],
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap']
+  }
+];
+
+const stats = [
+  { label: 'Años de Experiencia', value: '4+' },
+  { label: 'Proyectos Completados', value: '25+' },
+  { label: 'Tecnologías Dominadas', value: '15+' },
+  { label: 'Clientes Satisfechos', value: '100%' }
+];
+---
+
+<section id="experience" class="py-20 relative">
+  <div class="container mx-auto px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">
+          <span class="text-foreground">Mi</span>{' '}
+          <span class="bg-gradient-primary bg-clip-text text-transparent">Experiencia</span>
+        </h2>
+        <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+          Un recorrido por mi carrera profesional y los logros alcanzados
+        </p>
+      </div>
+
+      <!-- Experience Timeline -->
+      <div class="relative">
+        <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-primary hidden md:block" />
+
+        {experiences.map((exp, index) => (
+          <div
+            class={`relative mb-12 md:mb-16 ${
+              index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8 md:ml-auto'
+            } md:w-1/2`}
+            style={{ animationDelay: `${index * 0.3}s` }}
+          >
+             <div class={`absolute left-6 top-8 w-4 h-4 bg-gradient-primary rounded-full border-4 border-background shadow-glow hidden md:block ${
+                  index % 2 === 0 ? 'md:left-auto md:-right-2' : 'md:left-auto md:-left-2'
+                }`} />
+
+            <Card className="bg-gradient-surface border-primary/10 hover:border-primary/20 hover:shadow-glow/20 transition-all duration-300 group">
+              <CardHeader>
+                <div class="flex flex-col md:items-start">
+                  <Badge
+                    variant="secondary"
+                    className="bg-primary/10 text-primary border-primary/20 w-fit mb-3"
+                  >
+                    {exp.period}
+                  </Badge>
+                  <h3 class="text-xl font-semibold text-primary group-hover:text-accent transition-colors duration-300">
+                    {exp.position}
+                  </h3>
+                  <h4 class="text-lg text-accent font-medium mb-4">{exp.company}</h4>
+                </div>
+                <p class="text-muted-foreground leading-relaxed">{exp.description}</p>
+              </CardHeader>
+
+              <CardContent className="pt-0">
+                <div class="mb-6">
+                  <h5 class="text-sm font-semibold text-primary mb-3">Logros Destacados:</h5>
+                  <ul class="space-y-2">
+                    {exp.achievements.map((achievement, i) => (
+                      <li  class="text-sm text-muted-foreground flex items-start">
+                        <span class="text-accent mr-2 mt-1">•</span>
+                        {achievement}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h5 class="text-sm font-semibold text-primary mb-3">Tecnologías:</h5>
+                  <div class="flex flex-wrap gap-2">
+                    {exp.tech.map((tech) => (
+                      <Badge
+                        variant="secondary"
+                        className="text-xs bg-secondary/50 text-secondary-foreground border-secondary/20"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        ))}
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
+        {stats.map((stat, index) => (
+          <Card
+            key={stat.label}
+            className="bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300 text-center"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <CardContent className="p-6">
+              <div class="text-3xl font-bold text-primary mb-2">{stat.value}</div>
+              <div class="text-sm text-muted-foreground">{stat.label}</div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,198 @@
+---
+import { Card, CardContent, CardHeader } from '../ui/card';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
+import { Github } from 'lucide-react';
+
+const projects = [
+  {
+    title: 'E-Commerce Platform',
+    description: 'Plataforma de comercio electrónico completa con carrito de compras, pasarela de pago y panel de administración.',
+    image: '/api/placeholder/600/400',
+    tech: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
+    github: '#',
+    demo: '#',
+    featured: true
+  },
+  {
+    title: 'Task Management App',
+    description: 'Aplicación de gestión de tareas colaborativa con tiempo real, notificaciones y analíticas.',
+    image: '/api/placeholder/600/400',
+    tech: ['Vue.js', 'Firebase', 'Tailwind CSS'],
+    github: '#',
+    demo: '#',
+    featured: true
+  },
+  {
+    title: 'Portfolio Website',
+    description: 'Sitio web de portafolio personal con diseño moderno, animaciones suaves y optimización SEO.',
+    image: '/api/placeholder/600/400',
+    tech: ['Next.js', 'SASS', 'Framer Motion'],
+    github: '#',
+    demo: '#',
+    featured: false
+  },
+  {
+    title: 'Weather Dashboard',
+    description: 'Dashboard del clima con mapas interactivos, pronósticos detallados y múltiples ubicaciones.',
+    image: '/api/placeholder/600/400',
+    tech: ['React', 'API Integration', 'Chart.js'],
+    github: '#',
+    demo: '#',
+    featured: false
+  },
+  {
+    title: 'Social Media App',
+    description: 'Red social con chat en tiempo real, compartir contenido y sistema de notificaciones.',
+    image: '/api/placeholder/600/400',
+    tech: ['React Native', 'Socket.io', 'Express'],
+    github: '#',
+    demo: '#',
+    featured: false
+  },
+  {
+    title: 'Learning Platform',
+    description: 'Plataforma educativa con cursos, quizzes, progreso de estudiantes y certificaciones.',
+    image: '/api/placeholder/600/400',
+    tech: ['Angular', 'TypeScript', 'PostgreSQL'],
+    github: '#',
+    demo: '#',
+    featured: false
+  }
+];
+
+const featuredProjects = projects.filter(p => p.featured);
+const otherProjects = projects.filter(p => !p.featured);
+---
+
+<section id="projects" class="py-20 relative">
+  <div class="container mx-auto px-6">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">
+          <span class="text-foreground">Mis</span>{' '}
+          <span class="bg-gradient-primary bg-clip-text text-transparent">Proyectos</span>
+        </h2>
+        <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+          Una selección de proyectos que demuestran mis habilidades y pasión por el desarrollo frontend
+        </p>
+      </div>
+
+      <!-- Featured Projects -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-semibold mb-8 text-accent">Proyectos Destacados</h3>
+        <div class="grid md:grid-cols-2 gap-8">
+          {featuredProjects.map((project, index) => (
+            <Card
+              key={project.title}
+              className="bg-gradient-surface border-primary/10 hover:border-primary/20 hover:shadow-glow/20 transition-all duration-300 group overflow-hidden"
+              style={{ animationDelay: `${index * 0.2}s` }}
+            >
+              <div class="relative overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+
+              <CardHeader>
+                <h4 class="text-xl font-semibold text-primary group-hover:text-accent transition-colors duration-300">
+                  {project.title}
+                </h4>
+                <p class="text-muted-foreground leading-relaxed">
+                  {project.description}
+                </p>
+              </CardHeader>
+
+              <CardContent className="pt-0">
+                <div class="flex flex-wrap gap-2 mb-6">
+                  {project.tech.map((tech) => (
+                    <Badge
+                      variant="secondary"
+                      className="bg-primary/10 text-primary border-primary/20"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+
+                <div class="flex gap-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="border-primary/20 text-primary hover:bg-primary/10"
+                  >
+                    <Github className="w-4 h-4 mr-2" />
+                    Código
+                  </Button>
+                  <Button
+                    size="sm"
+                    className="bg-gradient-primary hover:shadow-glow transition-all duration-300"
+                  >
+                    Ver Demo
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      <!-- Other Projects -->
+      <div>
+        <h3 class="text-2xl font-semibold mb-8 text-accent">Otros Proyectos</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {otherProjects.map((project, index) => (
+            <Card
+              key={project.title}
+              className="bg-gradient-surface border-primary/10 hover:border-primary/20 hover:shadow-glow/20 transition-all duration-300 group"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <CardHeader>
+                <h4 class="text-lg font-semibold text-primary group-hover:text-accent transition-colors duration-300">
+                  {project.title}
+                </h4>
+                <p class="text-sm text-muted-foreground leading-relaxed">
+                  {project.description}
+                </p>
+              </CardHeader>
+
+              <CardContent className="pt-0">
+                <div class="flex flex-wrap gap-1 mb-4">
+                  {project.tech.map((tech) => (
+                    <Badge
+                      variant="secondary"
+                      className="text-xs bg-primary/10 text-primary border-primary/20"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+
+                <div class="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="border-primary/20 text-primary hover:bg-primary/10 text-xs"
+                  >
+                    <Github className="w-3 h-3 mr-1" />
+                    Código
+                  </Button>
+                  <Button
+                    size="sm"
+                    className="bg-gradient-primary hover:shadow-glow transition-all duration-300 text-xs"
+                  >
+                    Demo
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
