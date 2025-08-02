@@ -4,42 +4,85 @@ import { Badge } from '../ui/badge';
 
 const experiences = [
   {
-    position: 'Senior Frontend Developer',
-    company: 'TechCorp Solutions',
-    period: '2022 - Presente',
-    description: 'Lidero el desarrollo de aplicaciones web complejas utilizando React y TypeScript. Implementé un sistema de design system que redujo el tiempo de desarrollo en 40%.',
+    position: 'Full Stack Developer',
+    company: 'Devitech S.A.S',
+    period: 'Abr 2022 - Presente',
+    description:
+      'Desarrollo y mantenimiento de sistemas de venta de combustible a nivel nacional, así como de aplicaciones móviles con React Native. Configuración de servidores Ubuntu y automatización de procesos con Azure DevOps.',
     achievements: [
-      'Migración exitosa de aplicación legacy a React',
-      'Implementación de CI/CD reduciendo bugs en producción 60%',
-      'Mentoring de 3 desarrolladores junior'
+      'Implementación de sistema en tiempo real con React, TypeScript y Socket.io',
+      'Desarrollo de app Android con Redux y React Native',
+      'Optimización de monitoreo y despliegue usando Azure DevOps y Nginx'
     ],
-    tech: ['React', 'TypeScript', 'Next.js', 'GraphQL']
+    tech: ['React', 'TypeScript', 'React Native', 'Socket.io', 'PostgreSQL', 'Azure DevOps', 'Ubuntu']
+  },
+  {
+    position: 'Full Stack Developer',
+    company: 'MoviSAI',
+    period: 'Sep 2024 - Dic 2024',
+    description:
+      'Desarrollo de aplicaciones web y móviles para el departamento de tránsito de San Andrés. Participación en configuración de infraestructura y publicación en tiendas de apps.',
+    achievements: [
+      'Creación de app móvil para caracterización vehicular',
+      'Despliegue completo con EC2, Oracle RDS y balanceo de carga con Nginx',
+      'Integración frontend-backend con React y Express'
+    ],
+    tech: ['React', 'TypeScript', 'Oracle', 'Express', 'React Native', 'AWS EC2', 'Nginx']
   },
   {
     position: 'Frontend Developer',
-    company: 'Digital Innovations',
-    period: '2021 - 2022',
-    description: 'Desarrollo de interfaces de usuario para aplicaciones B2B y B2C. Colaboración estrecha con equipos de UX/UI para implementar diseños pixel-perfect.',
+    company: 'Begima',
+    period: 'Sep 2023 - Nov 2023',
+    description:
+      'Desarrollo de una plataforma e-commerce y landing page para una marca mexicana, enfocándome en la experiencia de usuario y rendimiento web.',
     achievements: [
-      'Desarrollo de 15+ componentes reutilizables',
-      'Optimización de performance mejorando Core Web Vitals',
-      'Implementación de testing automatizado'
+      'Implementación de interfaz completa y adaptativa',
+      'Optimización visual del sitio con enfoque en UX',
+      'Entrega ágil en tiempo récord con diseño responsivo'
     ],
-    tech: ['Vue.js', 'JavaScript', 'SASS', 'Jest']
+    tech: ['React', 'Tailwind CSS', 'JavaScript']
   },
   {
-    position: 'Junior Frontend Developer',
-    company: 'StartupTech',
-    period: '2020 - 2021',
-    description: 'Inicio en el desarrollo frontend trabajando en proyectos diversos. Enfoque en aprendizaje rápido y adaptación a nuevas tecnologías.',
+    position: 'Android Developer (Freelance)',
+    company: 'Freelance',
+    period: 'Ago 2023 - Sep 2023',
+    description:
+      'Diseño e implementación de una aplicación de registro de asistencia para Android. Participación en todas las etapas: diseño UI, lógica de negocio y pruebas.',
     achievements: [
-      'Desarrollo completo de landing pages',
-      'Integración con APIs REST',
-      'Participación en code reviews'
+      'Desarrollo completo desde cero de app móvil funcional',
+      'Diseño de interfaz intuitiva para usuarios no técnicos',
+      'Entrega funcional en menos de un mes'
     ],
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap']
+    tech: ['React Native', 'JavaScript', 'Android']
+  },
+  {
+    position: 'Full Stack Developer',
+    company: 'Beefree',
+    period: 'Ene 2022 - Jul 2022',
+    description:
+      'Construcción de servicios de reporte e integraciones para tiendas Etsy. Participación en backend, despliegue y configuración de servidores.',
+    achievements: [
+      'Desarrollo de API para extracción y visualización de reportes',
+      'Configuración de servidor con Nginx para despliegue en producción',
+      'Automatización de tareas repetitivas en el backend'
+    ],
+    tech: ['Node.js', 'Express', 'Nginx', 'MongoDB']
+  },
+  {
+    position: 'Frontend Developer',
+    company: 'Kiiex',
+    period: 'Ene 2022 - Jul 2022',
+    description:
+      'Creación y despliegue de landing page corporativa con diseño atractivo y funcional para mejorar la presencia digital de la marca.',
+    achievements: [
+      'Diseño e implementación de landing page responsiva',
+      'Mejoras en performance y accesibilidad',
+      'Despliegue ágil y eficiente'
+    ],
+    tech: ['React', 'Tailwind CSS', 'JavaScript']
   }
 ];
+
 
 const stats = [
   { label: 'Años de Experiencia', value: '4+' },
@@ -75,7 +118,7 @@ const stats = [
             style={{ animationDelay: `${index * 0.3}s` }}
           >
              <div class={`absolute left-6 top-8 w-4 h-4 bg-gradient-primary rounded-full border-4 border-background shadow-glow hidden md:block ${
-                  index % 2 === 0 ? 'md:left-auto md:-right-2' : 'md:left-auto md:-left-2'
+                  index % 2 === 0 ? 'md:left-auto md:-right-2' : 'md:left-auto md:-left-3'
                 }`} />
 
             <Card className="bg-gradient-surface border-primary/10 hover:border-primary/20 hover:shadow-glow/20 transition-all duration-300 group">

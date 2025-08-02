@@ -123,6 +123,11 @@ All colors MUST be HSL.
   }
 }
 
+.word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(12px);
+}
 @layer base {
   * {
     @apply border-border;

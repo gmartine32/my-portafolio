@@ -1,30 +1,45 @@
 ---
-import { Card, CardContent } from '../ui/card';
-import { Badge } from '../ui/badge';
+import { Card, CardContent } from "../ui/card";
+import { Badge } from "../ui/badge";
 
 const skills = [
-  'React', 'TypeScript', 'Next.js', 'Vue.js', 'JavaScript',
-  'HTML5', 'CSS3', 'Tailwind CSS', 'SASS', 'Node.js',
-  'Git', 'Figma', 'Adobe Creative Suite', 'Responsive Design'
+  "React",
+  "TypeScript",
+  "Next.js",
+  "Vue.js",
+  "JavaScript",
+  "HTML5",
+  "CSS3",
+  "Tailwind CSS",
+  "SASS",
+  "Node.js",
+  "Git",
+  "Figma",
+  "Adobe Creative Suite",
+  "Responsive Design",
 ];
 
 const expertise = [
   {
-    title: 'Frontend Development',
-    description: 'Desarrollo de aplicaciones web modernas con React, Vue y tecnologías cutting-edge.',
+    title: "Frontend Development",
+    description:
+      "Construcción de aplicaciones web y moviles modernas con tecnologías como React, React Native y Next.js, aplicando buenas prácticas y escalabilidad desde la base.",
   },
   {
-    title: 'UI/UX Design',
-    description: 'Diseño de interfaces intuitivas centradas en la experiencia del usuario.',
+    title: "UI/UX Design Thinking",
+    description:
+      "Diseño de interfaces centradas en el usuario, cuidando cada detalle visual y funcional para lograr una experiencia fluida e intuitiva.",
   },
   {
-    title: 'Performance Optimization',
-    description: 'Optimización de rendimiento y SEO para máxima eficiencia.',
+    title: "Performance & Code Quality",
+    description:
+      "Optimización de rendimiento, accesibilidad y SEO, aplicando principios como SOLID y arquitectura limpia para entregar productos robustos y mantenibles.",
   },
   {
-    title: 'Responsive Design',
-    description: 'Creación de experiencias perfectas en todos los dispositivos.',
-  }
+    title: "Responsive Web Design",
+    description:
+      "Adaptación perfecta a dispositivos móviles, tabletas y escritorios, garantizando una experiencia coherente en todo contexto.",
+  },
 ];
 ---
 
@@ -34,51 +49,70 @@ const expertise = [
       <!-- Header -->
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-bold mb-6">
-          <span class="text-foreground">Sobre</span>{' '}
-          <span class="bg-gradient-primary bg-clip-text text-transparent">Mí</span>
+          <span class="text-foreground">Sobre</span>{" "}
+          <span class="bg-gradient-primary bg-clip-text text-transparent"
+            >Mí</span
+          >
         </h2>
         <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Desarrollador frontend apasionado por crear experiencias digitales que marquen la diferencia
+          Desarrollador Frontend con pasión por construir experiencias digitales
+          que conectan e inspiran.
         </p>
       </div>
 
       <div class="grid lg:grid-cols-2 gap-12 items-start">
         <!-- About Text -->
         <div class="space-y-6">
-          <Card className="bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300">
+          <Card
+            className="bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300"
+          >
             <CardContent className="p-8">
-              <h3 class="text-2xl font-semibold mb-4 text-primary">Mi Historia</h3>
+              <h3 class="text-2xl font-semibold mb-4 text-primary">
+                Mi Historia
+              </h3>
               <p class="text-muted-foreground leading-relaxed mb-4">
-                Con más de 4 años de experiencia en desarrollo frontend, me especializo en crear 
-                aplicaciones web modernas que combinan diseño excepcional con funcionalidad robusta.
+                Soy Ingeniero en Sistemas y Desarrollador Frontend con más de 4
+                años de experiencia creando soluciones digitales modernas. Me
+                especializo en el desarrollo de interfaces intuitivas,
+                performantes y accesibles, combinando diseño y tecnología para
+                dar vida a ideas complejas.
               </p>
               <p class="text-muted-foreground leading-relaxed mb-4">
-                Mi enfoque se centra en la experiencia del usuario, el rendimiento y las mejores 
-                prácticas de desarrollo. Disfruto trabajando con equipos multidisciplinarios para 
-                llevar ideas innovadoras desde el concepto hasta la implementación.
+                Mi enfoque se basa en principios sólidos de arquitectura limpia,
+                usabilidad y rendimiento. Me gusta trabajar en equipos donde la
+                colaboración es clave y donde cada línea de código aporta a una
+                experiencia significativa para el usuario final.
               </p>
               <p class="text-muted-foreground leading-relaxed">
-                Cuando no estoy programando, me gusta explorar nuevas tecnologías, contribuir a 
-                proyectos open source y mantenerme al día con las últimas tendencias en desarrollo web.
+                Además de programar, disfruto explorar nuevas tecnologías,
+                contribuir al ecosistema open source y mantenerme en constante
+                aprendizaje. Creo firmemente que el desarrollo de software no
+                solo trata de resolver problemas, sino de crear valor y
+                experiencias memorables.
               </p>
             </CardContent>
           </Card>
 
           <!-- Skills -->
-          <Card className="bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300">
+          <Card
+            className="bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300"
+          >
             <CardContent className="p-8">
-              <h3 class="text-2xl font-semibold mb-6 text-primary">Stack Técnico</h3>
+              <h3 class="text-2xl font-semibold mb-6 text-primary">
+                Stack Técnico
+              </h3>
               <div class="flex flex-wrap gap-2">
-                {skills.map((skill, index) => (
-                  <Badge 
-                    
-                    variant="secondary"
-                    className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors duration-200"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    {skill}
-                  </Badge>
-                ))}
+                {
+                  skills.map((skill, index) => (
+                    <Badge
+                      variant="secondary"
+                      className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors duration-200"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      {skill}
+                    </Badge>
+                  ))
+                }
               </div>
             </CardContent>
           </Card>
@@ -89,23 +123,25 @@ const expertise = [
           <h3 class="text-2xl font-semibold mb-6 text-center lg:text-left">
             <span class="text-accent">Áreas de</span> Expertise
           </h3>
-          
-          {expertise.map((area, index) => (
-            <Card 
-              key={area.title} 
-              className="bg-gradient-surface border-primary/10 hover:border-primary/20 hover:shadow-glow/20 transition-all duration-300 group"
-              style={{ animationDelay: `${index * 0.2}s` }}
-            >
-              <CardContent className="p-6">
-                <h4 class="text-xl font-semibold mb-3 text-primary group-hover:text-accent transition-colors duration-300">
-                  {area.title}
-                </h4>
-                <p class="text-muted-foreground leading-relaxed">
-                  {area.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
+
+          {
+            expertise.map((area, index) => (
+              <Card
+                key={area.title}
+                className="bg-gradient-surface border-primary/10 hover:border-primary/20 hover:shadow-glow/20 transition-all duration-300 group"
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
+                <CardContent className="p-6">
+                  <h4 class="text-xl font-semibold mb-3 text-primary group-hover:text-accent transition-colors duration-300">
+                    {area.title}
+                  </h4>
+                  <p class="text-muted-foreground leading-relaxed">
+                    {area.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))
+          }
         </div>
       </div>
     </div>
