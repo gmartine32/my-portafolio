@@ -27,7 +27,7 @@ import { Toaster } from "../components/ui/toaster.tsx";
 			<Navigation client:load/>
 			<main>
 				<HeroSection />
-				<AboutSection />
+				<AboutSection client:visible animation="scale"/>
 				<ProjectsSection />
 				<ExperienceSection />
 				<ContactSection client:load/>
