@@ -15,7 +15,18 @@ import { Toaster } from "../components/ui/toaster.tsx";
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Gian Martínez</title>
+		<title>Portafolio de Gian Martínez | Full Stack Developer</title>
+		<meta name="description" content="Portafolio profesional de Gian Martínez, desarrollador full stack especializado en React, Astro, Tailwind CSS y tecnologías modernas. Descubre proyectos, experiencia y contacto." />
+		<meta name="author" content="Gian Martínez" />
+		<meta property="og:title" content="Portafolio de Gian Martínez | Full Stack Developer" />
+		<meta property="og:description" content="Portafolio profesional de Gian Martínez, desarrollador full stack especializado en React, Astro, Tailwind CSS y tecnologías modernas." />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://gianmartinez.dev" />
+		<meta property="og:image" content="/img/devitech.webp" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Portafolio de Gian Martínez | Full Stack Developer" />
+		<meta name="twitter:description" content="Portafolio profesional de Gian Martínez, desarrollador full stack especializado en React, Astro, Tailwind CSS y tecnologías modernas." />
+		<meta name="twitter:image" content="/img/devitech.webp" />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap"
 			rel="stylesheet"
@@ -24,7 +35,9 @@ import { Toaster } from "../components/ui/toaster.tsx";
 	<body>
 		<Toaster client:load/>
 		<div class="min-h-screen bg-background">
-			<Navigation client:load/>
+			<nav>
+				<Navigation client:load/>
+			</nav>
 			<main>
 				<HeroSection />
 				<AboutSection client:visible animation="scale"/>
