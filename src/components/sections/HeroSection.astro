@@ -37,23 +37,21 @@ import { Button } from "../ui/button";
       </p>
 
       <div class="hero-cta invisible flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-        <Button
-          client:load
-          size="lg"
-          className="bg-gradient-primary hover:shadow-glow transition-all duration-300 text-primary-foreground font-medium px-8"
-          onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+        <a
+          href="#projects"
+          class="bg-gradient-primary hover:shadow-glow transition-all duration-300 text-primary-foreground font-medium px-8 py-3 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 inline-flex items-center justify-center"
+          onclick="document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); return false;"
         >
           Ver Proyectos
-        </Button>
-        <Button
-          client:load
-          variant="outline"
-          size="lg"
-          className="border-primary/20 text-primary hover:bg-primary/10 hover:border-primary/40 px-8"
-          onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+        </a>
+        <a
+          href="/documents/cv-gian-martinez.pdf"
+          download="Gian-Martinez-CV.pdf"
+          class="border-primary/20 text-primary bg-background hover:bg-primary/10 hover:border-primary/40 px-8 py-3 rounded-md font-medium transition-all duration-300 shadow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 inline-flex items-center justify-center gap-2"
         >
-          Trabajemos Juntos
-        </Button>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+          Descargar CV
+        </a>
       </div>
     </div>
   </div>
