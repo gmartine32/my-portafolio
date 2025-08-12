@@ -13,28 +13,36 @@ import { Button } from "../ui/button";
   class="min-h-screen flex items-center justify-center relative overflow-hidden"
 >
   <!-- Fondos -->
-  <div class="absolute inset-0 bg-gradient-glow opacity-50 hero-float-bg"></div>
-  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-blue/10 rounded-full blur-3xl animate-float hero-float-bg"></div>
-  <div class="absolute bottom-1/3 right-1/4 w-80 h-80 bg-neon-purple/10 rounded-full blur-3xl animate-float hero-float-bg" style="animation-delay: -3s;"></div>
+  
+
+  <!-- Fondos tipo lámpara de lava, formas pequeñas y colores vibrantes -->
+  <div class="absolute inset-0 pointer-events-none z-0">
+    <div class="absolute top-[10%] left-[15%] w-24 h-24 bg-pink-400/40 blur-2xl hero-float-bg lava-1"></div>
+    <div class="absolute top-[30%] left-[60%] w-20 h-20 bg-blue-400/40 blur-2xl hero-float-bg lava-2"></div>
+    <div class="absolute top-[60%] left-[25%] w-16 h-16 bg-yellow-400/40 blur-2xl hero-float-bg lava-3"></div>
+    <div class="absolute top-[70%] left-[70%] w-28 h-28 bg-purple-400/40 blur-2xl hero-float-bg lava-4"></div>
+    <div class="absolute top-[50%] left-[45%] w-14 h-14 bg-green-400/40 blur-2xl hero-float-bg lava-5"></div>
+    <div class="absolute top-[80%] left-[10%] w-18 h-18 bg-orange-400/40 blur-2xl hero-float-bg lava-6"></div>
+  </div>
 
   <!-- Contenido -->
   <div class="container mx-auto px-6 text-center relative z-10">
     <div class="max-w-4xl mx-auto">
       <p class="hero-greeting invisible text-neon-blue text-lg mb-4 font-light tracking-wider">
-        Hola, soy
-      </p>
+  Hola, soy
+</p>
 
-      <h1 class="hero-name invisible text-6xl md:text-8xl font-bold mb-6">
-        Gian Martínez
-      </h1>
+<h1 class="hero-name invisible text-6xl md:text-8xl font-bold mb-6">
+  Gian Martínez
+</h1>
 
-      <h2 class="hero-title invisible text-2xl md:text-3xl text-accent mb-8 font-light">
-        Frontend Developer | Ingeniero en Sistemas
-      </h2>
+<h2 class="hero-title invisible text-2xl md:text-3xl text-accent mb-8 font-light">
+  Frontend Developer | Ingeniero en Sistemas
+</h2>
 
-      <p class="hero-description invisible text-lg text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
-        Especializado en desarrollar interfaces modernas, accesibles y performantes con tecnologías como React, Next.js y React Native. Combino buenas prácticas de arquitectura limpia con un enfoque centrado en el usuario para transformar ideas complejas en experiencias digitales intuitivas.
-      </p>
+<p class="hero-description invisible text-lg text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
+  Ingeniero en Sistemas y Desarrollador Full Stack con especialización en Frontend (React, Next.js, Node.js y React Native). Experto en despliegue de aplicaciones mediante Docker y Nginx, con experiencia en infraestructura en la nube. He trabajado en sectores energético, gubernamental y comercial, aplicando principios SOLID, arquitectura limpia y arquitectura hexagonal para garantizar soluciones escalables y mantenibles. Reconocido por liderazgo técnico, adaptabilidad y comunicación efectiva, orientado a entregar resultados de alta calidad.
+</p>
 
       <div class="hero-cta invisible flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
         <a
@@ -56,3 +64,46 @@ import { Button } from "../ui/button";
     </div>
   </div>
 </section>
+
+<style>
+  /* Ajuste en global.css para movimiento más orgánico y tamaño controlado */
+@keyframes lavaMove {
+  0% {
+    transform: translateY(0) scale(1) skew(0deg, 0deg) rotate(0deg);
+    border-radius: 50% 50% 50% 50%;
+    opacity: 0.6;
+  }
+  15% {
+    transform: translateY(-12px) scale(1.05) skew(4deg, 2deg) rotate(-2deg);
+    border-radius: 55% 45% 52% 48%;
+    opacity: 0.7;
+  }
+  35% {
+    transform: translateY(8px) scale(0.97) skew(-3deg, -5deg) rotate(3deg);
+    border-radius: 48% 52% 46% 54%;
+    opacity: 0.8;
+  }
+  60% {
+    transform: translateY(-10px) scale(1.03) skew(2deg, 6deg) rotate(-1deg);
+    border-radius: 53% 47% 58% 42%;
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0) scale(1) skew(0deg, 0deg) rotate(0deg);
+    border-radius: 50% 50% 50% 50%;
+    opacity: 0.6;
+  }
+}
+.hero-float-bg {
+  animation: lavaMove 9s cubic-bezier(0.77,0,0.175,1) infinite alternate;
+  will-change: transform, opacity, border-radius;
+  border-radius: 50%;
+  mix-blend-mode: lighten;
+}
+.lava-1 { animation-delay: 0s; animation-duration: 10s; }
+.lava-2 { animation-delay: 1.5s; animation-duration: 12s; }
+.lava-3 { animation-delay: 2.5s; animation-duration: 14s; }
+.lava-4 { animation-delay: 3.5s; animation-duration: 11s; }
+.lava-5 { animation-delay: 4.5s; animation-duration: 13s; }
+.lava-6 { animation-delay: 5.5s; animation-duration: 15s; }
+</style>
