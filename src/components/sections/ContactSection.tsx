@@ -32,24 +32,29 @@ const ContactSection = () => {
     setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
+  const handleLinkedInClick = () => {
+    window.open("https://www.linkedin.com/in/gianmartinezvilla", "_blank", "noopener,noreferrer");
+  };
+
   const socialLinks = [
     {
       name: 'Email',
       icon: Mail,
-      href: 'mailto:gian.martinez@email.com',
-      label: 'gian.martinez@email.com'
+      href: 'mailto:gianfrancovillam@gmail.com',
+      label: 'gianfrancovillam@gmail.com'
     },
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      href: 'https://linkedin.com/in/gianmartinez',
-      label: '/in/gianmartinez'
+      href: 'www.linkedin.com/in/gianmartinezvilla',
+      label: '/in/gianmartinez',
+      onClick: handleLinkedInClick
     },
     {
       name: 'GitHub',
       icon: Github,
-      href: 'https://github.com/gianmartinez',
-      label: '@gianmartinez'
+      href: 'https://github.com/gmartine32',
+      label: '@gmartine32'
     }
   ];
 
@@ -154,6 +159,7 @@ const ContactSection = () => {
                       rel="noopener noreferrer"
                       className="flex items-center gap-4 p-4 rounded-lg bg-muted/30 hover:bg-muted/50 border border-primary/10 hover:border-primary/20 transition-all duration-300 group"
                       style={{ animationDelay: `${index * 0.1}s` }}
+                      onClick={link.onClick}
                     >
                       <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground group-hover:shadow-glow transition-all duration-300">
                         <link.icon size={20} />
