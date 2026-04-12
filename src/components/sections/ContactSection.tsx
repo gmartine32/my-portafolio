@@ -48,8 +48,8 @@ const ContactSection = () => {
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      href: 'www.linkedin.com/in/gianmartinezvilla',
-      label: '/in/gianmartinez',
+      href: 'https://www.linkedin.com/in/gianmartinezvilla',
+      label: '/in/gianmartinezvilla',
       onClick: handleLinkedInClick
     },
     {
