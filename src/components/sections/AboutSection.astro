@@ -52,11 +52,18 @@ const expertise = [
 ];
 ---
 
+<script>
+  import { animateAboutSection } from "../../scripts/about-animation";
+
+  animateAboutSection();
+</script>
+
+
 <section id="about" class="py-20 relative">
   <div class="container mx-auto px-6">
     <div class="max-w-6xl mx-auto">
       <!-- Header -->
-      <div class="text-center mb-16">
+      <div class="about-header text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-bold mb-6">
           <span class="text-foreground">Sobre</span>{" "}
           <span class="bg-gradient-primary bg-clip-text text-transparent"
@@ -69,78 +76,68 @@ const expertise = [
         </p>
       </div>
 
-      <div class="grid lg:grid-cols-2 gap-12 items-start">
-        <!-- About Text -->
-        <div class="space-y-6">
-          <Card
-            className="bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300"
-          >
-            <CardContent className="p-8">
-              <h3 class="text-2xl font-semibold mb-4 text-primary">
-  Mi Historia
-</h3>
-<p class="text-muted-foreground leading-relaxed mb-4">
-  Soy Ingeniero en Sistemas y Desarrollador Frontend con más de 4 años de experiencia creando soluciones digitales modernas para web y móviles. Desde mis inicios me apasionó el desarrollo frontend, pero con el tiempo he expandido mis habilidades hacia el backend, los procesos de despliegue y la gestión de diferentes bases de datos, proponiendo siempre soluciones escalables y de alto rendimiento. Para mí, aprender y evolucionar profesionalmente es una meta constante.
-</p>
-<p class="text-muted-foreground leading-relaxed mb-4">
-  Domino arquitecturas como <strong>SOLID</strong>, <strong>MVVM</strong> y <strong>Clean Architecture</strong>, así como patrones de diseño sofisticados que garantizan escalabilidad, mantenibilidad y calidad en cada proyecto. Tengo experiencia aplicando patrones como <strong>Factory</strong>, <strong>Singleton</strong>, <strong>Observer</strong>, <strong>Strategy</strong>, <strong>Decorator</strong>, <strong>Adapter</strong>, <strong>Repository</strong>, <strong>Command</strong> y <strong>Builder</strong>, escogiendo e implementando el patrón más adecuado según el contexto y los requisitos del proyecto.
-</p>
-<p class="text-muted-foreground leading-relaxed">
-  Además, aplico enfoques de diseño de interfaces como <strong>Atomic Design</strong> para construir sistemas de UI consistentes y reutilizables, combinándolos con MVVM y Clean Architecture para lograr soluciones mantenibles y bien estructuradas. Disfruto explorar nuevas tecnologías, aprender de la comunidad open source y trabajar en entornos donde la colaboración y la mejora continua son parte de la cultura. Creo que el desarrollo de software no es solo resolver problemas, sino crear valor real, impacto y experiencias memorables para quienes usan lo que construimos.
-</p>
-            </CardContent>
-          </Card>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(180px,auto)]">
+        <!-- Main Story Card (Span 2x2) -->
+        <Card className="about-card md:col-span-2 md:row-span-2 bg-gradient-surface border-white/5 backdrop-blur-md hover:border-primary/20 transition-all duration-300">
+          <CardContent className="p-8 h-full flex flex-col justify-center">
+            <h3 class="text-2xl font-heading font-semibold mb-4 text-primary">Mi Historia</h3>
+            <p class="text-muted-foreground leading-relaxed mb-4">
+              Soy Ingeniero en Sistemas y Desarrollador con más de 4 años de experiencia creando soluciones digitales modernas. Desde mis inicios me apasionó el desarrollo frontend, pero he expandido mis habilidades hacia el backend, despliegues y bases de datos, proponiendo soluciones escalables.
+            </p>
+            <p class="text-muted-foreground leading-relaxed">
+              Domino arquitecturas como <strong>SOLID</strong>, <strong>MVVM</strong> y <strong>Clean Architecture</strong>. Aplico enfoques como <strong>Atomic Design</strong> para sistemas de UI consistentes, creando impacto y experiencias memorables.
+            </p>
+          </CardContent>
+        </Card>
 
-          <!-- Skills -->
-          <Card
-            className="bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300"
-          >
-            <CardContent className="p-8">
-              <h3 class="text-2xl font-semibold mb-6 text-primary">
-                Stack Técnico
-              </h3>
-              <div class="flex flex-wrap gap-2">
-                {
-                  skills.map((skill, index) => (
-                    <Badge
-                      variant="secondary"
-                      className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors duration-200"
-                      style={{ animationDelay: `${index * 0.1}s` }}
-                    >
-                      {skill}
-                    </Badge>
-                  ))
-                }
+        <!-- Location/Status Card -->
+        <Card className="about-card bg-gradient-surface border-white/5 backdrop-blur-md hover:border-primary/20 transition-all duration-300 flex flex-col items-center justify-center relative overflow-hidden group">
+          <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dot-noise.png')] opacity-20 group-hover:scale-110 transition-transform duration-700"></div>
+          <CardContent className="p-6 text-center z-10 relative">
+            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 border border-primary/30">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h4 class="font-heading font-semibold text-xl mb-1">Base de Operaciones</h4>
+            <p class="text-muted-foreground">Colombia, disponible remoto</p>
+          </CardContent>
+        </Card>
+
+        <!-- Metric Card -->
+        <Card className="about-card bg-gradient-primary border-transparent text-primary-foreground hover:shadow-glow transition-all duration-300 flex items-center justify-center">
+          <CardContent className="p-6 text-center">
+            <h4 class="text-5xl font-bold font-heading mb-2">4+</h4>
+            <p class="text-primary-foreground/80 font-medium">Años de Experiencia</p>
+          </CardContent>
+        </Card>
+
+        <!-- Tech Stack Marquee Card (Span 3) -->
+        <Card className="about-card md:col-span-3 bg-gradient-surface border-white/5 backdrop-blur-md hover:border-primary/20 transition-all duration-300 overflow-hidden">
+          <CardContent className="p-8">
+            <h3 class="text-xl font-heading font-semibold mb-6 flex items-center gap-2">
+               <span class="text-accent">Stack</span> Técnico
+            </h3>
+            <!-- GSAP Infinite Marquee Container -->
+            <div class="relative flex overflow-x-hidden group mask-fade">
+              <div class="animate-marquee whitespace-nowrap flex items-center gap-4 py-2 hover:[animation-play-state:paused]">
+                {skills.map((skill) => (
+                  <span class="px-4 py-2 mx-2 bg-white/5 border border-white/10 rounded-full text-foreground/80 whitespace-nowrap backdrop-blur-sm transition-colors hover:text-primary hover:border-primary/40 font-medium tracking-wide">
+                    {skill}
+                  </span>
+                ))}
               </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <!-- Expertise -->
-        <div class="space-y-6">
-          <h3 class="text-2xl font-semibold mb-6 text-center lg:text-left">
-            <span class="text-accent">Áreas de</span> Expertise
-          </h3>
-
-          {
-            expertise.map((area, index) => (
-              <Card
-                key={area.title}
-                className="bg-gradient-surface border-primary/10 hover:border-primary/20 hover:shadow-glow/20 transition-all duration-300 group"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <CardContent className="p-6">
-                  <h4 class="text-xl font-semibold mb-3 text-primary group-hover:text-accent transition-colors duration-300">
-                    {area.title}
-                  </h4>
-                  <p class="text-muted-foreground leading-relaxed">
-                    {area.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))
-          }
-        </div>
+              <div class="absolute top-0 animate-marquee2 whitespace-nowrap flex items-center gap-4 py-2 hover:[animation-play-state:paused]">
+                {skills.map((skill) => (
+                  <span class="px-4 py-2 mx-2 bg-white/5 border border-white/10 rounded-full text-foreground/80 whitespace-nowrap backdrop-blur-sm transition-colors hover:text-primary hover:border-primary/40 font-medium tracking-wide">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   </div>

@@ -16,7 +16,8 @@ theme: {
 		},
 		extend: {
 			fontFamily: {
-				'fredoka': ['Fredoka', 'sans-serif'],
+				'sans': ['Inter', 'sans-serif'],
+				'heading': ['Outfit', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -116,6 +117,14 @@ theme: {
 				'fade-in': {
 					'from': { opacity: '0' },
 					'to': { opacity: '1' }
+				},
+				marquee: {
+					'0%': { transform: 'translateX(0%)' },
+					'100%': { transform: 'translateX(-100%)' }
+				},
+				marquee2: {
+					'0%': { transform: 'translateX(100%)' },
+					'100%': { transform: 'translateX(0%)' }
 				}
 			},
 			animation: {
@@ -124,7 +133,9 @@ theme: {
 				'float': 'float 6s ease-in-out infinite',
 				'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
 				'slide-up': 'slide-up 0.6s ease-out',
-				'fade-in': 'fade-in 0.8s ease-out'
+				'fade-in': 'fade-in 0.8s ease-out',
+				'marquee': 'marquee 25s linear infinite',
+				'marquee2': 'marquee2 25s linear infinite'
 			}
 		}
 	},

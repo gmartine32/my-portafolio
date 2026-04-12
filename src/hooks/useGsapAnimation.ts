@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type AnimationType = "fade" | "fade-left" | "fade-right" | "zoom";
+type AnimationType = "fade" | "fade-left" | "fade-right" | "zoom" | "surreal-reveal" | "3d-flip";
 
 interface Options {
   animationType?: AnimationType;
@@ -33,9 +33,24 @@ export const useGsapAnimation = ({
           return { opacity: 0, x: 50 };
         case "zoom":
           return { opacity: 0, scale: 0.9 };
+        case "surreal-reveal":
+          return { opacity: 0, y: 30, scale: 0.95, filter: "blur(15px)" };
+        case "3d-flip":
+          return { opacity: 0, rotationX: 90, y: 50, transformOrigin: "bottom center" };
         case "fade":
         default:
           return { opacity: 0, y: 50 };
+      }
+    };
+
+    const getToProps = () => {
+      switch (animationType) {
+        case "surreal-reveal":
+          return { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" };
+        case "3d-flip":
+          return { opacity: 1, rotationX: 0, y: 0 };
+        default:
+          return { opacity: 1, x: 0, y: 0, scale: 1 };
       }
     };
 
@@ -45,17 +60,14 @@ export const useGsapAnimation = ({
           el,
           getFromProps(),
           {
-            opacity: 1,
-            x: 0,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: "power2.out",
-            delay: i * 0.1,
+            ...getToProps(),
+            duration: animationType === "surreal-reveal" || animationType === "3d-flip" ? 1.2 : 0.8,
+            ease: animationType === "surreal-reveal" ? "power3.out" : "power2.out",
+            delay: i * 0.15,
             scrollTrigger: {
               trigger: el,
               start: "top 85%",
-              toggleActions: once ? "play none none none" : "play none none reverse",
+              toggleActions: once ? "play none none none" : "play reverse play reverse",
             },
           }
         );

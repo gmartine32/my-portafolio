@@ -82,6 +82,12 @@ const featuredProjects = projects.filter((p) => p.featured);
 const otherProjects = projects.filter((p) => !p.featured);
 ---
 
+<script>
+  import { animateProjects } from "../../scripts/section-animations";
+  animateProjects();
+</script>
+
+
 <section id="projects" class="py-20 relative">
 	<div class="container mx-auto px-6">
 		<div class="max-w-7xl mx-auto">
@@ -104,81 +110,68 @@ const otherProjects = projects.filter((p) => !p.featured);
 				<h3 class="text-2xl font-semibold mb-8 text-accent">
 					Proyectos Destacados
 				</h3>
-				<div class="grid md:grid-cols-2 gap-8">
+				<div class="flex flex-col gap-16">
 					{featuredProjects.map((project, index) => (
 						<Card
 							key={project.title}
-							className="bg-gradient-surface border-primary/10 hover:border-primary/20 hover:shadow-glow/20 transition-all duration-300 group overflow-hidden"
-							style={{ animationDelay: `${index * 0.2}s` }}
+							className="bg-transparent border-0 shadow-none overflow-hidden group project-card-reveal"
 						>
-							<div class="relative overflow-hidden">
-								<img
-									src={project.image}
-									alt={project.title}
-									class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-								/>
-								<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-							</div>
-
-							<CardHeader>
-								<h4 class="text-xl font-semibold text-primary group-hover:text-accent transition-colors duration-300">
-									{project.title}
-								</h4>
-								<p class="text-muted-foreground leading-relaxed">
-									{project.description}
-								</p>
-							</CardHeader>
-
-							<CardContent className="pt-0">
-								<div class="flex flex-wrap gap-2 mb-6">
-									{project.tech.map((tech) => (
-										<Badge
-											variant="secondary"
-											className="bg-primary/10 text-primary border-primary/20"
-										>
-											{tech}
-										</Badge>
-									))}
+							<div class={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 items-center`}>
+								{/* Image side */}
+								<div class="w-full lg:w-3/5 overflow-hidden rounded-xl border border-white/10 relative">
+									<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-20 mix-blend-overlay transition-opacity duration-500 z-10"></div>
+									<img
+										src={project.image}
+										alt={project.title}
+										class="w-full h-[300px] lg:h-[450px] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+									/>
 								</div>
+								
+								{/* Content side */}
+								<div class="w-full lg:w-2/5 flex flex-col justify-center space-y-6">
+									<div>
+										<Badge variant="outline" className="mb-4 text-neon-blue border-neon-blue/30 bg-neon-blue/10">Caso de Estudio</Badge>
+										<h4 class="text-3xl font-heading font-bold text-primary group-hover:text-accent transition-colors duration-300">
+											{project.title}
+										</h4>
+									</div>
+									
+									<p class="text-muted-foreground text-lg leading-relaxed">
+										{project.description}
+									</p>
 
-								<div class="flex gap-4">
-									{project.github && project.github !== '#' && project.github !== '' ? (
-										<a href={project.github} target="_blank" rel="noopener noreferrer">
-											<Button
-												variant="outline"
-												size="sm"
-												className="border-primary/20 text-primary hover:bg-primary/10"
+									<div class="flex flex-wrap gap-2 pt-2">
+										{project.tech.map((tech) => (
+											<Badge
+												variant="secondary"
+												className="bg-white/5 text-foreground/80 border-white/10 font-medium"
 											>
-												<Github className="w-4 h-4 mr-2" />
-												Código
-											</Button>
-										</a>
-									) : (
-										<Button
-											variant="outline"
-											size="sm"
-											className="border-primary/20 text-primary hover:bg-primary/10"
-											disabled
-										>
-											<Github className="w-4 h-4 mr-2" />
-											Código
-										</Button>
-									)}
-									{project.demo && project.demo !== '#' && project.demo !== '' ? (
-										<a href={project.demo} target="_blank" rel="noopener noreferrer" class="bg-gradient-primary hover:shadow-glow transition-all duration-300 rounded-md px-4 py-2 text-sm font-medium text-primary-foreground inline-flex items-center justify-center">
-											Ver Demo
-										</a>
-									) : (
-										<Button
-											size="sm"
-											className="bg-gradient-primary hover:shadow-glow transition-all duration-300"
-											disabled
-										>
-											Ver Demo
-										</Button>
-									)}
+												{tech}
+											</Badge>
+										))}
+									</div>
+
+									<div class="flex gap-4 pt-4">
+										{project.github && project.github !== '#' && project.github !== '' ? (
+											<a href={project.github} target="_blank" rel="noopener noreferrer">
+												<Button
+													variant="outline"
+													size="lg"
+													className="border-primary/20 text-primary hover:bg-primary/10 tracking-widest text-sm"
+												>
+													<Github className="w-5 h-5 mr-3" />
+													CÓDIGO
+												</Button>
+											</a>
+										) : null}
+										{project.demo && project.demo !== '#' && project.demo !== '' ? (
+											<a href={project.demo} target="_blank" rel="noopener noreferrer" class="bg-primary hover:bg-primary/90 hover:shadow-glow transition-all duration-300 rounded-md px-8 py-3 text-sm font-bold tracking-widest text-primary-foreground inline-flex items-center justify-center">
+												VER DEMO
+											</a>
+										) : null}
+									</div>
 								</div>
-							</CardContent>
+							</div>
 						</Card>
 					))}
 				</div>

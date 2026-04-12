@@ -5,6 +5,7 @@ import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { Mail, Linkedin, Github } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
+import { useGsapAnimation } from '../../hooks/useGsapAnimation';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ const ContactSection = () => {
     message: ''
   });
   const { toast } = useToast();
+  const containerRef = useGsapAnimation({ animationType: "surreal-reveal", selector: ".contact-anim" });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -59,7 +61,7 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 relative">
+    <section id="contact" className="py-20 relative" ref={containerRef as any}>
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -75,7 +77,7 @@ const ContactSection = () => {
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <Card className="bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300">
+            <Card className="contact-anim bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300">
               <CardHeader>
                 <h3 className="text-2xl font-semibold text-primary">Envíame un Mensaje</h3>
                 <p className="text-muted-foreground">
@@ -143,7 +145,7 @@ const ContactSection = () => {
 
             {/* Contact Info */}
             <div className="space-y-8">
-              <Card className="bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300">
+              <Card className="contact-anim bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300">
                 <CardHeader>
                   <h3 className="text-2xl font-semibold text-primary">Información de Contacto</h3>
                   <p className="text-muted-foreground">
@@ -177,7 +179,7 @@ const ContactSection = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300">
+              <Card className="contact-anim bg-gradient-surface border-primary/10 hover:border-primary/20 transition-all duration-300">
                 <CardContent className="p-8 text-center">
                   <h4 className="text-xl font-semibold text-primary mb-4">
                     ¿Listo para empezar tu proyecto?

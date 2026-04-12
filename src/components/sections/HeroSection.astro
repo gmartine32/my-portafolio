@@ -27,16 +27,24 @@ import { Button } from "../ui/button";
 
   <!-- Contenido -->
   <div class="container mx-auto px-6 text-center relative z-10">
-    <div class="max-w-4xl mx-auto">
-      <p class="hero-greeting invisible text-neon-blue text-lg mb-4 font-light tracking-wider">
+    <div class="max-w-4xl mx-auto flex flex-col items-center">
+      
+      <div class="hero-status invisible flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
+        <span class="relative flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+        </span>
+        <span class="text-sm font-medium text-foreground/80 tracking-wide">Disponible para nuevos retos</span>
+      </div>
+      <p class="hero-greeting invisible text-neon-blue text-lg mb-4 font-light tracking-wider text-center">
   Hola, soy
 </p>
 
-<h1 class="hero-name invisible text-6xl md:text-8xl font-bold mb-6">
+<h1 class="hero-name invisible text-6xl md:text-8xl font-bold mb-6 text-center">
   Gian Martínez
 </h1>
 
-<h2 class="hero-title invisible text-2xl md:text-3xl text-accent mb-8 font-light">
+<h2 class="hero-title invisible text-2xl md:text-3xl text-accent mb-8 font-light text-center">
   Frontend Developer | Ingeniero en Sistemas
 </h2>
 

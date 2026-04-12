@@ -89,6 +89,12 @@ const stats = [
 ];
 ---
 
+<script>
+  import { animateExperience } from "../../scripts/section-animations";
+  animateExperience();
+</script>
+
+
 <section id="experience" class="py-20 relative">
 	<div class="container mx-auto px-6">
 		<div class="max-w-6xl mx-auto">
@@ -104,8 +110,10 @@ const stats = [
 			</div>
 
 			<!-- Experience Timeline -->
-			<div class="relative">
-				<div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-primary hidden md:block" />
+			<div class="relative experience-timeline-container">
+				<!-- Custom Line base and progress -->
+				<div class="absolute left-[31px] md:left-1/2 top-0 bottom-0 w-0.5 bg-white/5 hidden md:block" />
+				<div class="timeline-line-progress absolute left-[31px] md:left-1/2 top-0 w-0.5 bg-primary hidden md:block transform origin-top" />
 
 				{experiences.map((exp, index) => (
 					<div
