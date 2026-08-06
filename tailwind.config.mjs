@@ -4,6 +4,10 @@ export default {
     "./src/pages/**/*.{astro,js,jsx,ts,tsx}",
     "./src/components/**/*.{astro,js,jsx,ts,tsx}",
     "./src/layouts/**/*.{astro,js,jsx,ts,tsx}",
+    "./src/data/**/*.{ts,tsx}",
+    "./src/world/**/*.{ts,tsx}",
+    "./src/stores/**/*.{ts,tsx}",
+    "./src/hooks/**/*.{ts,tsx}",
     "./src/styles/**/*.{css,scss}"
   ],
 theme: {
