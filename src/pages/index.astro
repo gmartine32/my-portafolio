@@ -63,7 +63,8 @@ const ogImage = new URL("/img/kiex.webp", siteBase);
 	</head>
 		<body class="bg-background text-foreground antialiased">
 		<main>
-			<World client:load />
+			{/* client:only — World is browser-only (pointer, history, motion); skip SSR */}
+			<World client:only="react" />
 		</main>
 
 		<section class="sr-only" aria-label="Contenido del portfolio para lectores y buscadores">
