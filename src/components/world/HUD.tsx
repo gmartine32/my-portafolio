@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
 import type { Direction } from "../../types/world";
 import { useNavigationStore } from "../../stores/navigationStore";
@@ -14,8 +15,9 @@ const ICONS: Record<Direction, typeof ChevronUp> = {
 const POSITIONS: Record<Direction, string> = {
   up: "top-6 left-1/2 -translate-x-1/2",
   down: "bottom-6 left-1/2 -translate-x-1/2",
-  left: "left-4 top-1/2 -translate-y-1/2 sm:left-6",
-  right: "right-4 top-1/2 -translate-y-1/2 sm:right-6",
+  left: "left-3 bottom-24 top-auto translate-y-0 sm:left-6 sm:top-1/2 sm:bottom-auto sm:-translate-y-1/2",
+  right:
+    "right-3 bottom-24 top-auto translate-y-0 sm:right-6 sm:top-1/2 sm:bottom-auto sm:-translate-y-1/2",
 };
 
 const LABEL: Record<Direction, string> = {
@@ -25,6 +27,23 @@ const LABEL: Record<Direction, string> = {
   right: "a la derecha",
 };
 
+function useLightboxOpen() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const sync = () => setOpen(document.body.dataset.lightbox === "open");
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["data-lightbox"],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  return open;
+}
+
 export function HUD() {
   const currentRoomId = useNavigationStore((s) => s.currentRoomId);
   const announcement = useNavigationStore((s) => s.announcement);
@@ -32,6 +51,7 @@ export function HUD() {
   const move = useNavigationStore((s) => s.move);
   const room = getRoom(currentRoomId);
   const directions = getAvailableDirections(currentRoomId);
+  const lightboxOpen = useLightboxOpen();
 
   return (
     <>
@@ -48,21 +68,22 @@ export function HUD() {
         Habitación: {announcement}
       </div>
 
-      {directions.map((direction) => {
-        const Icon = ICONS[direction];
-        return (
-          <button
-            key={direction}
-            type="button"
-            aria-label={`Ir ${LABEL[direction]}`}
-            disabled={isTransitioning}
-            onClick={() => move(direction)}
-            className={`glass-panel glass-panel--interactive fixed z-40 flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-40 ${POSITIONS[direction]}`}
-          >
-            <Icon className="h-5 w-5" aria-hidden />
-          </button>
-        );
-      })}
+      {!lightboxOpen &&
+        directions.map((direction) => {
+          const Icon = ICONS[direction];
+          return (
+            <button
+              key={direction}
+              type="button"
+              aria-label={`Ir ${LABEL[direction]}`}
+              disabled={isTransitioning}
+              onClick={() => move(direction)}
+              className={`glass-panel glass-panel--interactive fixed z-40 flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-40 ${POSITIONS[direction]}`}
+            >
+              <Icon className="h-5 w-5" aria-hidden />
+            </button>
+          );
+        })}
     </>
   );
 }

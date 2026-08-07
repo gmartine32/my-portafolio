@@ -27,7 +27,10 @@ export type Project = {
   id: string;
   title: string;
   description: string;
+  /** Cover / thumbnail for lists */
   image: string;
+  /** Gallery images (at least the cover) */
+  images: string[];
   tech: string[];
   github: string;
   demo: string;

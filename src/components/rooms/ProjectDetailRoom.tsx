@@ -1,5 +1,6 @@
 import { ExternalLink, Github } from "lucide-react";
 import { projects } from "../../data/content";
+import { ProjectGallery } from "../projects/ProjectGallery";
 import { GlassPanel } from "../ui/GlassPanel";
 
 type ProjectDetailRoomProps = {
@@ -11,7 +12,7 @@ export function ProjectDetailRoom({ projectId }: ProjectDetailRoomProps) {
 
   if (!project) {
     return (
-      <div className="flex min-h-full items-center justify-center px-6">
+      <div className="flex min-h-full items-center justify-center px-6 pb-28 sm:pb-20">
         <p className="text-muted-foreground">Proyecto no encontrado</p>
       </div>
     );
@@ -19,17 +20,12 @@ export function ProjectDetailRoom({ projectId }: ProjectDetailRoomProps) {
 
   const hasGithub = project.github && project.github !== "#";
   const hasDemo = project.demo && project.demo !== "#";
+  const gallery =
+    project.images?.length > 0 ? project.images : [project.image];
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col px-6 py-20">
-      <GlassPanel className="mb-8 rounded-2xl">
-        <img
-          src={project.image}
-          alt=""
-          loading="lazy"
-          className="aspect-video w-full object-cover"
-        />
-      </GlassPanel>
+    <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col px-6 pb-28 pt-20 sm:px-8 sm:pb-20">
+      <ProjectGallery title={project.title} images={gallery} />
 
       <h1 className="font-heading mb-4 text-3xl font-bold md:text-5xl">{project.title}</h1>
       <p className="mb-8 text-lg text-muted-foreground">{project.description}</p>

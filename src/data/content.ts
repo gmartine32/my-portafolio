@@ -93,11 +93,110 @@ export const aboutCards: AboutCard[] = [
 
 export const projects: Project[] = [
   {
+    id: "docusaas",
+    title: "Docusaas",
+    description:
+      "Software a la medida multitenant para gestión documental empresarial, con frontend moderno y backend robusto.",
+    image: "/img/projects/docusaas/01.webp",
+    images: ["/img/projects/docusaas/01.webp"],
+    tech: ["Next.js", "Spring Boot", "PostgreSQL", "TypeScript"],
+    github: "#",
+    demo: "#",
+    featured: true,
+    problem: "Necesidad de una plataforma documental multiempresa, segura y escalable.",
+    solution:
+      "Arquitectura multitenant con Next.js en el frontend, Spring Boot en el backend y PostgreSQL como base de datos.",
+    learnings: ["Multitenancy", "Software a la medida", "Integración Next.js + Spring Boot"],
+  },
+  {
+    id: "papyria",
+    title: "Papyria",
+    description:
+      "Producto móvil con agentes de IA y RAG: frontend en React Native, API en Spring Boot y servicio de IA en FastAPI.",
+    image: "/img/projects/papyria/01.webp",
+    images: [
+      "/img/projects/papyria/01.webp",
+      "/img/projects/papyria/02.webp",
+    ],
+    tech: ["React Native", "Spring Boot", "Python", "FastAPI", "RAG"],
+    github: "#",
+    demo: "#",
+    featured: true,
+    problem: "Ofrecer una experiencia móvil con conocimiento contextual mediante agentes de IA.",
+    solution:
+      "App React Native respaldada por Spring Boot y un servicio Python/FastAPI para agentes IA y RAG.",
+    learnings: ["Arquitectura de agentes", "RAG en producción", "React Native + backends heterogéneos"],
+  },
+  {
+    id: "terpel-pos",
+    title: "TERPEL POS Móvil",
+    description:
+      "Sistema POS móvil para estaciones de servicio Terpel: inventario, ventas y reportes orientados a reducir tiempos de operación.",
+    image: "/img/projects/terpel-pos/01.webp",
+    images: [
+      "/img/projects/terpel-pos/01.webp",
+      "/img/projects/terpel-pos/02.webp",
+      "/img/projects/terpel-pos/03.webp",
+      "/img/projects/terpel-pos/04.webp",
+      "/img/projects/terpel-pos/05.webp",
+    ],
+    tech: ["React Native", "TypeScript"],
+    github: "#",
+    demo: "#",
+    featured: true,
+    problem: "Agilizar operaciones POS en estaciones de servicio con flujos claros y confiables.",
+    solution:
+      "Mantenimiento y evolución del POS móvil en React Native durante mi etapa en Devitech / Terpel, enfocando UX y tiempos de venta.",
+    learnings: ["Flujos POS móviles", "Operación en campo", "Mantenimiento de producto a escala"],
+  },
+  {
+    id: "premios-perrenque",
+    title: "Premios Perrengue",
+    description:
+      "Landing page web para la campaña Premios Perrengue, orientada a comunicación clara y conversión.",
+    image: "/img/projects/premios-perrenque/01.webp",
+    images: [
+      "/img/projects/premios-perrenque/01.webp",
+      "/img/projects/premios-perrenque/02.webp",
+      "/img/projects/premios-perrenque/03.webp",
+      "/img/projects/premios-perrenque/04.webp",
+      "/img/projects/premios-perrenque/05.webp",
+      "/img/projects/premios-perrenque/06.webp",
+    ],
+    tech: ["React", "Vite", "Tailwind CSS"],
+    github: "#",
+    demo: "#",
+    featured: true,
+    problem: "Comunicar la campaña Premios Perrengue con una presencia web atractiva y rápida.",
+    solution: "Landing page enfocada en mensaje, visuales y experiencia móvil.",
+    learnings: ["Landing de campaña", "Narrativa visual", "Optimización móvil"],
+  },
+  {
+    id: "haceb",
+    title: "Landing Haceb",
+    description:
+      "Landing page para Haceb con React y Vite; el registro de asistencia se resolvió con un backend en Node.",
+    image: "/img/projects/haceb/01.webp",
+    images: [
+      "/img/projects/haceb/01.webp",
+      "/img/projects/haceb/02.webp",
+      "/img/projects/haceb/03.webp",
+    ],
+    tech: ["React", "Vite", "Node.js"],
+    github: "#",
+    demo: "#",
+    featured: true,
+    problem: "Dar presencia digital a Haceb y capturar registros de asistencia de forma simple.",
+    solution: "Frontend en React + Vite y API de registro de asistencia en Node.js.",
+    learnings: ["Landings con Vite", "Formularios de registro", "Integración frontend–Node"],
+  },
+  {
     id: "devitech",
     title: "Landing page Devitech",
     description:
       "Desarrollo de landing page corporativa para una empresa tecnológica, optimizada para SEO y con diseño 100% responsivo.",
     image: "/img/devitech.webp",
+    images: ["/img/devitech.webp"],
     tech: ["Next.js", "TypeScript", "Node.js", "WP HEADLESS", "Tailwind CSS"],
     github: "#",
     demo: "https://devitech.com.co/home",
@@ -113,6 +212,7 @@ export const projects: Project[] = [
     description:
       "Landing para plataforma de intercambio de criptomonedas con datos de mercado en tiempo real.",
     image: "/img/kiex.webp",
+    images: ["/img/kiex.webp"],
     tech: ["React.js", "Antd design"],
     github: "#",
     demo: "https://kiex-web.lmcdigitalriver.online/#/",
@@ -127,6 +227,7 @@ export const projects: Project[] = [
     description:
       "Aplicación web para consultar vulnerabilidades de la National Vulnerability Database (NVD).",
     image: "/img/nvd-searcher.webp",
+    images: ["/img/nvd-searcher.webp"],
     tech: ["React.js", "Axios", "Tailwind CSS"],
     github: "https://github.com/gmartine32/challenge-frontend?tab=readme-ov-file",
     demo: "https://challenge-front.lmcdigitalriver.online",
@@ -136,38 +237,18 @@ export const projects: Project[] = [
     learnings: ["Consumo de APIs densas", "Filtrado client-side", "UI técnica usable"],
   },
   {
-    id: "terpel-pos",
-    title: "TERPEL POS MOBILE",
-    description:
-      "App móvil para puntos de venta con inventario, ventas y reportes en tiempo real.",
-    image: "/img/devitech.webp",
-    tech: ["Next.js", "SASS", "Framer Motion"],
-    github: "#",
-    demo: "#",
-    featured: false,
-    problem: "Simplificar operaciones POS en estaciones de servicio.",
-    solution: "Interfaz modular con animaciones optimizadas para flujos de venta ágiles.",
-    learnings: ["Flujos POS móviles", "Animaciones de productividad", "Modularidad de UI"],
-  },
-  {
-    id: "haceb",
-    title: "Landing page campaña Haceb",
-    description: "Landing para campaña publicitaria de electrodomésticos enfocada en conversión.",
-    image: "/img/kiex.webp",
-    tech: ["React Native", "Socket.io", "Express"],
-    github: "#",
-    demo: "#",
-    featured: false,
-    problem: "Aumentar conversión en campaña publicitaria.",
-    solution: "CTAs claros, diseño atractivo y optimización móvil.",
-    learnings: ["Landing de campaña", "Conversión móvil", "Mensajería de producto"],
-  },
-  {
     id: "movisai",
     title: "MOVISAI",
     description:
       "Plataforma web para caracterización socioeconómica en San Andrés con visualización de datos.",
-    image: "/img/nvd-searcher.webp",
+    image: "/img/projects/movisai/01.webp",
+    images: [
+      "/img/projects/movisai/01.webp",
+      "/img/projects/movisai/02.webp",
+      "/img/projects/movisai/03.webp",
+      "/img/projects/movisai/04.webp",
+      "/img/projects/movisai/05.webp",
+    ],
     tech: ["React", "API Integration", "Chart.js"],
     github: "#",
     demo: "#",
@@ -182,6 +263,7 @@ export const projects: Project[] = [
     description:
       "App móvil censal con soporte offline y sincronización automática para más de 30 mil vehículos.",
     image: "/img/devitech.webp",
+    images: ["/img/devitech.webp"],
     tech: ["React Native", "Node.js", "TypeScript", "Oracle"],
     github: "#",
     demo: "#",
@@ -193,6 +275,19 @@ export const projects: Project[] = [
 ];
 
 export const experiences: Experience[] = [
+  {
+    position: "Full Stack Developer",
+    company: "Papyria",
+    period: "2025 - Presente",
+    description:
+      "Producto móvil con agentes de IA y RAG: React Native, Spring Boot y FastAPI para el servicio de agentes e indexación.",
+    achievements: [
+      "Arquitectura de app React Native con backends Spring Boot y FastAPI",
+      "Integración de agentes de IA y pipeline RAG",
+      "Definición de flujos de producto y experiencia móvil",
+    ],
+    tech: ["React Native", "Spring Boot", "Python", "FastAPI", "RAG"],
+  },
   {
     position: "Full Stack Developer",
     company: "Devitech S.A.S – Terpel",

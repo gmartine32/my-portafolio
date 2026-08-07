@@ -8,7 +8,7 @@ export function ProjectsRoom() {
   const featured = projects.filter((p) => p.featured);
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col px-6 py-20">
+    <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col px-6 pb-28 pt-20 sm:px-8 sm:pb-20">
       <header className="mb-12 text-center">
         <h1 className="font-heading mb-3 text-4xl font-bold md:text-6xl">
           <span className="bg-gradient-primary bg-clip-text text-transparent">Proyectos</span>
@@ -31,7 +31,7 @@ export function ProjectsRoom() {
             <div className="aspect-video overflow-hidden bg-muted">
               <img
                 src={project.image}
-                alt=""
+                alt={project.title}
                 loading="lazy"
                 className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
               />

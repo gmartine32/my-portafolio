@@ -49,7 +49,8 @@ export default function World() {
   const currentRoomId = useNavigationStore((s) => s.currentRoomId);
   const hydrateFromUrl = useNavigationStore((s) => s.hydrateFromUrl);
   const reducedMotion = usePrefersReducedMotion();
-  const { onPointerDown, onPointerUp, onPointerCancel } = useWorldControls();
+  const { setWorldRoot, onPointerDown, onPointerUp, onPointerCancel } =
+    useWorldControls();
   useGlassPointerShine(!reducedMotion);
 
   useEffect(() => {
@@ -67,7 +68,8 @@ export default function World() {
 
   return (
     <div
-      className="fixed inset-0 z-10 h-[100dvh] w-screen bg-background"
+      ref={setWorldRoot}
+      className="fixed inset-0 z-10 h-[100dvh] w-screen touch-manipulation bg-background"
       role="application"
       aria-label="Developer World — portfolio exploratorio"
       onPointerDown={onPointerDown}

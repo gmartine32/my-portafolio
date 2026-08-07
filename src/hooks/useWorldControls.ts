@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Direction } from "../types/world";
 import { useNavigationStore } from "../stores/navigationStore";
 
-const SWIPE_THRESHOLD = 64;
+const SWIPE_THRESHOLD = 56;
 
 const KEY_MAP: Record<string, Direction> = {
   ArrowUp: "up",
@@ -30,11 +30,9 @@ function isTypingTarget(target: EventTarget | null): boolean {
   );
 }
 
-function isInteractive(target: EventTarget | null): boolean {
+function blocksWorldSwipe(target: EventTarget | null): boolean {
   if (!(target instanceof Element)) return false;
-  return Boolean(
-    target.closest("a, button, input, textarea, select, [role='button']"),
-  );
+  return Boolean(target.closest("[data-no-world-swipe]"));
 }
 
 function getActiveScrollContainer(): HTMLElement | null {
@@ -43,14 +41,21 @@ function getActiveScrollContainer(): HTMLElement | null {
   );
 }
 
+type GestureStart = {
+  x: number;
+  y: number;
+  blocked: boolean;
+  pointerId?: number;
+};
+
 export function useWorldControls() {
   const move = useNavigationStore((s) => s.move);
-  const pointerStart = useRef<{ x: number; y: number; interactive: boolean } | null>(
-    null,
-  );
+  const gestureStart = useRef<GestureStart | null>(null);
+  const [worldRoot, setWorldRoot] = useState<HTMLElement | null>(null);
 
   const onKeyDown = useCallback(
     (event: KeyboardEvent) => {
+      if (document.body.dataset.lightbox === "open") return;
       if (isTypingTarget(event.target)) return;
       const direction = KEY_MAP[event.key];
       if (!direction) return;
@@ -65,24 +70,14 @@ export function useWorldControls() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onKeyDown]);
 
-  const onPointerDown = useCallback((event: React.PointerEvent) => {
-    if (event.button !== 0) return;
-    pointerStart.current = {
-      x: event.clientX,
-      y: event.clientY,
-      interactive: isInteractive(event.target),
-    };
-  }, []);
+  const resolveSwipe = useCallback(
+    (clientX: number, clientY: number) => {
+      const start = gestureStart.current;
+      gestureStart.current = null;
+      if (!start || start.blocked) return;
 
-  const onPointerUp = useCallback(
-    (event: React.PointerEvent) => {
-      if (!pointerStart.current) return;
-      const { x, y, interactive } = pointerStart.current;
-      pointerStart.current = null;
-      if (interactive) return;
-
-      const dx = event.clientX - x;
-      const dy = event.clientY - y;
+      const dx = clientX - start.x;
+      const dy = clientY - start.y;
 
       if (Math.abs(dx) < SWIPE_THRESHOLD && Math.abs(dy) < SWIPE_THRESHOLD) {
         return;
@@ -108,9 +103,82 @@ export function useWorldControls() {
     [move],
   );
 
-  const onPointerCancel = useCallback(() => {
-    pointerStart.current = null;
+  const onPointerDown = useCallback((event: React.PointerEvent) => {
+    // Touch is handled via native touch listeners to survive scroll cancellation.
+    if (event.pointerType === "touch") return;
+    if (event.button !== 0) return;
+    // Never capture the pointer — capture on the world root retargets mouseup
+    // away from buttons and kills click handlers (e.g. gallery lightbox).
+    gestureStart.current = {
+      x: event.clientX,
+      y: event.clientY,
+      blocked: blocksWorldSwipe(event.target),
+      pointerId: event.pointerId,
+    };
   }, []);
 
-  return { onPointerDown, onPointerUp, onPointerCancel };
+  const onPointerUp = useCallback(
+    (event: React.PointerEvent) => {
+      if (event.pointerType === "touch") return;
+      if (!gestureStart.current) return;
+      if (
+        gestureStart.current.pointerId !== undefined &&
+        event.pointerId !== gestureStart.current.pointerId
+      ) {
+        return;
+      }
+      resolveSwipe(event.clientX, event.clientY);
+    },
+    [resolveSwipe],
+  );
+
+  const onPointerCancel = useCallback((event: React.PointerEvent) => {
+    if (event.pointerType === "touch") return;
+    gestureStart.current = null;
+  }, []);
+
+  useEffect(() => {
+    if (!worldRoot) return;
+
+    const onTouchStart = (event: TouchEvent) => {
+      if (event.touches.length !== 1) return;
+      const touch = event.touches[0];
+      gestureStart.current = {
+        x: touch.clientX,
+        y: touch.clientY,
+        blocked: blocksWorldSwipe(event.target),
+      };
+    };
+
+    const onTouchEnd = (event: TouchEvent) => {
+      if (!gestureStart.current) return;
+      const touch = event.changedTouches[0];
+      if (!touch) {
+        gestureStart.current = null;
+        return;
+      }
+      resolveSwipe(touch.clientX, touch.clientY);
+    };
+
+    const onTouchCancel = () => {
+      gestureStart.current = null;
+    };
+
+    worldRoot.addEventListener("touchstart", onTouchStart, { passive: true });
+    worldRoot.addEventListener("touchend", onTouchEnd, { passive: true });
+    worldRoot.addEventListener("touchcancel", onTouchCancel, { passive: true });
+
+    return () => {
+      worldRoot.removeEventListener("touchstart", onTouchStart);
+      worldRoot.removeEventListener("touchend", onTouchEnd);
+      worldRoot.removeEventListener("touchcancel", onTouchCancel);
+    };
+  }, [worldRoot, resolveSwipe]);
+
+  return {
+    setWorldRoot,
+    onPointerDown,
+    onPointerUp,
+    onPointerCancel,
+  };
 }
