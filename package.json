@@ -16,6 +16,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-toast": "^1.2.14",
     "@tailwindcss/vite": "^4.1.11",
+    "@vercel/analytics": "^2.0.1",
     "astro": "^5.11.0",
     "autoprefixer": "^10.4.21",
     "class-variance-authority": "^0.7.1",

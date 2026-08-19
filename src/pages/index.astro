@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Analytics from "@vercel/analytics/astro";
 import World from "../components/world/World.tsx";
 import { profile, projects, experiences } from "../data/content";
 
@@ -117,5 +118,6 @@ const ogImage = new URL("/img/kiex.webp", siteBase);
 				</ul>
 			</div>
 		</noscript>
+		<Analytics />
 	</body>
 </html>
