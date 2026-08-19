@@ -24,7 +24,6 @@ function buildProjectRooms(): Record<string, Room> {
       left: prevId,
       right: nextId,
       up: "projects",
-      down: index === projectChain.length - 1 ? "opensource" : undefined,
       componentKey: "project-detail",
       projectId: project.id,
     };
@@ -37,10 +36,6 @@ const projectRooms = buildProjectRooms();
 const firstProjectId = projectChain[0]
   ? `project-${projectChain[0].id}`
   : undefined;
-const lastProjectId = projectChain[projectChain.length - 1]
-  ? `project-${projectChain[projectChain.length - 1].id}`
-  : undefined;
-
 export const rooms: Record<string, Room> = {
   home: {
     id: "home",
@@ -49,6 +44,7 @@ export const rooms: Record<string, Room> = {
     y: 0,
     left: "about",
     right: "projects",
+    down: "experience",
     componentKey: "home",
   },
   about: {
@@ -57,7 +53,7 @@ export const rooms: Record<string, Room> = {
     x: -1,
     y: 0,
     right: "home",
-    down: "experience",
+    down: "opensource",
     componentKey: "about",
   },
   projects: {
@@ -67,16 +63,15 @@ export const rooms: Record<string, Room> = {
     y: 0,
     left: "home",
     right: firstProjectId,
-    down: "opensource",
     componentKey: "projects",
   },
   experience: {
     id: "experience",
     title: "Experiencia",
-    x: -1,
+    x: 0,
     y: 1,
-    up: "about",
-    down: "contact",
+    up: "home",
+    left: "opensource",
     componentKey: "experience",
   },
   contact: {
@@ -84,16 +79,17 @@ export const rooms: Record<string, Room> = {
     title: "Contacto",
     x: -1,
     y: 2,
-    up: "experience",
+    up: "opensource",
     componentKey: "contact",
   },
   opensource: {
     id: "opensource",
     title: "Open Source",
-    x: 1,
-    y: 2,
-    up: "projects",
-    left: lastProjectId,
+    x: -1,
+    y: 1,
+    up: "about",
+    down: "contact",
+    right: "experience",
     componentKey: "opensource",
   },
   ...projectRooms,
