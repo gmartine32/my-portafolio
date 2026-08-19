@@ -35,6 +35,14 @@ function blocksWorldSwipe(target: EventTarget | null): boolean {
   return Boolean(target.closest("[data-no-world-swipe]"));
 }
 
+function isInteractiveTarget(target: EventTarget | null): boolean {
+  if (!(target instanceof Element)) return false;
+  if (isTypingTarget(target)) return true;
+  return Boolean(
+    target.closest("button, a, input, textarea, select, [contenteditable='true']"),
+  );
+}
+
 function getActiveScrollContainer(): HTMLElement | null {
   return document.querySelector<HTMLElement>(
     '[data-room-frame][data-active="true"]',
@@ -45,11 +53,13 @@ type GestureStart = {
   x: number;
   y: number;
   blocked: boolean;
+  interactive: boolean;
   pointerId?: number;
 };
 
 export function useWorldControls() {
   const move = useNavigationStore((s) => s.move);
+  const toggleHudControls = useNavigationStore((s) => s.toggleHudControls);
   const gestureStart = useRef<GestureStart | null>(null);
   const [worldRoot, setWorldRoot] = useState<HTMLElement | null>(null);
 
@@ -80,6 +90,9 @@ export function useWorldControls() {
       const dy = clientY - start.y;
 
       if (Math.abs(dx) < SWIPE_THRESHOLD && Math.abs(dy) < SWIPE_THRESHOLD) {
+        if (document.body.dataset.lightbox === "open") return;
+        if (start.interactive) return;
+        toggleHudControls();
         return;
       }
 
@@ -100,7 +113,7 @@ export function useWorldControls() {
 
       move(dy > 0 ? "up" : "down");
     },
-    [move],
+    [move, toggleHudControls],
   );
 
   const onPointerDown = useCallback((event: React.PointerEvent) => {
@@ -113,6 +126,7 @@ export function useWorldControls() {
       x: event.clientX,
       y: event.clientY,
       blocked: blocksWorldSwipe(event.target),
+      interactive: isInteractiveTarget(event.target),
       pointerId: event.pointerId,
     };
   }, []);
@@ -147,6 +161,7 @@ export function useWorldControls() {
         x: touch.clientX,
         y: touch.clientY,
         blocked: blocksWorldSwipe(event.target),
+        interactive: isInteractiveTarget(event.target),
       };
     };
 

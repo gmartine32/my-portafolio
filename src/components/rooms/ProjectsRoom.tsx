@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { projects } from "../../data/content";
+import { isMobileProject } from "../../lib/projectImageLayout";
 import { useNavigationStore } from "../../stores/navigationStore";
 import { GlassPanel } from "../ui/GlassPanel";
 
@@ -8,7 +9,7 @@ export function ProjectsRoom() {
   const featured = projects.filter((p) => p.featured);
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col px-6 pb-28 pt-20 sm:px-8 sm:pb-20">
+    <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col px-6 pb-28 pt-28 sm:px-8 sm:pb-20">
       <header className="mb-12 text-center">
         <h1 className="font-heading mb-3 text-4xl font-bold md:text-6xl">
           <span className="bg-gradient-primary bg-clip-text text-transparent">Proyectos</span>
@@ -19,7 +20,10 @@ export function ProjectsRoom() {
       </header>
 
       <div className="grid gap-5 md:grid-cols-2">
-        {featured.map((project) => (
+        {featured.map((project) => {
+          const mobileLayout = isMobileProject(project);
+
+          return (
           <GlassPanel
             key={project.id}
             as="button"
@@ -28,12 +32,20 @@ export function ProjectsRoom() {
             onClick={() => goTo(`project-${project.id}`)}
             className="group rounded-2xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
-            <div className="aspect-video overflow-hidden bg-muted">
+            <div
+              className={
+                mobileLayout
+                  ? "mx-auto flex aspect-[9/16] max-h-72 max-w-[160px] items-center justify-center overflow-hidden bg-muted/40"
+                  : "aspect-video overflow-hidden bg-muted"
+              }
+            >
               <img
                 src={project.image}
                 alt={project.title}
                 loading="lazy"
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                className={`h-full w-full transition duration-500 group-hover:scale-105 ${
+                  mobileLayout ? "object-contain object-center" : "object-cover"
+                }`}
               />
             </div>
             <div className="p-5">
@@ -56,7 +68,8 @@ export function ProjectsRoom() {
               </div>
             </div>
           </GlassPanel>
-        ))}
+          );
+        })}
       </div>
 
       <p className="mt-10 text-center text-sm text-muted-foreground">

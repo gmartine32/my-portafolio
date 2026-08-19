@@ -15,7 +15,6 @@ import { roomList } from "../../world/map";
 import { AmbientDunesBackground } from "./AmbientDunesBackground";
 import { Camera } from "./Camera";
 import { HUD } from "./HUD";
-import { NavigatorHints } from "./NavigatorHints";
 import { RoomFrame } from "./RoomFrame";
 
 function RoomContent({
@@ -79,7 +78,6 @@ export default function World() {
       <AmbientDunesBackground />
 
       <HUD />
-      <NavigatorHints />
 
       <Camera currentRoomId={currentRoomId}>
         {roomList.map((room) => {

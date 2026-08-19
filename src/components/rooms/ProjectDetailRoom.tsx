@@ -1,5 +1,6 @@
 import { ExternalLink, Github } from "lucide-react";
 import { projects } from "../../data/content";
+import { getProjectImageLayout } from "../../lib/projectImageLayout";
 import { ProjectGallery } from "../projects/ProjectGallery";
 import { GlassPanel } from "../ui/GlassPanel";
 
@@ -24,8 +25,12 @@ export function ProjectDetailRoom({ projectId }: ProjectDetailRoomProps) {
     project.images?.length > 0 ? project.images : [project.image];
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col px-6 pb-28 pt-20 sm:px-8 sm:pb-20">
-      <ProjectGallery title={project.title} images={gallery} />
+    <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col px-6 pb-28 pt-28 sm:px-8 sm:pb-20">
+      <ProjectGallery
+        title={project.title}
+        images={gallery}
+        layout={getProjectImageLayout(project)}
+      />
 
       <h1 className="font-heading mb-4 text-3xl font-bold md:text-5xl">{project.title}</h1>
       <p className="mb-8 text-lg text-muted-foreground">{project.description}</p>

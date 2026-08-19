@@ -1,16 +1,23 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import type { ProjectImageLayout } from "../../lib/projectImageLayout";
 import { GlassPanel } from "../ui/GlassPanel";
 
 type ProjectGalleryProps = {
   title: string;
   images: string[];
+  layout?: ProjectImageLayout;
 };
 
 const SWIPE_THRESHOLD = 48;
 
-export function ProjectGallery({ title, images }: ProjectGalleryProps) {
+export function ProjectGallery({
+  title,
+  images,
+  layout = "desktop",
+}: ProjectGalleryProps) {
+  const isMobile = layout === "mobile";
   const gallery = images.length > 0 ? images : [];
   const [index, setIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -190,16 +197,30 @@ export function ProjectGallery({ title, images }: ProjectGalleryProps) {
                 }
                 openLightbox();
               }}
-              className="relative z-0 block w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className={`relative z-0 block w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                isMobile ? "mx-auto max-w-[280px] sm:max-w-xs" : ""
+              }`}
               aria-label={`Ampliar imagen ${index + 1} de ${title}`}
             >
-              <img
-                src={current}
-                alt={`${title} — captura ${index + 1}`}
-                loading="lazy"
-                draggable={false}
-                className="aspect-video w-full object-cover"
-              />
+              {isMobile ? (
+                <div className="flex aspect-[9/19.5] w-full items-center justify-center bg-muted/40">
+                  <img
+                    src={current}
+                    alt={`${title} — captura ${index + 1}`}
+                    loading="lazy"
+                    draggable={false}
+                    className="h-full w-full object-contain object-center"
+                  />
+                </div>
+              ) : (
+                <img
+                  src={current}
+                  alt={`${title} — captura ${index + 1}`}
+                  loading="lazy"
+                  draggable={false}
+                  className="aspect-video w-full object-cover"
+                />
+              )}
             </button>
 
             {hasMultiple && (
@@ -246,7 +267,9 @@ export function ProjectGallery({ title, images }: ProjectGalleryProps) {
                 }}
                 aria-label={`Ampliar imagen ${i + 1}`}
                 aria-current={i === index}
-                className={`relative h-14 w-20 shrink-0 overflow-hidden rounded-md ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                className={`relative shrink-0 overflow-hidden rounded-md ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                  isMobile ? "h-20 w-12" : "h-14 w-20"
+                } ${
                   i === index
                     ? "ring-2 ring-primary"
                     : "opacity-70 hover:opacity-100"
@@ -257,7 +280,11 @@ export function ProjectGallery({ title, images }: ProjectGalleryProps) {
                   alt=""
                   loading="lazy"
                   draggable={false}
-                  className="h-full w-full object-cover"
+                  className={`h-full w-full ${
+                    isMobile
+                      ? "bg-muted/40 object-contain object-center"
+                      : "object-cover"
+                  }`}
                 />
               </button>
             ))}

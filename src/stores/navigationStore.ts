@@ -13,18 +13,24 @@ type NavigationState = {
   currentRoomId: string;
   isTransitioning: boolean;
   announcement: string;
+  hudControlsVisible: boolean;
   move: (direction: Direction) => boolean;
   goTo: (roomId: string) => boolean;
   hydrateFromUrl: () => void;
   setTransitioning: (value: boolean) => void;
+  toggleHudControls: () => void;
 };
 
 export const useNavigationStore = create<NavigationState>((set, get) => ({
   currentRoomId: DEFAULT_ROOM_ID,
   isTransitioning: false,
   announcement: "Inicio",
+  hudControlsVisible: false,
 
   setTransitioning: (value) => set({ isTransitioning: value }),
+
+  toggleHudControls: () =>
+    set((state) => ({ hudControlsVisible: !state.hudControlsVisible })),
 
   hydrateFromUrl: () => {
     if (typeof window === "undefined") return;
@@ -43,7 +49,12 @@ export const useNavigationStore = create<NavigationState>((set, get) => ({
     const room = getRoom(roomId);
     if (!room) return false;
 
-    set({ isTransitioning: true, currentRoomId: room.id, announcement: room.title });
+    set({
+      isTransitioning: true,
+      currentRoomId: room.id,
+      announcement: room.title,
+      hudControlsVisible: false,
+    });
     syncRoomToUrl(room.id);
 
     window.setTimeout(() => {
