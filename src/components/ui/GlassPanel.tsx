@@ -41,7 +41,7 @@ export function GlassPanel({
   return (
     <Comp
       className={cn(
-        "glass-panel",
+        "glass-panel bg-background/55",
         interactive && "glass-panel--interactive",
         active && "glass-panel--active",
         className

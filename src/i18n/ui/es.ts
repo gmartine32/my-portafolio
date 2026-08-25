@@ -1,0 +1,119 @@
+export const esUi = {
+  world: {
+    ariaLabel: "Developer World — portafolio exploratorio",
+    fallbackTitle: "Mundo",
+    roomLive: "Habitación: {title}",
+  },
+  directions: {
+    up: "arriba",
+    down: "abajo",
+    left: "a la izquierda",
+    right: "a la derecha",
+  },
+  hud: {
+    goTo: "Ir {direction} a {title}",
+    go: "Ir {direction}",
+  },
+  rooms: {
+    home: "Inicio",
+    about: "Sobre mí",
+    projects: "Proyectos",
+    experience: "Experiencia",
+    contact: "Contacto",
+    opensource: "Open Source",
+  },
+  home: {
+    explore: "Explorar",
+    navHint: "Flechas, WASD o desliza",
+  },
+  about: {
+    titleBefore: "Sobre",
+    titleAccent: "mí",
+    years: "{location} · {years} años de experiencia",
+  },
+  projects: {
+    title: "Proyectos",
+    subtitle: "El corazón del portfolio. Usa ← → para recorrer cada proyecto.",
+    countHint: "{count} proyectos · desliza a la derecha para entrar al detalle",
+  },
+  projectDetail: {
+    notFound: "Proyecto no encontrado",
+    problem: "Problema",
+    solution: "Solución",
+    learnings: "Aprendizajes",
+    github: "GitHub",
+    demo: "Demo",
+  },
+  experience: {
+    titleBefore: "Mi",
+    titleAccent: "Experiencia",
+    subtitle: "Un recorrido por mi carrera profesional y los logros alcanzados",
+  },
+  opensource: {
+    titleBefore: "Open",
+    titleAccent: "Source",
+    subtitle: "Proyectos públicos, contribuciones y recursos",
+  },
+  contact: {
+    title: "¿Construimos algo?",
+    subtitle: "Escríbeme o revisa mi trabajo. Estoy disponible para nuevos retos remotos.",
+    email: "Correo",
+    cv: "CV",
+    downloadCv: "Descargar CV",
+  },
+  map: {
+    chip: "Mapa",
+    openSr: "Abrir mapa del mundo. Estás en {title}.",
+    helpAria: "Ver cómo navegar este portafolio",
+    dialogAria: "Mapa del mundo",
+    title: "Mapa del mundo",
+    subtitle: "Elegí cualquier sala para viajar directo.",
+    close: "Cerrar mapa",
+    goTo: "Ir a {title}",
+    currentRoom: " (sala actual)",
+    projectsCount: "{title}, {count} proyectos. {action} lista",
+    showList: "Ver",
+    hideList: "Ocultar",
+    projectsHeading: "Proyectos",
+    viewGallery: "Ver galería",
+    here: "Estás aquí",
+    visited: "Visitado",
+    unvisited: "Sin visitar",
+    keyboardHint: "Flechas para moverte · Enter para viajar · Esc para cerrar",
+  },
+  onboarding: {
+    progress: "Cómo navegar · {n} de {total}",
+    skip: "Saltar",
+    next: "Siguiente",
+    done: "Entendido",
+    steps: {
+      world: {
+        title: "Este portafolio es un mundo",
+        body: "Cada sección es una sala conectada a las demás. Muévete con las flechas del teclado, con WASD o deslizando el dedo.",
+      },
+      controls: {
+        title: "Toca la pantalla para ver los controles",
+        body: "Un toque corto (o un clic) muestra y oculta las flechas de navegación, con las direcciones disponibles desde donde estés.",
+      },
+      map: {
+        title: "El mapa te lleva a cualquier parte",
+        body: "Abre el mapa de la esquina para ver la estructura completa y saltar directo a la sala que quieras. Atajo: tecla M. El botón de al lado vuelve a mostrar esta guía.",
+      },
+    },
+  },
+  gallery: {
+    dialog: "Galería de {title}",
+    close: "Cerrar galería",
+    prev: "Imagen anterior",
+    next: "Imagen siguiente",
+    expand: "Ampliar imagen {n} de {title}",
+    expandN: "Ampliar imagen {n}",
+    capture: "{title} — captura {n}",
+  },
+  lang: {
+    groupLabel: "Idioma",
+    setTo: "Cambiar idioma a {name}",
+  },
+};
+
+export type UiMessages = typeof esUi;

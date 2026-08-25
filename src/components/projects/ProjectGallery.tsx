@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { interpolate, useUi } from "../../i18n/hooks";
 import type { ProjectImageLayout } from "../../lib/projectImageLayout";
 import { GlassPanel } from "../ui/GlassPanel";
 
@@ -17,6 +18,7 @@ export function ProjectGallery({
   images,
   layout = "desktop",
 }: ProjectGalleryProps) {
+  const t = useUi();
   const isMobile = layout === "mobile";
   const gallery = images.length > 0 ? images : [];
   const [index, setIndex] = useState(0);
@@ -115,7 +117,7 @@ export function ProjectGallery({
             data-project-lightbox
             role="dialog"
             aria-modal="true"
-            aria-label={`Galería de ${title}`}
+            aria-label={interpolate(t.gallery.dialog, { title })}
             className="fixed inset-0 z-[100] flex flex-col bg-background/95 backdrop-blur-md"
             onPointerDown={(event) => event.stopPropagation()}
             onClick={() => setLightboxOpen(false)}
@@ -126,7 +128,7 @@ export function ProjectGallery({
               </p>
               <button
                 type="button"
-                aria-label="Cerrar galería"
+                aria-label={t.gallery.close}
                 onClick={(event) => {
                   event.stopPropagation();
                   setLightboxOpen(false);
@@ -145,7 +147,7 @@ export function ProjectGallery({
             >
               <img
                 src={current}
-                alt={`${title} — captura ${index + 1}`}
+                alt={interpolate(t.gallery.capture, { title, n: index + 1 })}
                 className="max-h-[80dvh] max-w-full object-contain"
               />
 
@@ -153,7 +155,7 @@ export function ProjectGallery({
                 <>
                   <button
                     type="button"
-                    aria-label="Imagen anterior"
+                    aria-label={t.gallery.prev}
                     onClick={() => go(-1)}
                     className="glass-panel glass-panel--interactive absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full sm:left-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
@@ -161,7 +163,7 @@ export function ProjectGallery({
                   </button>
                   <button
                     type="button"
-                    aria-label="Imagen siguiente"
+                    aria-label={t.gallery.next}
                     onClick={() => go(1)}
                     className="glass-panel glass-panel--interactive absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full sm:right-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
@@ -200,13 +202,13 @@ export function ProjectGallery({
               className={`relative z-0 block w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                 isMobile ? "mx-auto max-w-[280px] sm:max-w-xs" : ""
               }`}
-              aria-label={`Ampliar imagen ${index + 1} de ${title}`}
+              aria-label={interpolate(t.gallery.expand, { n: index + 1, title })}
             >
               {isMobile ? (
                 <div className="flex aspect-[9/19.5] w-full items-center justify-center bg-muted/40">
                   <img
                     src={current}
-                    alt={`${title} — captura ${index + 1}`}
+                    alt={interpolate(t.gallery.capture, { title, n: index + 1 })}
                     loading="lazy"
                     draggable={false}
                     className="h-full w-full object-contain object-center"
@@ -215,7 +217,7 @@ export function ProjectGallery({
               ) : (
                 <img
                   src={current}
-                  alt={`${title} — captura ${index + 1}`}
+                  alt={interpolate(t.gallery.capture, { title, n: index + 1 })}
                   loading="lazy"
                   draggable={false}
                   className="aspect-video w-full object-cover"
@@ -227,7 +229,7 @@ export function ProjectGallery({
               <>
                 <button
                   type="button"
-                  aria-label="Imagen anterior"
+                  aria-label={t.gallery.prev}
                   onClick={(event) => {
                     event.stopPropagation();
                     go(-1);
@@ -238,7 +240,7 @@ export function ProjectGallery({
                 </button>
                 <button
                   type="button"
-                  aria-label="Imagen siguiente"
+                  aria-label={t.gallery.next}
                   onClick={(event) => {
                     event.stopPropagation();
                     go(1);
@@ -265,7 +267,7 @@ export function ProjectGallery({
                   setIndex(i);
                   openLightbox();
                 }}
-                aria-label={`Ampliar imagen ${i + 1}`}
+                aria-label={interpolate(t.gallery.expandN, { n: i + 1 })}
                 aria-current={i === index}
                 className={`relative shrink-0 overflow-hidden rounded-md ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   isMobile ? "h-20 w-12" : "h-14 w-20"

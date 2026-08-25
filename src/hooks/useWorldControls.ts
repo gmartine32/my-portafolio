@@ -60,19 +60,33 @@ type GestureStart = {
 export function useWorldControls() {
   const move = useNavigationStore((s) => s.move);
   const toggleHudControls = useNavigationStore((s) => s.toggleHudControls);
+  const toggleMap = useNavigationStore((s) => s.toggleMap);
+  const isMapOpen = useNavigationStore((s) => s.isMapOpen);
+  const isOnboardingOpen = useNavigationStore((s) => s.isOnboardingOpen);
   const gestureStart = useRef<GestureStart | null>(null);
   const [worldRoot, setWorldRoot] = useState<HTMLElement | null>(null);
+
+  // Map and onboarding own the keyboard and pointer while they are up.
+  const suspended = isMapOpen || isOnboardingOpen;
 
   const onKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (document.body.dataset.lightbox === "open") return;
       if (isTypingTarget(event.target)) return;
+
+      if (event.key === "m" || event.key === "M") {
+        event.preventDefault();
+        if (!isOnboardingOpen) toggleMap();
+        return;
+      }
+
+      if (suspended) return;
       const direction = KEY_MAP[event.key];
       if (!direction) return;
       event.preventDefault();
       move(direction);
     },
-    [move],
+    [move, toggleMap, suspended, isOnboardingOpen],
   );
 
   useEffect(() => {
@@ -84,7 +98,7 @@ export function useWorldControls() {
     (clientX: number, clientY: number) => {
       const start = gestureStart.current;
       gestureStart.current = null;
-      if (!start || start.blocked) return;
+      if (!start || start.blocked || suspended) return;
 
       const dx = clientX - start.x;
       const dy = clientY - start.y;
@@ -113,7 +127,7 @@ export function useWorldControls() {
 
       move(dy > 0 ? "up" : "down");
     },
-    [move, toggleHudControls],
+    [move, toggleHudControls, suspended],
   );
 
   const onPointerDown = useCallback((event: React.PointerEvent) => {

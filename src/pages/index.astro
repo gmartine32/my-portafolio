@@ -63,6 +63,31 @@ const ogImage = new URL("/img/kiex.webp", siteBase);
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap"
 			rel="stylesheet"
 		/>
+		<script is:inline>
+			(function () {
+				var KEY = "portfolio:locale:v1";
+				var supported = ["es", "en"];
+				try {
+					var saved = localStorage.getItem(KEY);
+					if (saved && supported.indexOf(saved) !== -1) {
+						document.documentElement.lang = saved;
+						return;
+					}
+				} catch (e) {}
+				var langs = navigator.languages || [navigator.language];
+				for (var i = 0; i < langs.length; i++) {
+					var tag = String(langs[i] || "")
+						.toLowerCase()
+						.replace("_", "-");
+					var base = tag.split("-")[0];
+					if (supported.indexOf(base) !== -1) {
+						document.documentElement.lang = base;
+						return;
+					}
+				}
+				document.documentElement.lang = "es";
+			})();
+		</script>
 	</head>
 		<body class="bg-background text-foreground antialiased">
 		<main>

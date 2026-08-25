@@ -1,5 +1,5 @@
 import { ExternalLink, Github } from "lucide-react";
-import { projects } from "../../data/content";
+import { useContent, useUi } from "../../i18n/hooks";
 import { getProjectImageLayout } from "../../lib/projectImageLayout";
 import { ProjectGallery } from "../projects/ProjectGallery";
 import { GlassPanel } from "../ui/GlassPanel";
@@ -9,12 +9,14 @@ type ProjectDetailRoomProps = {
 };
 
 export function ProjectDetailRoom({ projectId }: ProjectDetailRoomProps) {
+  const { projects } = useContent();
+  const t = useUi();
   const project = projects.find((p) => p.id === projectId);
 
   if (!project) {
     return (
       <div className="flex min-h-full items-center justify-center px-6 pb-28 sm:pb-20">
-        <p className="text-muted-foreground">Proyecto no encontrado</p>
+        <p className="text-foreground/85">{t.projectDetail.notFound}</p>
       </div>
     );
   }
@@ -33,13 +35,13 @@ export function ProjectDetailRoom({ projectId }: ProjectDetailRoomProps) {
       />
 
       <h1 className="font-heading mb-4 text-3xl font-bold md:text-5xl">{project.title}</h1>
-      <p className="mb-8 text-lg text-muted-foreground">{project.description}</p>
+      <p className="mb-8 text-lg text-foreground/90">{project.description}</p>
 
       <div className="mb-8 flex flex-wrap gap-2">
         {project.tech.map((tech) => (
           <span
             key={tech}
-            className="glass-chip rounded-full px-3 py-1.5 text-sm"
+            className="glass-chip rounded-full px-3 py-1.5 text-sm text-foreground"
           >
             {tech}
           </span>
@@ -49,24 +51,30 @@ export function ProjectDetailRoom({ projectId }: ProjectDetailRoomProps) {
       <div className="mb-10 grid gap-4 md:grid-cols-2">
         {project.problem && (
           <GlassPanel className="rounded-2xl p-5">
-            <h2 className="font-heading mb-2 text-lg font-semibold text-foreground">Problema</h2>
-            <p className="text-sm text-muted-foreground">{project.problem}</p>
+            <h2 className="font-heading mb-2 text-lg font-semibold text-foreground">
+              {t.projectDetail.problem}
+            </h2>
+            <p className="text-sm text-foreground/90">{project.problem}</p>
           </GlassPanel>
         )}
         {project.solution && (
           <GlassPanel className="rounded-2xl p-5">
-            <h2 className="font-heading mb-2 text-lg font-semibold text-foreground">Solución</h2>
-            <p className="text-sm text-muted-foreground">{project.solution}</p>
+            <h2 className="font-heading mb-2 text-lg font-semibold text-foreground">
+              {t.projectDetail.solution}
+            </h2>
+            <p className="text-sm text-foreground/90">{project.solution}</p>
           </GlassPanel>
         )}
       </div>
 
       {project.learnings && project.learnings.length > 0 && (
         <div className="mb-10">
-          <h2 className="font-heading mb-3 text-lg font-semibold">Aprendizajes</h2>
+          <h2 className="font-heading mb-3 text-lg font-semibold text-foreground">
+            {t.projectDetail.learnings}
+          </h2>
           <ul className="space-y-2">
             {project.learnings.map((item) => (
-              <li key={item} className="text-sm text-muted-foreground">
+              <li key={item} className="text-sm text-foreground/90">
                 <span className="mr-2 text-primary">•</span>
                 {item}
               </li>
@@ -86,7 +94,7 @@ export function ProjectDetailRoom({ projectId }: ProjectDetailRoomProps) {
             className="inline-flex items-center gap-2 rounded-md px-5 py-2.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <Github className="h-4 w-4" aria-hidden />
-            GitHub
+            {t.projectDetail.github}
           </GlassPanel>
         )}
         {hasDemo && (
@@ -97,7 +105,7 @@ export function ProjectDetailRoom({ projectId }: ProjectDetailRoomProps) {
             className="inline-flex items-center gap-2 rounded-md bg-gradient-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <ExternalLink className="h-4 w-4" aria-hidden />
-            Demo
+            {t.projectDetail.demo}
           </a>
         )}
       </div>

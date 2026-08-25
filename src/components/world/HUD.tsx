@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
 import type { Direction } from "../../types/world";
+import { interpolate, useLocale, useUi } from "../../i18n/hooks";
+import { useLightboxOpen } from "../../hooks/useLightboxOpen";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { useNavigationStore } from "../../stores/navigationStore";
 import { getRoom } from "../../world/map";
-import { getAvailableDirections } from "../../world/navigation";
+import { getAvailableDirections, resolveNeighbor } from "../../world/navigation";
+import { getRoomTitle } from "../../world/titles";
 import { NavigatorHints } from "./NavigatorHints";
 
 const ICONS: Record<Direction, typeof ChevronUp> = {
@@ -22,47 +24,40 @@ const POSITIONS: Record<Exclude<Direction, "up">, string> = {
     "right-3 bottom-24 top-auto translate-y-0 sm:right-6 sm:top-1/2 sm:bottom-auto sm:-translate-y-1/2",
 };
 
-const LABEL: Record<Direction, string> = {
-  up: "arriba",
-  down: "abajo",
-  left: "a la izquierda",
-  right: "a la derecha",
-};
-
-function useLightboxOpen() {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const sync = () => setOpen(document.body.dataset.lightbox === "open");
-    sync();
-    const observer = new MutationObserver(sync);
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ["data-lightbox"],
-    });
-    return () => observer.disconnect();
-  }, []);
-
-  return open;
-}
-
 const NAV_BUTTON_CLASS =
-  "glass-panel glass-panel--interactive flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-40";
+  "glass-panel glass-panel--interactive flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-background/55 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-40";
 
 export function HUD() {
   const currentRoomId = useNavigationStore((s) => s.currentRoomId);
   const announcement = useNavigationStore((s) => s.announcement);
   const isTransitioning = useNavigationStore((s) => s.isTransitioning);
   const hudControlsVisible = useNavigationStore((s) => s.hudControlsVisible);
+  const isMapOpen = useNavigationStore((s) => s.isMapOpen);
+  const isOnboardingOpen = useNavigationStore((s) => s.isOnboardingOpen);
   const move = useNavigationStore((s) => s.move);
   const reducedMotion = usePrefersReducedMotion();
+  const locale = useLocale();
+  const t = useUi();
   const room = getRoom(currentRoomId);
   const directions = getAvailableDirections(currentRoomId);
   const lightboxOpen = useLightboxOpen();
   const isProjectDetail = room?.componentKey === "project-detail";
-  const showControls = hudControlsVisible && !lightboxOpen;
+  const showControls =
+    hudControlsVisible && !lightboxOpen && !isMapOpen && !isOnboardingOpen;
   const hasUp = directions.includes("up");
   const edgeDirections = directions.filter((direction) => direction !== "up");
+  const roomTitle = room ? getRoomTitle(room, locale) : t.world.fallbackTitle;
+
+  const destinationLabel = (direction: Direction) => {
+    const neighbor = resolveNeighbor(currentRoomId, direction);
+    const dir = t.directions[direction];
+    return neighbor
+      ? interpolate(t.hud.goTo, {
+          direction: dir,
+          title: getRoomTitle(neighbor, locale),
+        })
+      : interpolate(t.hud.go, { direction: dir });
+  };
 
   const fade = reducedMotion
     ? { duration: 0 }
@@ -81,7 +76,7 @@ export function HUD() {
             aria-hidden
           >
             <p className="font-heading text-center text-sm font-medium tracking-wide text-foreground/90">
-              {room?.title ?? "Mundo"}
+              {roomTitle}
             </p>
           </div>
         )}
@@ -101,7 +96,7 @@ export function HUD() {
       </div>
 
       <div className="sr-only" aria-live="polite" aria-atomic="true">
-        Habitación: {announcement}
+        {interpolate(t.world.roomLive, { title: announcement })}
       </div>
 
       <AnimatePresence>
@@ -109,7 +104,7 @@ export function HUD() {
           <motion.button
             key="up"
             type="button"
-            aria-label={`Ir ${LABEL.up}`}
+            aria-label={destinationLabel("up")}
             disabled={isTransitioning}
             onClick={() => move("up")}
             className={`${NAV_BUTTON_CLASS} fixed z-40 ${upPosition}`}
@@ -129,7 +124,7 @@ export function HUD() {
               <motion.button
                 key={direction}
                 type="button"
-                aria-label={`Ir ${LABEL[direction]}`}
+                aria-label={destinationLabel(direction)}
                 disabled={isTransitioning}
                 onClick={() => move(direction)}
                 className={`${NAV_BUTTON_CLASS} fixed z-40 ${POSITIONS[direction]}`}

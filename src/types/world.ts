@@ -23,6 +23,28 @@ export type Room = {
   projectId?: string;
 };
 
+export type Profile = {
+  name: string;
+  title: string;
+  subtitle: string;
+  greeting: string;
+  status: string;
+  stack: string[];
+  bio: string;
+  location: string;
+  yearsExperience: string;
+  cvUrl: string;
+  email: string;
+  emailLabel: string;
+  linkedin: string;
+  github: string;
+};
+
+export type ExperienceStat = {
+  label: string;
+  value: string;
+};
+
 export type Project = {
   id: string;
   title: string;

@@ -29,7 +29,10 @@ export function useGlassPointerShine(enabled: boolean) {
       if (event.pointerType === "touch") return;
 
       const target = (event.target as Element | null)?.closest?.(GLASS_SELECTOR);
-      if (!(target instanceof HTMLElement)) {
+      if (
+        !(target instanceof HTMLElement) ||
+        target.closest('[data-glass-shine="off"]')
+      ) {
         if (active) {
           clearShine(active);
           active = null;

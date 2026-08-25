@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { profile } from "../../data/content";
+import { useContent, useUi } from "../../i18n/hooks";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { useNavigationStore } from "../../stores/navigationStore";
 
 export function HomeRoom() {
   const reducedMotion = usePrefersReducedMotion();
   const goTo = useNavigationStore((s) => s.goTo);
+  const { profile } = useContent();
+  const t = useUi();
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col items-center justify-center px-6 py-20 text-center">
@@ -56,11 +58,11 @@ export function HomeRoom() {
           onClick={() => goTo("projects")}
           className="inline-flex items-center gap-2 rounded-md bg-gradient-primary px-8 py-3 font-medium text-primary-foreground shadow transition hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
-          Explorar
+          {t.home.explore}
         </button>
         <p className="flex items-center gap-1 text-sm text-foreground/80">
           <ChevronDown className="h-4 w-4" aria-hidden />
-          Flechas, WASD o desliza
+          {t.home.navHint}
         </p>
       </div>
     </div>

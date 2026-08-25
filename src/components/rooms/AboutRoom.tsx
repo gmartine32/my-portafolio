@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { aboutCards, profile, skills } from "../../data/content";
+import { interpolate, useContent, useUi } from "../../i18n/hooks";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { cn } from "../../lib/utils";
 import { GlassPanel } from "../ui/GlassPanel";
@@ -8,16 +8,24 @@ import { GlassPanel } from "../ui/GlassPanel";
 export function AboutRoom() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const reducedMotion = usePrefersReducedMotion();
+  const { aboutCards, profile, skills } = useContent();
+  const t = useUi();
   const active = aboutCards.find((c) => c.id === activeId);
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col px-6 py-20">
       <header className="mb-10 text-center">
         <h1 className="font-heading mb-3 text-4xl font-bold md:text-6xl">
-          Sobre <span className="bg-gradient-primary bg-clip-text text-transparent">mí</span>
+          {t.about.titleBefore}{" "}
+          <span className="bg-gradient-primary bg-clip-text text-transparent">
+            {t.about.titleAccent}
+          </span>
         </h1>
-        <p className="mx-auto max-w-2xl text-muted-foreground">
-          {profile.location} · {profile.yearsExperience} años de experiencia
+        <p className="mx-auto max-w-2xl text-foreground/85">
+          {interpolate(t.about.years, {
+            location: profile.location,
+            years: profile.yearsExperience,
+          })}
         </p>
       </header>
 
@@ -35,10 +43,10 @@ export function AboutRoom() {
               onClick={() => setActiveId(isOpen ? null : card.id)}
               className="rounded-2xl p-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <h2 className="font-heading mb-2 text-xl font-semibold text-primary">
+              <h2 className="font-heading mb-2 text-xl font-semibold text-foreground">
                 {card.title}
               </h2>
-              <p className="text-sm text-muted-foreground">{card.summary}</p>
+              <p className="text-sm text-foreground/90">{card.summary}</p>
             </GlassPanel>
           );
         })}
@@ -52,12 +60,14 @@ export function AboutRoom() {
             animate={{ opacity: 1, y: 0 }}
             exit={reducedMotion ? undefined : { opacity: 0, y: 8 }}
             transition={{ duration: 0.25 }}
-            className={cn("glass-panel mt-8 rounded-2xl p-6")}
+            className={cn("glass-panel mt-8 rounded-2xl bg-background/55 p-6")}
             role="region"
             aria-label={active.title}
           >
-            <h3 className="font-heading mb-4 text-2xl font-semibold">{active.title}</h3>
-            <div className="space-y-3 text-muted-foreground">
+            <h3 className="font-heading mb-4 text-2xl font-semibold text-foreground">
+              {active.title}
+            </h3>
+            <div className="space-y-3 text-foreground/95">
               {active.body.map((paragraph) => (
                 <p key={paragraph.slice(0, 24)}>{paragraph}</p>
               ))}

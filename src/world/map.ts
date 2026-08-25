@@ -1,9 +1,7 @@
-import { projects } from "../data/content";
+import { getProjectChain } from "../data/shared";
 import type { Room } from "../types/world";
 
-const featured = projects.filter((p) => p.featured);
-const others = projects.filter((p) => !p.featured);
-const projectChain = [...featured, ...others];
+const projectChain = getProjectChain();
 
 function buildProjectRooms(): Record<string, Room> {
   const rooms: Record<string, Room> = {};
@@ -36,6 +34,7 @@ const projectRooms = buildProjectRooms();
 const firstProjectId = projectChain[0]
   ? `project-${projectChain[0].id}`
   : undefined;
+
 export const rooms: Record<string, Room> = {
   home: {
     id: "home",

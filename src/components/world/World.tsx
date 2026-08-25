@@ -7,15 +7,20 @@ import { HomeRoom } from "../rooms/HomeRoom";
 import { OpenSourceRoom } from "../rooms/OpenSourceRoom";
 import { ProjectDetailRoom } from "../rooms/ProjectDetailRoom";
 import { ProjectsRoom } from "../rooms/ProjectsRoom";
+import { applyHtmlLang } from "../../i18n/detect";
+import { useLocale, useUi } from "../../i18n/hooks";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { useGlassPointerShine } from "../../hooks/useGlassPointerShine";
 import { useWorldControls } from "../../hooks/useWorldControls";
 import { useNavigationStore } from "../../stores/navigationStore";
 import { roomList } from "../../world/map";
+import { getRoomTitle } from "../../world/titles";
 import { AmbientDunesBackground } from "./AmbientDunesBackground";
 import { Camera } from "./Camera";
 import { HUD } from "./HUD";
+import { Onboarding } from "./Onboarding";
 import { RoomFrame } from "./RoomFrame";
+import { WorldMap } from "./WorldMap";
 
 function RoomContent({
   componentKey,
@@ -47,6 +52,9 @@ function RoomContent({
 export default function World() {
   const currentRoomId = useNavigationStore((s) => s.currentRoomId);
   const hydrateFromUrl = useNavigationStore((s) => s.hydrateFromUrl);
+  const refreshAnnouncement = useNavigationStore((s) => s.refreshAnnouncement);
+  const locale = useLocale();
+  const t = useUi();
   const reducedMotion = usePrefersReducedMotion();
   const { setWorldRoot, onPointerDown, onPointerUp, onPointerCancel } =
     useWorldControls();
@@ -55,6 +63,11 @@ export default function World() {
   useEffect(() => {
     hydrateFromUrl();
   }, [hydrateFromUrl]);
+
+  useEffect(() => {
+    applyHtmlLang(locale);
+    refreshAnnouncement();
+  }, [locale, refreshAnnouncement]);
 
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
@@ -70,7 +83,7 @@ export default function World() {
       ref={setWorldRoot}
       className="fixed inset-0 z-10 h-[100dvh] w-screen touch-manipulation bg-background"
       role="application"
-      aria-label="Developer World — portfolio exploratorio"
+      aria-label={t.world.ariaLabel}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerCancel}
@@ -78,6 +91,10 @@ export default function World() {
       <AmbientDunesBackground />
 
       <HUD />
+
+      <WorldMap />
+
+      <Onboarding />
 
       <Camera currentRoomId={currentRoomId}>
         {roomList.map((room) => {
@@ -105,7 +122,7 @@ export default function World() {
                 }
                 transition={{ duration: 0.35 }}
               >
-                <RoomFrame title={room.title} isActive={isActive}>
+                <RoomFrame title={getRoomTitle(room, locale)} isActive={isActive}>
                   <div
                     className={isActive ? "pointer-events-auto" : "pointer-events-none"}
                   >
