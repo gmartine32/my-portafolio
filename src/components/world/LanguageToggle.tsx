@@ -23,7 +23,7 @@ export function LanguageToggle() {
             aria-label={interpolate(t.lang.setTo, { name: LOCALE_LABELS[code] })}
             onClick={() => setLocale(code)}
             className={[
-              "rounded-full px-2.5 text-[0.7rem] font-semibold uppercase tracking-wide transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+              "flex h-7 w-7 items-center justify-center rounded-full text-[0.7rem] font-semibold uppercase tracking-wide transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
               active
                 ? "bg-primary/30 text-foreground"
                 : "text-foreground/90 hover:text-foreground",

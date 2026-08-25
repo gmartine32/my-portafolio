@@ -320,7 +320,7 @@ export function WorldMap() {
         {!lightboxOpen && (
           <motion.div
             key="map-trigger"
-            className="fixed bottom-4 left-3 z-50 flex items-center gap-2 sm:bottom-6 sm:left-6"
+            className="fixed bottom-4 left-3 z-50 flex flex-col items-start gap-1.5 sm:bottom-6 sm:left-6"
             data-no-world-swipe
             data-onboarding-anchor="map"
             data-glass-shine="off"
@@ -329,44 +329,46 @@ export function WorldMap() {
             exit={{ opacity: 0 }}
             transition={overlayTransition}
           >
-            <button
-              ref={triggerRef}
-              type="button"
-              onClick={openMap}
-              aria-haspopup="dialog"
-              aria-expanded={isMapOpen}
-              className="glass-panel glass-panel--interactive flex items-center gap-2 rounded-2xl bg-background/55 px-2.5 py-2 text-left text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:px-3"
-            >
-              <MinimapGlyph
-                nodes={nodes}
-                edges={edges}
-                activeId={activeSectionId}
-                visited={visitedRoomIds}
-              />
-              <span className="hidden flex-col leading-tight sm:flex">
-                <span className="flex items-center gap-1 text-[0.65rem] uppercase tracking-widest text-foreground">
-                  <MapIcon className="h-3 w-3" aria-hidden />
-                  {t.map.chip}
-                </span>
-                <span className="font-heading text-sm font-medium text-foreground">
-                  {currentTitle}
-                </span>
-              </span>
-              <span className="sr-only">
-                {interpolate(t.map.openSr, { title: currentTitle })}
-              </span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setOnboardingOpen(true)}
-              aria-label={t.map.helpAria}
-              className="glass-panel glass-panel--interactive flex h-10 w-10 items-center justify-center rounded-full bg-background/55 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            >
-              <HelpCircle className="h-4 w-4" aria-hidden />
-            </button>
-
             <LanguageToggle />
+
+            <div className="flex items-center gap-2">
+              <button
+                ref={triggerRef}
+                type="button"
+                onClick={openMap}
+                aria-haspopup="dialog"
+                aria-expanded={isMapOpen}
+                className="glass-panel glass-panel--interactive flex items-center gap-2 rounded-2xl bg-background/55 px-2.5 py-2 text-left text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:px-3"
+              >
+                <MinimapGlyph
+                  nodes={nodes}
+                  edges={edges}
+                  activeId={activeSectionId}
+                  visited={visitedRoomIds}
+                />
+                <span className="hidden flex-col leading-tight sm:flex">
+                  <span className="flex items-center gap-1 text-[0.65rem] uppercase tracking-widest text-foreground">
+                    <MapIcon className="h-3 w-3" aria-hidden />
+                    {t.map.chip}
+                  </span>
+                  <span className="font-heading text-sm font-medium text-foreground">
+                    {currentTitle}
+                  </span>
+                </span>
+                <span className="sr-only">
+                  {interpolate(t.map.openSr, { title: currentTitle })}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setOnboardingOpen(true)}
+                aria-label={t.map.helpAria}
+                className="glass-panel glass-panel--interactive flex h-10 w-10 items-center justify-center rounded-full bg-background/55 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <HelpCircle className="h-4 w-4" aria-hidden />
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
