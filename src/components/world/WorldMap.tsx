@@ -3,6 +3,8 @@ import {
   ArrowRight,
   Briefcase,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   FolderKanban,
   Github,
   HelpCircle,
@@ -16,6 +18,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Direction, Room, RoomComponentKey } from "../../types/world";
 import { interpolate, useLocale, useUi } from "../../i18n/hooks";
 import { useLightboxOpen } from "../../hooks/useLightboxOpen";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { useNavigationStore } from "../../stores/navigationStore";
 import { getRoomTitle, getRoomTitleById } from "../../world/titles";
@@ -215,6 +218,7 @@ export function WorldMap() {
   const goTo = useNavigationStore((s) => s.goTo);
   const setOnboardingOpen = useNavigationStore((s) => s.setOnboardingOpen);
   const reducedMotion = usePrefersReducedMotion();
+  const isNarrow = useMediaQuery("(max-width: 639px)");
   const lightboxOpen = useLightboxOpen();
   const locale = useLocale();
   const t = useUi();
@@ -225,9 +229,13 @@ export function WorldMap() {
 
   const [expandedProjects, setExpandedProjects] = useState(false);
   const [focusedId, setFocusedId] = useState(activeSectionId);
+  /** Mobile-only: cluster slides off to free content. Desktop ignores this. */
+  const [mobileCollapsed, setMobileCollapsed] = useState(false);
   const nodeRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const expandRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const controlsCollapsed = isNarrow && mobileCollapsed;
 
   const mainIds = useMemo(() => new Set<string>(MAIN_ROOM_IDS), []);
 
@@ -236,6 +244,10 @@ export function WorldMap() {
     setFocusedId(activeSectionId);
     setExpandedProjects(currentRoomId.startsWith("project-"));
   }, [isMapOpen, activeSectionId, currentRoomId]);
+
+  useEffect(() => {
+    if (isOnboardingOpen) setMobileCollapsed(false);
+  }, [isOnboardingOpen]);
 
   useEffect(() => {
     if (!isMapOpen) return;
@@ -247,8 +259,20 @@ export function WorldMap() {
 
   const dismiss = useCallback(() => {
     closeMap();
-    requestAnimationFrame(() => triggerRef.current?.focus());
+    requestAnimationFrame(() => {
+      (triggerRef.current ?? expandRef.current)?.focus();
+    });
   }, [closeMap]);
+
+  const collapseControls = useCallback(() => {
+    setMobileCollapsed(true);
+    requestAnimationFrame(() => expandRef.current?.focus());
+  }, []);
+
+  const expandControls = useCallback(() => {
+    setMobileCollapsed(false);
+    requestAnimationFrame(() => triggerRef.current?.focus());
+  }, []);
 
   useEffect(() => {
     if (!isMapOpen) return;
@@ -320,7 +344,9 @@ export function WorldMap() {
         {!lightboxOpen && (
           <motion.div
             key="map-trigger"
-            className="fixed bottom-4 left-3 z-50 flex flex-col items-start gap-1.5 sm:bottom-6 sm:left-6"
+            className={`fixed bottom-4 z-50 flex items-end sm:bottom-6 sm:left-6 ${
+              controlsCollapsed ? "left-0" : "left-3"
+            }`}
             data-no-world-swipe
             data-onboarding-anchor="map"
             data-glass-shine="off"
@@ -329,46 +355,101 @@ export function WorldMap() {
             exit={{ opacity: 0 }}
             transition={overlayTransition}
           >
-            <LanguageToggle />
+            <AnimatePresence mode="popLayout" initial={false}>
+              {controlsCollapsed ? (
+                <motion.button
+                  key="map-controls-expand"
+                  ref={expandRef}
+                  type="button"
+                  onClick={expandControls}
+                  aria-label={t.map.expandControls}
+                  aria-expanded={false}
+                  className="glass-panel glass-panel--interactive flex h-10 w-8 items-center justify-center rounded-l-none rounded-r-2xl bg-background/55 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:hidden"
+                  initial={
+                    reducedMotion ? false : { opacity: 0, x: -16 }
+                  }
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={
+                    reducedMotion
+                      ? { opacity: 0 }
+                      : { opacity: 0, x: -16 }
+                  }
+                  transition={overlayTransition}
+                >
+                  <ChevronRight className="h-4 w-4" aria-hidden />
+                </motion.button>
+              ) : (
+                <motion.div
+                  key="map-controls-cluster"
+                  className="flex items-end gap-1.5"
+                  initial={
+                    reducedMotion ? false : { opacity: 0, x: -20 }
+                  }
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={
+                    reducedMotion
+                      ? { opacity: 0 }
+                      : { opacity: 0, x: -20 }
+                  }
+                  transition={overlayTransition}
+                >
+                  <button
+                    type="button"
+                    onClick={collapseControls}
+                    aria-label={t.map.collapseControls}
+                    aria-expanded={true}
+                    className="glass-panel glass-panel--interactive flex h-10 w-8 shrink-0 items-center justify-center rounded-2xl bg-background/55 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:hidden"
+                  >
+                    <ChevronLeft className="h-4 w-4" aria-hidden />
+                  </button>
 
-            <div className="flex items-center gap-2">
-              <button
-                ref={triggerRef}
-                type="button"
-                onClick={openMap}
-                aria-haspopup="dialog"
-                aria-expanded={isMapOpen}
-                className="glass-panel glass-panel--interactive flex items-center gap-2 rounded-2xl bg-background/55 px-2.5 py-2 text-left text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:px-3"
-              >
-                <MinimapGlyph
-                  nodes={nodes}
-                  edges={edges}
-                  activeId={activeSectionId}
-                  visited={visitedRoomIds}
-                />
-                <span className="hidden flex-col leading-tight sm:flex">
-                  <span className="flex items-center gap-1 text-[0.65rem] uppercase tracking-widest text-foreground">
-                    <MapIcon className="h-3 w-3" aria-hidden />
-                    {t.map.chip}
-                  </span>
-                  <span className="font-heading text-sm font-medium text-foreground">
-                    {currentTitle}
-                  </span>
-                </span>
-                <span className="sr-only">
-                  {interpolate(t.map.openSr, { title: currentTitle })}
-                </span>
-              </button>
+                  <div className="flex flex-col items-start gap-1.5">
+                    <LanguageToggle />
 
-              <button
-                type="button"
-                onClick={() => setOnboardingOpen(true)}
-                aria-label={t.map.helpAria}
-                className="glass-panel glass-panel--interactive flex h-10 w-10 items-center justify-center rounded-full bg-background/55 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              >
-                <HelpCircle className="h-4 w-4" aria-hidden />
-              </button>
-            </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        ref={triggerRef}
+                        type="button"
+                        onClick={openMap}
+                        aria-haspopup="dialog"
+                        aria-expanded={isMapOpen}
+                        className="glass-panel glass-panel--interactive flex items-center gap-2 rounded-2xl bg-background/55 px-2.5 py-2 text-left text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:px-3"
+                      >
+                        <MinimapGlyph
+                          nodes={nodes}
+                          edges={edges}
+                          activeId={activeSectionId}
+                          visited={visitedRoomIds}
+                        />
+                        <span className="hidden flex-col leading-tight sm:flex">
+                          <span className="flex items-center gap-1 text-[0.65rem] uppercase tracking-widest text-foreground">
+                            <MapIcon className="h-3 w-3" aria-hidden />
+                            {t.map.chip}
+                          </span>
+                          <span className="font-heading text-sm font-medium text-foreground">
+                            {currentTitle}
+                          </span>
+                        </span>
+                        <span className="sr-only">
+                          {interpolate(t.map.openSr, {
+                            title: currentTitle,
+                          })}
+                        </span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setOnboardingOpen(true)}
+                        aria-label={t.map.helpAria}
+                        className="glass-panel glass-panel--interactive flex h-10 w-10 items-center justify-center rounded-full bg-background/55 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      >
+                        <HelpCircle className="h-4 w-4" aria-hidden />
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>
