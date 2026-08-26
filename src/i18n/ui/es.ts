@@ -65,6 +65,8 @@ export const esUi = {
     chip: "Mapa",
     openSr: "Abrir mapa del mundo. Estás en {title}.",
     helpAria: "Ver cómo navegar este portafolio",
+    expandControls: "Mostrar mapa e idioma",
+    collapseControls: "Ocultar mapa e idioma",
     dialogAria: "Mapa del mundo",
     title: "Mapa del mundo",
     subtitle: "Elegí cualquier sala para viajar directo.",

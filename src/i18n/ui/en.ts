@@ -67,6 +67,8 @@ export const enUi: UiMessages = {
     chip: "Map",
     openSr: "Open the world map. You are in {title}.",
     helpAria: "See how to navigate this portfolio",
+    expandControls: "Show map and language",
+    collapseControls: "Hide map and language",
     dialogAria: "World map",
     title: "World map",
     subtitle: "Pick any room to travel there directly.",
