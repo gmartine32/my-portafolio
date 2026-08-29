@@ -20,9 +20,10 @@ export const esCopy: ContentCopy = {
     },
     estudios: {
       title: "Estudios",
-      summary: "Ingeniería en Sistemas y aprendizaje continuo.",
+      summary: "Ingeniería en Sistemas · credencial verificada en blockchain.",
       body: [
-        "Formación como Ingeniero en Sistemas con foco en ingeniería de software, arquitectura y desarrollo de productos.",
+        "Formación como Ingeniero en Sistemas en la Universidad de la Costa, con foco en ingeniería de software, arquitectura y desarrollo de productos.",
+        "La credencial de grado está emitida por la universidad y puede verificarse públicamente mediante Certika.",
         "Aprendizaje continuo en frontend moderno, cloud, DevOps y prácticas de calidad de código.",
       ],
     },

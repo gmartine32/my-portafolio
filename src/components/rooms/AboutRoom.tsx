@@ -6,6 +6,7 @@ import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { depthEnter, depthEnterFlat, springSpatial } from "../../motion/systemMotion";
 import { SystemPanel } from "../ui/SystemPanel";
 import { ProfilePortrait } from "./ProfilePortrait";
+import { VerifiedCredential } from "./VerifiedCredential";
 import { ROOM_CONTAINER, ROOM_HEADER, ROOM_SUBTITLE, ROOM_TITLE } from "./roomLayouts";
 
 const DETAIL_SCROLL_OFFSET = 96;
@@ -32,7 +33,7 @@ export function AboutRoom() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const reducedMotion = usePrefersReducedMotion();
   const isMobile = useMediaQuery("(max-width: 1023px)");
-  const { aboutCards, profile, skills } = useContent();
+  const { aboutCards, profile, skills, educationCredential } = useContent();
   const t = useUi();
   const active = aboutCards.find((c) => c.id === activeId);
   const detailRef = useRef<HTMLDivElement>(null);
@@ -153,6 +154,9 @@ export function AboutRoom() {
                     </div>
                   ))}
                 </div>
+              )}
+              {active.id === "estudios" && (
+                <VerifiedCredential {...educationCredential} />
               )}
             </SystemPanel>
           </motion.div>

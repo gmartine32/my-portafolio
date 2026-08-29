@@ -34,6 +34,18 @@ export const esUi = {
     years: "{location} · {years} años de experiencia",
     portraitAlt: "Retrato de {name}",
   },
+  credential: {
+    verified: "Verificada",
+    blockchainCredential: "Credencial blockchain",
+    issuedBy: "Emitida por {issuer}",
+    issuedOn: "Expedido el {date}",
+    poweredBy: "Plataforma: {provider}",
+    timestampNote: "Registro con huella digital inalterable (OpenTimestamps)",
+    hoverHint: "Pasa el cursor para ver detalles de emisión",
+    openCredential: "Verificar credencial",
+    verifyCredential: "Verificar credencial de {degree} en Certika",
+    tapHint: "Toca para ver detalles de emisión",
+  },
   projects: {
     title: "Proyectos",
     subtitle: "Selecciona un proyecto para ver el detalle. Usa ← → dentro del detalle para recorrer la cadena.",

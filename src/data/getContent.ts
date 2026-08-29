@@ -1,6 +1,7 @@
 import type { Locale } from "../i18n/locales";
 import type {
   AboutCard,
+  EducationCredential,
   Experience,
   ExperienceStat,
   OpenSourceItem,
@@ -13,6 +14,7 @@ import type { ContentCopy } from "./copy";
 import {
   ABOUT_CARD_IDS,
   OPEN_SOURCE_IDS,
+  educationCredential,
   experienceShared,
   experienceStatValues,
   getProjectChain,
@@ -25,6 +27,7 @@ export type Content = {
   profile: Profile;
   skills: readonly string[];
   aboutCards: AboutCard[];
+  educationCredential: EducationCredential;
   projects: Project[];
   experiences: Experience[];
   experienceStats: ExperienceStat[];
@@ -50,6 +53,7 @@ export function getContent(locale: Locale): Content {
       id,
       ...copy.aboutCards[id],
     })),
+    educationCredential: { ...educationCredential },
     projects: getProjectChain().map((shared) => {
       const overlay = copy.projects[shared.id];
       return {

@@ -52,6 +52,17 @@ export const ABOUT_CARD_IDS = [
 
 export type AboutCardId = (typeof ABOUT_CARD_IDS)[number];
 
+export const educationCredential = {
+  degree: "Ingeniería de Sistemas",
+  institution: "Universidad de la Costa",
+  period: "2025",
+  issuedDate: "06-05-2025",
+  verifyUrl: "https://app.certika.co/badges/MjA2NTU=",
+  badgeId: "MjA2NTU=",
+  issuer: "Universidad de la Costa",
+  provider: "Certika",
+} as const;
+
 export const PROJECT_IDS = [
   "docusaas",
   "papyria",

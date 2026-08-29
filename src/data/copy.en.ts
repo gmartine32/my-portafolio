@@ -20,9 +20,10 @@ export const enCopy: ContentCopy = {
     },
     estudios: {
       title: "Studies",
-      summary: "Systems Engineering and continuous learning.",
+      summary: "Systems Engineering · blockchain-verified credential.",
       body: [
-        "Trained as a Systems Engineer with a focus on software engineering, architecture, and product development.",
+        "Systems Engineering degree from Universidad de la Costa, focused on software engineering, architecture, and product development.",
+        "The graduation credential was issued by the university and can be publicly verified through Certika.",
         "Ongoing learning in modern frontend, cloud, DevOps, and code-quality practices.",
       ],
     },

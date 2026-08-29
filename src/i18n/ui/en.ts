@@ -36,6 +36,18 @@ export const enUi: UiMessages = {
     years: "{location} · {years} years of experience",
     portraitAlt: "Portrait of {name}",
   },
+  credential: {
+    verified: "Verified",
+    blockchainCredential: "Blockchain credential",
+    issuedBy: "Issued by {issuer}",
+    issuedOn: "Issued on {date}",
+    poweredBy: "Platform: {provider}",
+    timestampNote: "Tamper-evident record (OpenTimestamps)",
+    hoverHint: "Hover to see issuance details",
+    openCredential: "Verify credential",
+    verifyCredential: "Verify {degree} credential on Certika",
+    tapHint: "Tap to see issuance details",
+  },
   projects: {
     title: "Projects",
     subtitle: "Pick a project to view details. Use ← → inside a project to walk the chain.",

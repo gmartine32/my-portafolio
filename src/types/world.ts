@@ -79,6 +79,17 @@ export type AboutCard = {
   body: string[];
 };
 
+export type EducationCredential = {
+  degree: string;
+  institution: string;
+  period: string;
+  issuedDate: string;
+  verifyUrl: string;
+  badgeId: string;
+  issuer: string;
+  provider: string;
+};
+
 export type OpenSourceItem = {
   id: string;
   title: string;
