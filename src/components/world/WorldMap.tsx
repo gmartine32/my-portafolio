@@ -247,6 +247,7 @@ export function WorldMap() {
   const activeSectionId = getSectionForRoom(currentRoomId);
 
   const [focusedId, setFocusedId] = useState(activeSectionId);
+  /** Mobile-only: cluster slides off to free content. Desktop ignores this. */
   const [mobileCollapsed, setMobileCollapsed] = useState(false);
   const nodeRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const triggerRef = useRef<HTMLButtonElement | null>(null);
