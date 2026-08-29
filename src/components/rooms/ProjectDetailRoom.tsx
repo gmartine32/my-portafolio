@@ -27,8 +27,8 @@ export function ProjectDetailRoom({ projectId }: ProjectDetailRoomProps) {
     project.images?.length > 0 ? project.images : [project.image];
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col px-6 pb-28 pt-28 sm:px-8 sm:pb-20">
-      <div className="relative z-20 -mx-2 sm:mx-0">
+    <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col gap-6 px-6 pb-28 pt-28 sm:gap-8 sm:px-8 sm:pb-20">
+      <div className="relative -mx-2 sm:mx-0">
         <ProjectGallery
           title={project.title}
           images={gallery}
@@ -36,59 +36,55 @@ export function ProjectDetailRoom({ projectId }: ProjectDetailRoomProps) {
         />
       </div>
 
-      <div className="relative z-10 -mt-6 sm:-mt-10">
-        <SystemPanel shell className="rounded-2xl p-6 sm:p-8">
-          <h1 className="font-heading mb-4 text-3xl font-semibold tracking-tight md:text-4xl">
-            {project.title}
-          </h1>
-          <p className="mb-8 text-lg text-muted-foreground">{project.description}</p>
+      <SystemPanel shell className="rounded-2xl p-6 sm:p-8">
+        <h1 className="font-heading mb-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          {project.title}
+        </h1>
+        <p className="mb-8 text-lg text-muted-foreground">{project.description}</p>
 
-          <div className="mb-8 flex flex-wrap gap-2">
-            {project.tech.map((tech) => (
-              <span
-                key={tech}
-                className="system-chip rounded-full px-3 py-1.5 font-mono text-xs text-foreground/90"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
+        <div className="mb-8 flex flex-wrap gap-2">
+          {project.tech.map((tech) => (
+            <span
+              key={tech}
+              className="system-chip rounded-full px-3 py-1.5 font-mono text-xs text-foreground/90"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            {project.problem && (
-              <div className="rounded-xl border border-border/60 bg-surface-far/30 p-5">
-                <h2 className="system-label mb-3 normal-case">{t.projectDetail.problem}</h2>
-                <p className="text-sm leading-relaxed text-foreground/90">{project.problem}</p>
-              </div>
-            )}
-            {project.solution && (
-              <div className="rounded-xl border border-border/60 bg-surface-far/30 p-5">
-                <h2 className="system-label mb-3 normal-case">{t.projectDetail.solution}</h2>
-                <p className="text-sm leading-relaxed text-foreground/90">{project.solution}</p>
-              </div>
-            )}
-          </div>
-        </SystemPanel>
-      </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {project.problem && (
+            <div className="rounded-xl border border-border/60 bg-surface-far/30 p-5">
+              <h2 className="system-label mb-3 normal-case">{t.projectDetail.problem}</h2>
+              <p className="text-sm leading-relaxed text-foreground/90">{project.problem}</p>
+            </div>
+          )}
+          {project.solution && (
+            <div className="rounded-xl border border-border/60 bg-surface-far/30 p-5">
+              <h2 className="system-label mb-3 normal-case">{t.projectDetail.solution}</h2>
+              <p className="text-sm leading-relaxed text-foreground/90">{project.solution}</p>
+            </div>
+          )}
+        </div>
+      </SystemPanel>
 
       {project.learnings && project.learnings.length > 0 && (
-        <div className="relative z-0 -mt-8 opacity-80 sm:-mt-12">
-          <SystemPanel className="rounded-2xl p-5 sm:p-6">
-            <h2 className="font-heading mb-4 text-lg font-medium text-foreground">
-              {t.projectDetail.learnings}
-            </h2>
-            <ul className="space-y-2 border-l border-border pl-4">
-              {project.learnings.map((item) => (
-                <li key={item} className="text-sm text-muted-foreground">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </SystemPanel>
-        </div>
+        <SystemPanel className="rounded-2xl p-5 sm:p-6">
+          <h2 className="font-heading mb-4 text-lg font-medium text-foreground">
+            {t.projectDetail.learnings}
+          </h2>
+          <ul className="space-y-2 border-l border-border pl-4">
+            {project.learnings.map((item) => (
+              <li key={item} className="text-sm text-muted-foreground">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </SystemPanel>
       )}
 
-      <div className="relative z-10 mt-10 flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-3 pb-2">
         {hasGithub && (
           <SystemPanel
             as="a"

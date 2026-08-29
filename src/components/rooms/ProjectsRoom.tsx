@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { interpolate, useContent, useUi } from "../../i18n/hooks";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { isMobileProject } from "../../lib/projectImageLayout";
 import { springSpatial } from "../../motion/systemMotion";
@@ -9,21 +10,37 @@ import type { Project } from "../../types/world";
 import { SystemPanel } from "../ui/SystemPanel";
 import { ROOM_CONTAINER, ROOM_HEADER, ROOM_SUBTITLE, ROOM_TITLE } from "./roomLayouts";
 
+function projectCardMotion(reducedMotion: boolean, isMobile: boolean, y: number) {
+  if (reducedMotion || isMobile) {
+    return {
+      initial: false as const,
+      animate: { opacity: 1 },
+    };
+  }
+  return {
+    initial: { opacity: 0, y },
+    animate: { opacity: 1, y: 0 },
+  };
+}
+
 function FeaturedProjectCard({
   project,
   onOpen,
   reducedMotion,
+  isMobile,
 }: {
   project: Project;
   onOpen: () => void;
   reducedMotion: boolean;
+  isMobile: boolean;
 }) {
   const mobileLayout = isMobileProject(project);
+  const motionProps = projectCardMotion(reducedMotion, isMobile, 20);
 
   return (
     <motion.div
-      initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      className="relative w-full shrink-0"
+      {...motionProps}
       transition={springSpatial}
     >
       <SystemPanel
@@ -83,19 +100,22 @@ function ProjectStackRow({
   onOpen,
   index,
   reducedMotion,
+  isMobile,
 }: {
   project: Project;
   onOpen: () => void;
   index: number;
   reducedMotion: boolean;
+  isMobile: boolean;
 }) {
   const mobileLayout = isMobileProject(project);
+  const motionProps = projectCardMotion(reducedMotion, isMobile, 12);
 
   return (
     <motion.li
-      initial={reducedMotion ? false : { opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ ...springSpatial, delay: index * 0.04 }}
+      className="relative w-full shrink-0"
+      {...motionProps}
+      transition={{ ...springSpatial, delay: isMobile || reducedMotion ? 0 : index * 0.04 }}
     >
       <SystemPanel
         as="button"
@@ -141,14 +161,15 @@ export function ProjectsRoom() {
   const { projects } = useContent();
   const t = useUi();
   const reducedMotion = usePrefersReducedMotion();
+  const isMobile = useMediaQuery("(max-width: 1023px)");
   const featured = projects.filter((p) => p.featured);
   const [lead, ...rest] = featured;
 
   const openProject = (id: string) => goTo(`project-${id}`);
 
   return (
-    <div className={`${ROOM_CONTAINER} max-w-3xl flex-col pb-28 pt-28 sm:pb-20`}>
-      <header className={`${ROOM_HEADER} max-w-2xl`}>
+    <div className={`${ROOM_CONTAINER} max-w-3xl flex-col gap-6 pb-28 pt-28 sm:gap-8 sm:pb-20`}>
+      <header className={`${ROOM_HEADER} mb-0 max-w-2xl`}>
         <h1 className={ROOM_TITLE}>
           <span className="text-primary">{t.projects.title}</span>
         </h1>
@@ -160,17 +181,19 @@ export function ProjectsRoom() {
           project={lead}
           onOpen={() => openProject(lead.id)}
           reducedMotion={reducedMotion}
+          isMobile={isMobile}
         />
       )}
 
       {rest.length > 0 && (
-        <ul className="mt-4 space-y-3">
+        <ul className="flex w-full flex-col gap-3 sm:gap-4">
           {rest.map((project, index) => (
             <ProjectStackRow
               key={project.id}
               project={project}
               index={index}
               reducedMotion={reducedMotion}
+              isMobile={isMobile}
               onOpen={() => openProject(project.id)}
             />
           ))}
