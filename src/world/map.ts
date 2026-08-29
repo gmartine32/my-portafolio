@@ -95,7 +95,7 @@ export const rooms: Record<string, Room> = {
 
 export const DEFAULT_ROOM_ID = "home";
 
-export const roomList = Object.values(rooms);
+export const roomList = Object.values(rooms).filter((room) => room.id !== "opensource");
 
 export function getRoom(id: string): Room | undefined {
   return rooms[id];

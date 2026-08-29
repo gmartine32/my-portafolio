@@ -54,16 +54,6 @@ import { WorldMap } from "./WorldMap";
 
 
 
-function OpenSourceRedirect() {
-  const goTo = useNavigationStore((s) => s.goTo);
-
-  useEffect(() => {
-    goTo("about");
-  }, [goTo]);
-
-  return null;
-}
-
 function RoomContent({
 
   componentKey,
@@ -99,10 +89,6 @@ function RoomContent({
     case "contact":
 
       return <ContactRoom />;
-
-    case "opensource":
-
-      return <OpenSourceRedirect />;
 
     case "project-detail":
 

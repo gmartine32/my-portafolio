@@ -88,7 +88,11 @@ export const useNavigationStore = create<NavigationState>((set, get) => ({
 
   hydrateFromUrl: () => {
     if (typeof window === "undefined") return;
-    const roomId = roomFromSearchParams(window.location.search);
+    let roomId = roomFromSearchParams(window.location.search);
+    if (roomId === "opensource") {
+      roomId = DEFAULT_ROOM_ID;
+      syncRoomToUrl(roomId);
+    }
     const room = getRoom(roomId);
     if (!room) return;
     set((state) => ({
