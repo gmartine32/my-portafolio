@@ -2,7 +2,7 @@ import type { ContentCopy } from "./copy";
 
 export const enCopy: ContentCopy = {
   profile: {
-    title: "Frontend Engineer",
+    title: "Full Stack Engineer",
     subtitle: "Frontend Developer | Systems Engineer",
     greeting: "Hi, I'm",
     status: "Available for new challenges",

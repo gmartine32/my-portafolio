@@ -6,7 +6,11 @@ import { profile, projects, experiences } from "../data/content";
 
 const siteBase = Astro.site || Astro.url.origin;
 const canonicalURL = new URL(Astro.url.pathname, siteBase);
-const ogImage = new URL("/img/kiex.webp", siteBase);
+const pageTitle = "Espacio de Gian Martínez";
+const pageDescription =
+	"Full Stack Engineer. Portafolio interactivo con proyectos, experiencia y contacto.";
+const ogImage = new URL("/img/og/espacio-gian-martinez.jpg", siteBase);
+const ogImageAlt = "Espacio de Gian Martínez — Full Stack Engineer";
 ---
 
 <html lang="es">
@@ -16,39 +20,33 @@ const ogImage = new URL("/img/kiex.webp", siteBase);
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="canonical" href={canonicalURL} />
-		<title>Gian Martínez - Frontend Developer & Ingeniero de Software</title>
-		<meta
-			name="description"
-			content="Portafolio exploratorio de Gian Martínez. Desarrollador Full Stack, Frontend Developer e Ingeniero de Software experto en React, Astro, Next.js y ecosistema Node.js."
-		/>
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
 		<meta
 			name="keywords"
 			content="Gian Martinez, Gian Martinez Frontend, Gian Martinez Software, Gian Martinez Developer, Ingeniero de Software, Full Stack Developer, React Developer"
 		/>
 		<meta name="author" content="Gian Martínez" />
-		<meta property="og:title" content="Portafolio de Gian Martínez | Full Stack Developer" />
-		<meta
-			property="og:description"
-			content="Explora el universo profesional de Gian Martínez: proyectos, experiencia y contacto en un mundo interactivo."
-		/>
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={ogImageAlt} />
 		<meta property="og:locale" content="es_ES" />
-		<meta property="og:site_name" content="Gian Martínez" />
+		<meta property="og:site_name" content={pageTitle} />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content="Portafolio de Gian Martínez | Full Stack Developer" />
-		<meta
-			name="twitter:description"
-			content="Explora el universo profesional de Gian Martínez: proyectos, experiencia y contacto en un mundo interactivo."
-		/>
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={pageDescription} />
 		<meta name="twitter:image" content={ogImage} />
 
 		<script type="application/ld+json" set:html={JSON.stringify({
 			"@context": "https://schema.org/",
 			"@type": "Person",
 			"name": "Gian Martínez",
-			"jobTitle": "Frontend Developer & Software Engineer",
+			"jobTitle": "Full Stack Engineer",
 			"url": "https://gianmartinez.space",
 			"sameAs": [
 				"https://www.linkedin.com/in/gianmartinezvilla",
@@ -57,12 +55,6 @@ const ogImage = new URL("/img/kiex.webp", siteBase);
 			"knowsAbout": ["Frontend Development", "Software Engineering", "React", "Next.js", "Astro", "Full Stack"]
 		})} />
 
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap"
-			rel="stylesheet"
-		/>
 		<script is:inline>
 			(function () {
 				var KEY = "portfolio:locale:v1";

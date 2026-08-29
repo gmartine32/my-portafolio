@@ -133,7 +133,7 @@ export function ProjectGallery({
                   event.stopPropagation();
                   setLightboxOpen(false);
                 }}
-                className="glass-panel glass-panel--interactive flex h-10 w-10 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="system-panel system-panel--interactive flex h-10 w-10 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 <X className="h-5 w-5" aria-hidden />
               </button>
@@ -157,7 +157,7 @@ export function ProjectGallery({
                     type="button"
                     aria-label={t.gallery.prev}
                     onClick={() => go(-1)}
-                    className="glass-panel glass-panel--interactive absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full sm:left-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    className="system-panel system-panel--interactive absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full sm:left-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     <ChevronLeft className="h-5 w-5" aria-hidden />
                   </button>
@@ -165,7 +165,7 @@ export function ProjectGallery({
                     type="button"
                     aria-label={t.gallery.next}
                     onClick={() => go(1)}
-                    className="glass-panel glass-panel--interactive absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full sm:right-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    className="system-panel system-panel--interactive absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full sm:right-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     <ChevronRight className="h-5 w-5" aria-hidden />
                   </button>
@@ -234,7 +234,7 @@ export function ProjectGallery({
                     event.stopPropagation();
                     go(-1);
                   }}
-                  className="glass-panel glass-panel--interactive absolute left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="system-panel system-panel--interactive absolute left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <ChevronLeft className="h-5 w-5" aria-hidden />
                 </button>
@@ -245,7 +245,7 @@ export function ProjectGallery({
                     event.stopPropagation();
                     go(1);
                   }}
-                  className="glass-panel glass-panel--interactive absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="system-panel system-panel--interactive absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <ChevronRight className="h-5 w-5" aria-hidden />
                 </button>

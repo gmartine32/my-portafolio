@@ -2,7 +2,7 @@ import type { ContentCopy } from "./copy";
 
 export const esCopy: ContentCopy = {
   profile: {
-    title: "Frontend Engineer",
+    title: "Full Stack Engineer",
     subtitle: "Frontend Developer | Ingeniero en Sistemas",
     greeting: "Hola, soy",
     status: "Disponible para nuevos retos",

@@ -1,64 +1,97 @@
+import { motion } from "framer-motion";
 import { useContent, useUi } from "../../i18n/hooks";
-import { GlassPanel } from "../ui/GlassPanel";
+import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
+import { springSpatial } from "../../motion/systemMotion";
+import { SystemPanel } from "../ui/SystemPanel";
+import { ROOM_CONTAINER, ROOM_HEADER, ROOM_SUBTITLE, ROOM_TITLE } from "./roomLayouts";
 
 export function ExperienceRoom() {
   const { experiences, experienceStats } = useContent();
   const t = useUi();
+  const reducedMotion = usePrefersReducedMotion();
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col px-6 py-20">
-      <header className="mb-12 text-center">
-        <h1 className="font-heading mb-3 text-4xl font-bold md:text-6xl">
+    <div className={`${ROOM_CONTAINER} max-w-4xl flex-col`}>
+      <header className={ROOM_HEADER}>
+        <h1 className={ROOM_TITLE}>
           {t.experience.titleBefore}{" "}
-          <span className="bg-gradient-primary bg-clip-text text-transparent">
-            {t.experience.titleAccent}
-          </span>
+          <span className="text-primary">{t.experience.titleAccent}</span>
         </h1>
-        <p className="text-foreground/85">{t.experience.subtitle}</p>
+        <p className={ROOM_SUBTITLE}>{t.experience.subtitle}</p>
       </header>
 
-      <ol className="relative space-y-8 border-l border-white/10 pl-8">
-        {experiences.map((exp) => (
-          <li key={`${exp.company}-${exp.period}`} className="relative">
-            <span className="absolute -left-[2.4rem] top-1.5 h-3 w-3 rounded-full bg-primary shadow-glow" />
-            <GlassPanel className="rounded-2xl bg-background/55 p-5">
-              <p className="mb-2 text-sm font-medium text-primary">{exp.period}</p>
-              <h2 className="font-heading text-xl font-semibold text-foreground">
-                {exp.position}
-              </h2>
-              <p className="mb-3 text-primary">{exp.company}</p>
-              <p className="mb-4 text-sm leading-relaxed text-foreground/90">
-                {exp.description}
-              </p>
-              <ul className="mb-4 space-y-1.5">
-                {exp.achievements.map((item) => (
-                  <li key={item} className="text-sm text-foreground/90">
-                    <span className="mr-2 text-primary">•</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap gap-2">
-                {exp.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="glass-chip rounded-full px-2.5 py-1 text-xs text-foreground"
-                  >
-                    {tech}
-                  </span>
-                ))}
+      <ol className="relative">
+        <div
+          className="absolute bottom-4 left-4 top-4 w-px bg-gradient-to-b from-primary/50 via-border to-transparent"
+          aria-hidden
+        />
+
+        {experiences.map((exp, index) => (
+          <motion.li
+            key={`${exp.company}-${exp.period}`}
+            initial={reducedMotion ? false : { opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ ...springSpatial, delay: index * 0.08 }}
+            className="relative pb-12 pl-11 last:pb-0"
+          >
+            <div
+              className="absolute left-4 top-3 flex h-4 w-4 -translate-x-1/2 items-center justify-center"
+              aria-hidden
+            >
+              <span className="absolute inset-0 rounded-full border border-primary/40 bg-background" />
+              <span className="relative h-2 w-2 rounded-full bg-primary" />
+            </div>
+
+            <SystemPanel shell className="rounded-2xl">
+              <div className="rounded-[calc(var(--radius)-0.375rem)] p-5 sm:p-6">
+                <p className="system-label mb-2">{exp.period}</p>
+                <h2 className="font-heading text-xl font-medium text-foreground">
+                  {exp.position}
+                </h2>
+                <p className="mb-4 text-sm text-primary">{exp.company}</p>
+                <p className="mb-5 text-sm leading-relaxed text-muted-foreground">
+                  {exp.description}
+                </p>
+                <ul className="mb-5 space-y-2 border-t border-border pt-4">
+                  {exp.achievements.map((item) => (
+                    <li key={item} className="flex gap-2 text-sm text-foreground/85">
+                      <span className="mt-2 h-px w-3 shrink-0 bg-primary/50" aria-hidden />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-wrap gap-1.5">
+                  {exp.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      className="system-chip rounded-full px-2.5 py-1 font-mono text-[0.65rem] text-foreground/85"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </GlassPanel>
-          </li>
+            </SystemPanel>
+          </motion.li>
         ))}
       </ol>
 
-      <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
-        {experienceStats.map((stat) => (
-          <GlassPanel key={stat.label} className="rounded-2xl bg-background/55 p-4 text-center">
-            <p className="font-heading text-2xl font-bold text-foreground">{stat.value}</p>
-            <p className="text-xs text-foreground/85">{stat.label}</p>
-          </GlassPanel>
+      <div className="mt-14 flex flex-wrap items-baseline gap-x-8 gap-y-4 border-t border-border pt-8">
+        {experienceStats.map((stat, index) => (
+          <motion.div
+            key={stat.label}
+            initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...springSpatial, delay: 0.3 + index * 0.05 }}
+            className="flex items-baseline gap-3"
+          >
+            <span className="font-heading text-3xl font-semibold tabular-nums text-foreground">
+              {stat.value}
+            </span>
+            <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+              {stat.label}
+            </span>
+          </motion.div>
         ))}
       </div>
     </div>

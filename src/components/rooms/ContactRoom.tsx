@@ -1,10 +1,15 @@
+import { motion } from "framer-motion";
 import { FileDown, Github, Linkedin, Mail } from "lucide-react";
 import { useContent, useUi } from "../../i18n/hooks";
-import { GlassPanel } from "../ui/GlassPanel";
+import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
+import { springSpatial } from "../../motion/systemMotion";
+import { SystemPanel } from "../ui/SystemPanel";
+import { ROOM_CONTAINER, ROOM_HEADER, ROOM_SUBTITLE, ROOM_TITLE } from "./roomLayouts";
 
 export function ContactRoom() {
   const { profile } = useContent();
   const t = useUi();
+  const reducedMotion = usePrefersReducedMotion();
 
   const links = [
     {
@@ -35,56 +40,71 @@ export function ContactRoom() {
   ];
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-center px-6 py-20 text-center">
-      <h1 className="font-heading mb-4 text-4xl font-bold md:text-6xl">{t.contact.title}</h1>
-      <p className="mb-14 max-w-xl text-lg text-foreground/90">{t.contact.subtitle}</p>
+    <div className={`${ROOM_CONTAINER} max-w-lg flex-col justify-center`}>
+      <header className={`${ROOM_HEADER} max-w-xl`}>
+        <h1 className={ROOM_TITLE}>{t.contact.title}</h1>
+        <p className={`${ROOM_SUBTITLE} text-lg`}>{t.contact.subtitle}</p>
+      </header>
 
-      <ul className="grid w-full gap-4 sm:grid-cols-2">
-        {links.map((link) => {
+      <ul className="w-full space-y-3">
+        {links.map((link, index) => {
           const Icon = link.icon;
           const body = (
             <>
-              <span className="glass-chip flex h-12 w-12 items-center justify-center rounded-xl text-primary">
+              <span className="system-chip flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-primary">
                 <Icon className="h-5 w-5" aria-hidden />
               </span>
-              <span>
-                <span className="block font-heading text-lg font-semibold text-foreground">
+              <span className="min-w-0 flex-1 text-left">
+                <span className="block font-heading text-base font-medium text-foreground">
                   {link.name}
                 </span>
-                <span className="text-sm text-foreground/85">{link.label}</span>
+                <span className="block truncate font-mono text-xs text-muted-foreground">
+                  {link.label}
+                </span>
               </span>
             </>
           );
 
+          const panelClass =
+            "group flex w-full items-center gap-4 rounded-2xl p-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:p-5";
+
+          const motionProps = {
+            initial: reducedMotion ? false : ({ opacity: 0, y: 16 } as const),
+            animate: { opacity: 1, y: 0 },
+            transition: { ...springSpatial, delay: index * 0.06 },
+          };
+
           if (link.download) {
             return (
-              <li key={link.name}>
-                <GlassPanel
+              <motion.li key={link.name} {...motionProps}>
+                <SystemPanel
                   as="a"
                   href={link.href}
                   download="Gian-Martinez-CV.pdf"
                   interactive
-                  className="group flex items-center gap-4 rounded-2xl p-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  shell
+                  className={panelClass}
                 >
                   {body}
-                </GlassPanel>
-              </li>
+                </SystemPanel>
+              </motion.li>
             );
           }
 
           return (
-            <li key={link.name}>
-              <GlassPanel
+            <motion.li key={link.name} {...motionProps}>
+              <SystemPanel
                 as="a"
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 interactive
-                className="group flex items-center gap-4 rounded-2xl p-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                shell
+                className={panelClass}
               >
                 {body}
-              </GlassPanel>
-            </li>
+              </SystemPanel>
+            </motion.li>
           );
         })}
       </ul>

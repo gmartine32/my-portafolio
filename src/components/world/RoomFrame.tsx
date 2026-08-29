@@ -14,7 +14,7 @@ export function RoomFrame({ children, title, isActive }: RoomFrameProps) {
       aria-label={title}
       aria-hidden={!isActive}
       tabIndex={isActive ? -1 : -1}
-      className="absolute inset-0 h-full w-full overflow-y-auto overflow-x-hidden overscroll-contain"
+      className="absolute inset-0 h-full w-full overflow-y-auto overflow-x-hidden overscroll-contain [overflow-anchor:none] [-webkit-overflow-scrolling:touch]"
       style={{ scrollbarGutter: "stable" }}
     >
       <div className="relative z-10 flex min-h-full w-full flex-col">{children}</div>

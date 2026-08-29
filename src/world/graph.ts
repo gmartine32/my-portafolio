@@ -6,7 +6,6 @@ export const MAIN_ROOM_IDS = [
   "about",
   "projects",
   "experience",
-  "opensource",
   "contact",
 ] as const;
 

@@ -1,6 +1,10 @@
+import { motion } from "framer-motion";
 import { BookOpen, GitBranch, Github, Package } from "lucide-react";
 import { useContent, useUi } from "../../i18n/hooks";
-import { GlassPanel } from "../ui/GlassPanel";
+import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
+import { springSpatial } from "../../motion/systemMotion";
+import { SystemPanel } from "../ui/SystemPanel";
+import { ROOM_CONTAINER, ROOM_HEADER, ROOM_SUBTITLE, ROOM_TITLE } from "./roomLayouts";
 
 const ICONS = {
   github: Github,
@@ -12,41 +16,49 @@ const ICONS = {
 export function OpenSourceRoom() {
   const { openSourceItems } = useContent();
   const t = useUi();
+  const reducedMotion = usePrefersReducedMotion();
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col px-6 py-20">
-      <header className="mb-12 text-center">
-        <h1 className="font-heading mb-3 text-4xl font-bold md:text-6xl">
+    <div className={`${ROOM_CONTAINER} max-w-3xl flex-col`}>
+      <header className={ROOM_HEADER}>
+        <h1 className={ROOM_TITLE}>
           {t.opensource.titleBefore}{" "}
-          <span className="bg-gradient-primary bg-clip-text text-transparent">
-            {t.opensource.titleAccent}
-          </span>
+          <span className="text-primary">{t.opensource.titleAccent}</span>
         </h1>
-        <p className="text-foreground/85">{t.opensource.subtitle}</p>
+        <p className={ROOM_SUBTITLE}>{t.opensource.subtitle}</p>
       </header>
 
-      <ul className="grid gap-4 sm:grid-cols-2">
-        {openSourceItems.map((item) => {
+      <ul className="divide-y divide-border rounded-2xl border border-border">
+        {openSourceItems.map((item, index) => {
           const Icon = ICONS[item.type];
           return (
-            <li key={item.id}>
-              <GlassPanel
+            <motion.li
+              key={item.id}
+              initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ...springSpatial, delay: index * 0.04 }}
+            >
+              <SystemPanel
                 as="a"
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 interactive
-                className="flex h-full flex-col rounded-2xl p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="flex items-center gap-4 rounded-none border-0 bg-transparent px-4 py-3.5 first:rounded-t-2xl last:rounded-b-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:px-5"
               >
-                <span className="glass-chip mb-4 flex h-11 w-11 items-center justify-center rounded-xl text-primary">
-                  <Icon className="h-5 w-5" aria-hidden />
+                <span className="system-chip flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-primary">
+                  <Icon className="h-4 w-4" aria-hidden />
                 </span>
-                <h2 className="font-heading mb-2 text-xl font-semibold text-foreground">
-                  {item.title}
-                </h2>
-                <p className="text-sm text-foreground/90">{item.description}</p>
-              </GlassPanel>
-            </li>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate font-heading text-sm font-medium text-foreground sm:text-base">
+                    {item.title}
+                  </span>
+                  <span className="block truncate text-xs text-muted-foreground sm:text-sm">
+                    {item.description}
+                  </span>
+                </span>
+              </SystemPanel>
+            </motion.li>
           );
         })}
       </ul>

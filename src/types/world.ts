@@ -25,6 +25,7 @@ export type Room = {
 
 export type Profile = {
   name: string;
+  portrait?: string;
   title: string;
   subtitle: string;
   greeting: string;

@@ -2,6 +2,7 @@ import type { OpenSourceItem, Project } from "../types/world";
 
 export const profileShared = {
   name: "Gian Martínez",
+  portrait: "/img/profile/gian-portrait.webp",
   stack: ["React", "Next.js", "React Native"],
   yearsExperience: "4+",
   cvUrl: "/documents/cv-gian-martinez.pdf",

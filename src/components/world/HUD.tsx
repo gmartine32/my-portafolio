@@ -4,6 +4,7 @@ import type { Direction } from "../../types/world";
 import { interpolate, useLocale, useUi } from "../../i18n/hooks";
 import { useLightboxOpen } from "../../hooks/useLightboxOpen";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
+import { springUI } from "../../motion/systemMotion";
 import { useNavigationStore } from "../../stores/navigationStore";
 import { getRoom } from "../../world/map";
 import { getAvailableDirections, resolveNeighbor } from "../../world/navigation";
@@ -25,7 +26,7 @@ const POSITIONS: Record<Exclude<Direction, "up">, string> = {
 };
 
 const NAV_BUTTON_CLASS =
-  "glass-panel glass-panel--interactive flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-background/55 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-40";
+  "system-panel system-panel--interactive flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-35";
 
 export function HUD() {
   const currentRoomId = useNavigationStore((s) => s.currentRoomId);
@@ -59,9 +60,7 @@ export function HUD() {
       : interpolate(t.hud.go, { direction: dir });
   };
 
-  const fade = reducedMotion
-    ? { duration: 0 }
-    : { duration: 0.28, ease: [0.22, 1, 0.36, 1] as const };
+  const fade = reducedMotion ? { duration: 0 } : springUI;
 
   const upPosition = isProjectDetail
     ? "top-[7.25rem] left-1/2 -translate-x-1/2"
@@ -72,10 +71,10 @@ export function HUD() {
       <div className="pointer-events-none fixed left-1/2 top-4 z-40 flex -translate-x-1/2 flex-col items-center gap-2">
         {isProjectDetail && (
           <div
-            className="glass-chip inline-flex w-fit max-w-[min(90vw,22rem)] items-center rounded-full px-4 py-2"
+            className="system-chip inline-flex w-fit max-w-[min(90vw,22rem)] items-center rounded-full px-4 py-2"
             aria-hidden
           >
-            <p className="font-heading text-center text-sm font-medium tracking-wide text-foreground/90">
+            <p className="font-mono text-center text-xs tracking-wide text-foreground/90">
               {roomTitle}
             </p>
           </div>
@@ -84,9 +83,9 @@ export function HUD() {
           {showControls && (
             <motion.div
               key="hints"
-              initial={{ opacity: 0, y: reducedMotion ? 0 : -6 }}
+              initial={{ opacity: 0, y: reducedMotion ? 0 : -8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: reducedMotion ? 0 : -6 }}
+              exit={{ opacity: 0, y: reducedMotion ? 0 : -8 }}
               transition={fade}
             >
               <NavigatorHints />
@@ -108,9 +107,11 @@ export function HUD() {
             disabled={isTransitioning}
             onClick={() => move("up")}
             className={`${NAV_BUTTON_CLASS} fixed z-40 ${upPosition}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            whileHover={reducedMotion ? undefined : { scale: 1.06 }}
+            whileTap={reducedMotion ? undefined : { scale: 0.94 }}
             transition={fade}
           >
             <ChevronUp className="h-5 w-5" aria-hidden />
@@ -128,9 +129,11 @@ export function HUD() {
                 disabled={isTransitioning}
                 onClick={() => move(direction)}
                 className={`${NAV_BUTTON_CLASS} fixed z-40 ${POSITIONS[direction]}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                whileHover={reducedMotion ? undefined : { scale: 1.06 }}
+                whileTap={reducedMotion ? undefined : { scale: 0.94 }}
                 transition={fade}
               >
                 <Icon className="h-5 w-5" aria-hidden />

@@ -11,7 +11,7 @@ export function LanguageToggle() {
     <div
       role="group"
       aria-label={t.lang.groupLabel}
-      className="glass-panel flex h-10 items-center rounded-full bg-background/55 p-0.5"
+      className="system-panel flex h-10 items-center rounded-full p-0.5"
     >
       {LOCALES.map((code) => {
         const active = locale === code;

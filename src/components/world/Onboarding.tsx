@@ -9,6 +9,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { interpolate, useUi } from "../../i18n/hooks";
 import { usePersistentFlag } from "../../hooks/usePersistentFlag";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
+import { springUI } from "../../motion/systemMotion";
 import { useNavigationStore } from "../../stores/navigationStore";
 
 const SEEN_KEY = "portfolio:onboarding:v1";
@@ -193,17 +194,17 @@ export function Onboarding() {
               aria-modal="true"
               aria-labelledby="onboarding-title"
               aria-describedby="onboarding-body"
-              className="glass-panel max-h-[86dvh] w-full max-w-md overflow-y-auto rounded-3xl px-6 py-6 sm:px-7"
-              data-glass-shine="off"
+              className="system-panel max-h-[86dvh] w-full max-w-md overflow-y-auto rounded-3xl px-6 py-6 sm:px-7"
+              data-panel-shine="off"
               initial={reducedMotion ? false : { opacity: 0, y: 14, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={transition}
             >
-              <span className="glass-chip mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl">
+              <span className="system-chip mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl">
                 <Icon className="h-5 w-5 text-primary" aria-hidden />
               </span>
 
-              <p className="mb-1.5 text-[0.7rem] uppercase tracking-widest text-foreground/80">
+              <p className="system-label mb-1.5">
                 {interpolate(t.onboarding.progress, {
                   n: index + 1,
                   total: STEP_META.length,
@@ -227,7 +228,7 @@ export function Onboarding() {
                   {["←", "↑", "↓", "→", "W", "A", "S", "D"].map((key) => (
                     <kbd
                       key={key}
-                      className="glass-chip min-w-7 rounded-lg px-2 py-1 text-center text-xs font-medium text-foreground"
+                      className="system-chip min-w-7 rounded-lg px-2 py-1 text-center font-mono text-xs font-medium text-foreground"
                     >
                       {key}
                     </kbd>
@@ -263,7 +264,7 @@ export function Onboarding() {
                     type="button"
                     data-onboarding-primary
                     onClick={() => (isLast ? finish() : setIndex(index + 1))}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-gradient-primary px-5 py-2 text-sm font-medium text-primary-foreground shadow transition hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    className="system-cta gap-1.5 px-5 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     {isLast ? t.onboarding.done : t.onboarding.next}
                     {!isLast && <ArrowRight className="h-4 w-4" aria-hidden />}

@@ -2,7 +2,7 @@ import { ExternalLink, Github } from "lucide-react";
 import { useContent, useUi } from "../../i18n/hooks";
 import { getProjectImageLayout } from "../../lib/projectImageLayout";
 import { ProjectGallery } from "../projects/ProjectGallery";
-import { GlassPanel } from "../ui/GlassPanel";
+import { SystemPanel } from "../ui/SystemPanel";
 
 type ProjectDetailRoomProps = {
   projectId: string;
@@ -16,7 +16,7 @@ export function ProjectDetailRoom({ projectId }: ProjectDetailRoomProps) {
   if (!project) {
     return (
       <div className="flex min-h-full items-center justify-center px-6 pb-28 sm:pb-20">
-        <p className="text-foreground/85">{t.projectDetail.notFound}</p>
+        <p className="text-muted-foreground">{t.projectDetail.notFound}</p>
       </div>
     );
   }
@@ -27,82 +27,87 @@ export function ProjectDetailRoom({ projectId }: ProjectDetailRoomProps) {
     project.images?.length > 0 ? project.images : [project.image];
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col px-6 pb-28 pt-28 sm:px-8 sm:pb-20">
-      <ProjectGallery
-        title={project.title}
-        images={gallery}
-        layout={getProjectImageLayout(project)}
-      />
-
-      <h1 className="font-heading mb-4 text-3xl font-bold md:text-5xl">{project.title}</h1>
-      <p className="mb-8 text-lg text-foreground/90">{project.description}</p>
-
-      <div className="mb-8 flex flex-wrap gap-2">
-        {project.tech.map((tech) => (
-          <span
-            key={tech}
-            className="glass-chip rounded-full px-3 py-1.5 text-sm text-foreground"
-          >
-            {tech}
-          </span>
-        ))}
+    <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col px-6 pb-28 pt-28 sm:px-8 sm:pb-20">
+      <div className="relative z-20 -mx-2 sm:mx-0">
+        <ProjectGallery
+          title={project.title}
+          images={gallery}
+          layout={getProjectImageLayout(project)}
+        />
       </div>
 
-      <div className="mb-10 grid gap-4 md:grid-cols-2">
-        {project.problem && (
-          <GlassPanel className="rounded-2xl p-5">
-            <h2 className="font-heading mb-2 text-lg font-semibold text-foreground">
-              {t.projectDetail.problem}
-            </h2>
-            <p className="text-sm text-foreground/90">{project.problem}</p>
-          </GlassPanel>
-        )}
-        {project.solution && (
-          <GlassPanel className="rounded-2xl p-5">
-            <h2 className="font-heading mb-2 text-lg font-semibold text-foreground">
-              {t.projectDetail.solution}
-            </h2>
-            <p className="text-sm text-foreground/90">{project.solution}</p>
-          </GlassPanel>
-        )}
+      <div className="relative z-10 -mt-6 sm:-mt-10">
+        <SystemPanel shell className="rounded-2xl p-6 sm:p-8">
+          <h1 className="font-heading mb-4 text-3xl font-semibold tracking-tight md:text-4xl">
+            {project.title}
+          </h1>
+          <p className="mb-8 text-lg text-muted-foreground">{project.description}</p>
+
+          <div className="mb-8 flex flex-wrap gap-2">
+            {project.tech.map((tech) => (
+              <span
+                key={tech}
+                className="system-chip rounded-full px-3 py-1.5 font-mono text-xs text-foreground/90"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {project.problem && (
+              <div className="rounded-xl border border-border/60 bg-surface-far/30 p-5">
+                <h2 className="system-label mb-3 normal-case">{t.projectDetail.problem}</h2>
+                <p className="text-sm leading-relaxed text-foreground/90">{project.problem}</p>
+              </div>
+            )}
+            {project.solution && (
+              <div className="rounded-xl border border-border/60 bg-surface-far/30 p-5">
+                <h2 className="system-label mb-3 normal-case">{t.projectDetail.solution}</h2>
+                <p className="text-sm leading-relaxed text-foreground/90">{project.solution}</p>
+              </div>
+            )}
+          </div>
+        </SystemPanel>
       </div>
 
       {project.learnings && project.learnings.length > 0 && (
-        <div className="mb-10">
-          <h2 className="font-heading mb-3 text-lg font-semibold text-foreground">
-            {t.projectDetail.learnings}
-          </h2>
-          <ul className="space-y-2">
-            {project.learnings.map((item) => (
-              <li key={item} className="text-sm text-foreground/90">
-                <span className="mr-2 text-primary">•</span>
-                {item}
-              </li>
-            ))}
-          </ul>
+        <div className="relative z-0 -mt-8 opacity-80 sm:-mt-12">
+          <SystemPanel className="rounded-2xl p-5 sm:p-6">
+            <h2 className="font-heading mb-4 text-lg font-medium text-foreground">
+              {t.projectDetail.learnings}
+            </h2>
+            <ul className="space-y-2 border-l border-border pl-4">
+              {project.learnings.map((item) => (
+                <li key={item} className="text-sm text-muted-foreground">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </SystemPanel>
         </div>
       )}
 
-      <div className="flex flex-wrap gap-3">
+      <div className="relative z-10 mt-10 flex flex-wrap gap-3">
         {hasGithub && (
-          <GlassPanel
+          <SystemPanel
             as="a"
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
             interactive
-            className="inline-flex items-center gap-2 rounded-md px-5 py-2.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <Github className="h-4 w-4" aria-hidden />
             {t.projectDetail.github}
-          </GlassPanel>
+          </SystemPanel>
         )}
         {hasDemo && (
           <a
             href={project.demo}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md bg-gradient-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="system-cta gap-2 px-5 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <ExternalLink className="h-4 w-4" aria-hidden />
             {t.projectDetail.demo}

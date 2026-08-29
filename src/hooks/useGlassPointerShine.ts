@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 
-const GLASS_SELECTOR = ".glass-panel, .glass-chip";
+const PANEL_SELECTOR = ".system-panel, .system-chip, .glass-panel, .glass-chip";
 
 function clearShine(el: HTMLElement) {
+  el.style.removeProperty("--panel-x");
+  el.style.removeProperty("--panel-y");
+  el.style.setProperty("--panel-shine", "0");
   el.style.removeProperty("--glass-x");
   el.style.removeProperty("--glass-y");
   el.style.setProperty("--glass-shine", "0");
@@ -11,10 +14,13 @@ function clearShine(el: HTMLElement) {
 function setShine(el: HTMLElement, clientX: number, clientY: number) {
   const rect = el.getBoundingClientRect();
   if (rect.width <= 0 || rect.height <= 0) return;
-  const x = ((clientX - rect.left) / rect.width) * 100;
-  const y = ((clientY - rect.top) / rect.height) * 100;
-  el.style.setProperty("--glass-x", `${x}%`);
-  el.style.setProperty("--glass-y", `${y}%`);
+  const px = ((clientX - rect.left) / rect.width) * 100;
+  const py = ((clientY - rect.top) / rect.height) * 100;
+  el.style.setProperty("--panel-x", `${px}%`);
+  el.style.setProperty("--panel-y", `${py}%`);
+  el.style.setProperty("--panel-shine", "1");
+  el.style.setProperty("--glass-x", `${px}%`);
+  el.style.setProperty("--glass-y", `${py}%`);
   el.style.setProperty("--glass-shine", "1");
 }
 
@@ -28,9 +34,10 @@ export function useGlassPointerShine(enabled: boolean) {
     const onPointerMove = (event: PointerEvent) => {
       if (event.pointerType === "touch") return;
 
-      const target = (event.target as Element | null)?.closest?.(GLASS_SELECTOR);
+      const target = (event.target as Element | null)?.closest?.(PANEL_SELECTOR);
       if (
         !(target instanceof HTMLElement) ||
+        target.closest('[data-panel-shine="off"]') ||
         target.closest('[data-glass-shine="off"]')
       ) {
         if (active) {

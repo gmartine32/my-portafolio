@@ -52,7 +52,7 @@ export const rooms: Record<string, Room> = {
     x: -1,
     y: 0,
     right: "home",
-    down: "opensource",
+    down: "experience",
     componentKey: "about",
   },
   projects: {
@@ -70,7 +70,8 @@ export const rooms: Record<string, Room> = {
     x: 0,
     y: 1,
     up: "home",
-    left: "opensource",
+    down: "contact",
+    left: "about",
     componentKey: "experience",
   },
   contact: {
@@ -78,17 +79,15 @@ export const rooms: Record<string, Room> = {
     title: "Contacto",
     x: -1,
     y: 2,
-    up: "opensource",
+    up: "experience",
     componentKey: "contact",
   },
+  // Hidden for now — re-enable by restoring links in about/experience/contact
   opensource: {
     id: "opensource",
     title: "Open Source",
     x: -1,
     y: 1,
-    up: "about",
-    down: "contact",
-    right: "experience",
     componentKey: "opensource",
   },
   ...projectRooms,
