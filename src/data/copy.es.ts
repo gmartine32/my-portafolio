@@ -2,53 +2,54 @@ import type { ContentCopy } from "./copy";
 
 export const esCopy: ContentCopy = {
   profile: {
-    title: "Full Stack Engineer",
-    subtitle: "Frontend Developer | Ingeniero en Sistemas",
+    title: "Senior Full Stack & AI-Augmented Engineer",
+    subtitle: "Resolutor de Problemas Complejos | Frontend & Mobile Specialist | Ingeniero de Sistemas",
     greeting: "Hola, soy",
     status: "Disponible para nuevos retos",
-    bio: "Ingeniero en Sistemas y Desarrollador Full Stack (React, Next.js, React Native, Electron, Node.js, Spring Boot, Go y PostgreSQL). Experto en despliegue con Docker y Nginx; experiencia cloud y entregas end-to-end.",
+    bio: "Ingeniero de Sistemas y Senior Full Stack Engineer apasionado por desglosar y resolver problemas complejos de ingeniería. Pionero en flujos acelerados con IA (Cursor, Claude Code, RAG, Spec-Driven Development), creando arquitecturas escalables, resilientes y de alto impacto con React, Next.js, React Native, Node.js, Spring Boot, Go y PostgreSQL.",
     location: "Colombia, disponible remoto",
   },
   aboutCards: {
     historia: {
       title: "Historia",
-      summary: "Más de 4 años construyendo productos digitales.",
+      summary: "Más de 4 años desglosando problemas y construyendo productos digitales.",
       body: [
-        "Soy Ingeniero en Sistemas y Desarrollador con más de 4 años de experiencia creando soluciones digitales modernas. Desde mis inicios me apasionó el desarrollo frontend, pero he expandido mis habilidades hacia el backend, despliegues y bases de datos.",
-        "He trabajado en sectores energético, gubernamental y comercial, aplicando principios SOLID, arquitectura limpia y arquitectura hexagonal.",
+        "Soy Ingeniero de Sistemas y Desarrollador con más de 4 años de experiencia creando soluciones digitales de alto impacto. Me apasionan los problemas complejos: donde otros encuentran fricción o bloqueos, disfruto investigando la causa raíz y diseñando soluciones de software sólidas y elegantes.",
+        "He liderado y evolucionado plataformas críticas en sectores energético (750+ estaciones Terpel), gubernamental y comercial, combinando arquitectura limpia, principios SOLID y flujos modernos de desarrollo acelerado con inteligencia artificial.",
       ],
     },
     estudios: {
       title: "Estudios",
-      summary: "Ingeniería en Sistemas · credencial verificada en blockchain.",
+      summary: "Ingeniería de Sistemas · credencial oficial verificada en blockchain.",
       body: [
-        "Formación como Ingeniero en Sistemas en la Universidad de la Costa, con foco en ingeniería de software, arquitectura y desarrollo de productos.",
-        "La credencial de grado está emitida por la universidad y puede verificarse públicamente mediante Certika.",
-        "Aprendizaje continuo en frontend moderno, cloud, DevOps y prácticas de calidad de código.",
+        "Formación como Ingeniero de Sistemas en la Universidad de la Costa (CUC), graduado con mención de honor por rendimiento académico, enfocado en arquitectura de software, sistemas distribuidos y desarrollo de producto.",
+        "Credencial profesional emitida por la universidad y verificable en blockchain a través de Certika.",
+        "Aprendizaje continuo en inteligencia artificial generativa, RAG, sistemas cloud y observabilidad de calidad.",
       ],
     },
     tecnologias: {
-      title: "Tecnologías",
-      summary: "React, TypeScript, Node y cloud.",
+      title: "Tecnologías & IA",
+      summary: "React, Next, Spring Boot, Go, Cloud y flujos con IA.",
       body: [
-        "Stack principal: React, Next.js, React Native, Electron, TypeScript, Node.js, Spring Boot y Go.",
-        "También trabajo con Docker, Nginx, PostgreSQL, PL/SQL, Kafka, MongoDB, AWS y Azure para entregar soluciones completas.",
+        "Desarrollo potenciado con IA: Cursor, Claude Code, GitHub Copilot, Prompt & Context Engineering, Spec-Driven Development, pipelines RAG y APIs de modelos de lenguaje.",
+        "Frontend & Móvil: React, Next.js, React Native (Expo/EAS), Electron, TypeScript, Tailwind CSS.",
+        "Backend & Datos: Node.js, Spring Boot (Java), Go, Python (FastAPI), PostgreSQL, PL/SQL, Kafka, Docker, Nginx, AWS y Azure.",
       ],
     },
     filosofia: {
       title: "Filosofía",
-      summary: "Código limpio, UX clara, impacto real.",
+      summary: "Pasión por los problemas, foco en la solución y excelencia técnica.",
       body: [
-        "Priorizo experiencias fluidas, accesibles y mantenibles. Domino arquitecturas como SOLID, MVVM y Clean Architecture.",
-        "Aplico enfoques como Atomic Design para sistemas de UI consistentes, creando impacto y experiencias memorables.",
+        "Los problemas no son obstáculos; son el punto de partida de la innovación. Me apasiona entender a fondo el problema de negocio y de los usuarios para crear la arquitectura que mejor lo resuelva.",
+        "Combino código limpio (SOLID, Clean Architecture) con desarrollo asistido por IA para multiplicar la velocidad de entrega sin comprometer mantenibilidad ni cobertura de pruebas.",
       ],
     },
     pasatiempos: {
       title: "Pasatiempos",
-      summary: "Explorar UX, juegos y prototipos.",
+      summary: "Explorar UX, prototipos y experimentación con IA.",
       body: [
-        "Me gusta explorar interfaces, prototipar ideas y analizar cómo los videojuegos resuelven navegación y feedback.",
-        "También disfruto documentar aprendizajes y experimentar con animaciones y herramientas nuevas.",
+        "Me fascina explorar nuevas herramientas de IA, experimentar con flujos agénticos y analizar cómo los videojuegos resuelven interacción y retroalimentación.",
+        "También disfruto prototipar ideas independientes y optimizar herramientas de productividad para desarrollo.",
       ],
     },
   },
@@ -102,6 +103,16 @@ export const esCopy: ContentCopy = {
         "App React + Vite con backend Node.js e integración de Google Maps / Routes API; entrega rápida end-to-end para Populi.",
       learnings: ["Google Maps / Routes API", "Logística de rutas", "Entregas rápidas productivas"],
     },
+    santacruz: {
+      title: "Carnes Santa Cruz",
+      description:
+        "Landing page corporativa desarrollada en WordPress / CMS para carnicería boutique, entregada bajo requerimientos estrictos del cliente en 3 meses.",
+      problem:
+        "Necesidad de presencia digital corporativa con catálogo visual de cortes, alta velocidad y posicionamiento local en un plazo de tres meses.",
+      solution:
+        "Desarrollo y despliegue en WordPress CMS con diseño responsive a medida, optimización de imágenes WebP y SEO técnico.",
+      learnings: ["WordPress CMS a medida", "Optimización de assets y WebP", "Entrega por fases en 3 meses"],
+    },
     devitech: {
       description:
         "Desarrollo de landing page corporativa para una empresa tecnológica, optimizada para SEO y con diseño 100% responsivo.",
@@ -145,7 +156,7 @@ export const esCopy: ContentCopy = {
   },
   experiences: [
     {
-      position: "Full Stack Developer",
+      position: "Senior Full Stack & AI-Accelerated Engineer",
       period: "Nov 2021 - Presente",
       description:
         "Sistemas de gestión de combustible para más de 750 estaciones Terpel; stack React/Next/RN/Electron, Node, Spring Boot y migración a Go, con PostgreSQL, PL/SQL y Kafka bajo Scrum orientado a objetivos.",
@@ -153,23 +164,23 @@ export const esCopy: ContentCopy = {
         "Mejora operativa en sistemas usados por 750+ estaciones (−40% carga, −50% entrega)",
         "Frontend con React, Next.js, React Native y Electron; backends Node.js, Spring Boot y migración a Go",
         "Datos y mensajería con PostgreSQL, PL/SQL y Kafka",
-        "Scrum adaptado a objetivos; CI/CD con Azure DevOps (−50% tiempos de entrega)",
+        "Scrum adaptado a objetivos; CI/CD y flujos con IA (−50% tiempos de ciclo)",
       ],
     },
     {
-      position: "Founder & Full Stack Engineer",
-      period: "Ene 2024 - Presente",
+      position: "Founder & AI / Full Stack Engineer",
+      period: "Ene 2024 - Ene 2025",
       description:
         "Lector multiplataforma de EPUB y PDF con IA: React Native, Spring Boot y FastAPI para agentes, RAG e indexación.",
       achievements: [
         "Producto de lectura EPUB/PDF con asistencia de IA en React Native",
         "Backends Spring Boot y Python/FastAPI con pipeline RAG",
-        "Arquitectura limpia, sincronización y flujos de producto móvil",
+        "Desarrollo acelerado con flujos agénticos (Cursor, Claude Code) y especificaciones ejecutables",
       ],
     },
     {
-      position: "Full Stack Developer",
-      period: "2025 - Presente",
+      position: "Full Stack Developer (Contrato por Proyectos)",
+      period: "2024 - 2025",
       description:
         "Encargado personal de los desarrollos de Populi en modalidad independiente; entregas end-to-end rápidas con calidad productiva.",
       achievements: [
@@ -179,7 +190,7 @@ export const esCopy: ContentCopy = {
       ],
     },
     {
-      position: "Desarrollador Full Stack",
+      position: "Desarrollador Full Stack (Consultoría)",
       period: "Mayo 2025 - Junio 2025",
       description:
         "Desarrollé sitio corporativo en 30 días con Next.js y WordPress Headless, mejorando UX y SEO técnico.",
@@ -191,7 +202,18 @@ export const esCopy: ContentCopy = {
       ],
     },
     {
-      position: "Full Stack Developer",
+      position: "Desarrollador Web (Independiente)",
+      period: "Oct 2024 - Dic 2024",
+      description:
+        "Desarrollo y despliegue de landing page corporativa en WordPress CMS para Carnes Santa Cruz en un plazo de 3 meses.",
+      achievements: [
+        "Landing corporativa responsiva con catálogo de productos y foco en conversión",
+        "Optimización de assets en WebP y tiempos de carga",
+        "Configuración de hosting productivo y SEO técnico local",
+      ],
+    },
+    {
+      position: "Full Stack Developer (Proyecto Temporal)",
       period: "Sep 2024 - Dic 2024",
       description:
         "Plataforma web de caracterización vehicular y app móvil publicada en tiendas oficiales.",
@@ -201,7 +223,7 @@ export const esCopy: ContentCopy = {
       ],
     },
     {
-      position: "Frontend Developer",
+      position: "Frontend Developer (Freelance)",
       period: "Sep 2023 - Nov 2023",
       description: "Plataforma ecommerce y landing promocional orientadas a conversión.",
       achievements: [
@@ -210,7 +232,7 @@ export const esCopy: ContentCopy = {
       ],
     },
     {
-      position: "Full Stack Developer",
+      position: "Full Stack Developer (Freelance)",
       period: "Ene 2022 - Jul 2022",
       description: "Servicio de reportería para tiendas Etsy con Node.js.",
       achievements: [
@@ -219,7 +241,7 @@ export const esCopy: ContentCopy = {
       ],
     },
     {
-      position: "Frontend Developer",
+      position: "Frontend Developer (Freelance)",
       period: "Ene 2022 - Jul 2022",
       description: "Landing promocional con despliegue optimizado en hosting propio.",
       achievements: [

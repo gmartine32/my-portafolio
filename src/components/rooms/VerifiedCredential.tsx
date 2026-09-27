@@ -63,10 +63,15 @@ export function VerifiedCredential({
           </span>
         </div>
 
-        <div className="flex items-start gap-3">
-          <span className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-surface-mid/70 text-primary">
-            <Link2 className="h-4 w-4" aria-hidden />
-          </span>
+        <div className="flex items-start gap-4">
+          <div className="relative mt-0.5 flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-primary/25 bg-surface-mid/60 p-1.5 shadow-md shadow-primary/5 transition-transform duration-300 hover:scale-105">
+            <img
+              src="/img/credentials/insignia-prof-ing-sistemas.webp"
+              alt="Insignia Profesional de Ingeniería de Sistemas"
+              className="h-full w-full object-contain"
+              loading="lazy"
+            />
+          </div>
           <div className="min-w-0 flex-1">
             <h4 className="font-heading text-xl font-medium text-foreground sm:text-2xl">
               {degree}

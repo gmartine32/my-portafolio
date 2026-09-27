@@ -61,6 +61,7 @@ export type Project = {
   problem?: string;
   solution?: string;
   learnings?: string[];
+  layout?: "mobile" | "desktop";
 };
 
 export type Experience = {

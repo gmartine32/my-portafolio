@@ -2,53 +2,54 @@ import type { ContentCopy } from "./copy";
 
 export const enCopy: ContentCopy = {
   profile: {
-    title: "Full Stack Engineer",
-    subtitle: "Frontend Developer | Systems Engineer",
+    title: "Senior Full Stack & AI-Augmented Engineer",
+    subtitle: "Complex Problem Solver | Frontend & Mobile Specialist | Systems Engineer",
     greeting: "Hi, I'm",
     status: "Available for new challenges",
-    bio: "Systems Engineer and Full Stack Developer (React, Next.js, React Native, Electron, Node.js, Spring Boot, Go, and PostgreSQL). Experienced in Docker and Nginx deployments, cloud work, and end-to-end delivery.",
+    bio: "Systems Engineer and Senior Full Stack Engineer passionate about dissecting and solving complex engineering challenges. Pioneer in AI-augmented workflows (Cursor, Claude Code, RAG, Spec-Driven Development), building scalable, resilient, and high-impact systems with React, Next.js, React Native, Node.js, Spring Boot, Go, and PostgreSQL.",
     location: "Colombia, available remotely",
   },
   aboutCards: {
     historia: {
       title: "Story",
-      summary: "4+ years building digital products.",
+      summary: "4+ years breaking down hard problems and shipping digital products.",
       body: [
-        "I'm a Systems Engineer and developer with more than 4 years of experience creating modern digital solutions. I started in love with frontend, then grew into backend, deployments, and databases.",
-        "I have worked in energy, government, and commercial sectors, applying SOLID principles, clean architecture, and hexagonal architecture.",
+        "I am a Systems Engineer and Developer with more than 4 years of experience delivering high-impact digital solutions. I thrive on complex problems: where others see friction or blockers, I take pride in discovering the root cause and designing resilient, elegant software systems.",
+        "I have led and evolved critical platforms across energy (750+ Terpel stations), government, and commercial sectors, combining clean architecture, SOLID principles, and cutting-edge AI-accelerated engineering workflows.",
       ],
     },
     estudios: {
       title: "Studies",
-      summary: "Systems Engineering · blockchain-verified credential.",
+      summary: "Systems Engineering · blockchain-verified official credential.",
       body: [
-        "Systems Engineering degree from Universidad de la Costa, focused on software engineering, architecture, and product development.",
-        "The graduation credential was issued by the university and can be publicly verified through Certika.",
-        "Ongoing learning in modern frontend, cloud, DevOps, and code-quality practices.",
+        "Systems Engineering degree from Universidad de la Costa (CUC), graduated with academic honors, focused on software architecture, distributed systems, and product development.",
+        "Official graduation credential issued by the university and publicly verifiable on blockchain through Certika.",
+        "Continuous learning in generative AI, RAG pipelines, cloud architectures, and production-grade observability.",
       ],
     },
     tecnologias: {
-      title: "Technologies",
-      summary: "React, TypeScript, Node, and cloud.",
+      title: "Technologies & AI",
+      summary: "React, Next, Spring Boot, Go, Cloud, and AI workflows.",
       body: [
-        "Core stack: React, Next.js, React Native, Electron, TypeScript, Node.js, Spring Boot, and Go.",
-        "I also work with Docker, Nginx, PostgreSQL, PL/SQL, Kafka, MongoDB, AWS, and Azure to ship complete solutions.",
+        "AI-Augmented Development: Cursor, Claude Code, GitHub Copilot, Prompt & Context Engineering, Spec-Driven Development, RAG pipelines, and LLM APIs.",
+        "Frontend & Mobile: React, Next.js, React Native (Expo/EAS), Electron, TypeScript, Tailwind CSS.",
+        "Backend & Data: Node.js, Spring Boot (Java), Go, Python (FastAPI), PostgreSQL, PL/SQL, Kafka, Docker, Nginx, AWS, and Azure.",
       ],
     },
     filosofia: {
       title: "Philosophy",
-      summary: "Clean code, clear UX, real impact.",
+      summary: "Passion for problems, focus on solutions, and technical excellence.",
       body: [
-        "I prioritize fluid, accessible, and maintainable experiences. I work with architectures such as SOLID, MVVM, and Clean Architecture.",
-        "I apply approaches like Atomic Design for consistent UI systems, aiming for memorable experiences and real impact.",
+        "Problems are not obstacles; they are the genesis of innovation. I immerse myself into understanding the business and user problem deeply so that the architecture directly resolves it.",
+        "I combine clean code (SOLID, Clean Architecture) with agentic AI tooling to accelerate delivery speed while preserving strict test coverage and maintainability.",
       ],
     },
     pasatiempos: {
       title: "Hobbies",
-      summary: "Exploring UX, games, and prototypes.",
+      summary: "Exploring UX, prototypes, and AI experimentation.",
       body: [
-        "I enjoy exploring interfaces, prototyping ideas, and studying how games solve navigation and feedback.",
-        "I also like documenting what I learn and experimenting with animation and new tools.",
+        "I enjoy exploring emergent AI developer tools, experimenting with agentic pipelines, and analyzing how modern games design interaction and feedback.",
+        "I also love prototyping independent ideas and optimizing developer productivity tooling.",
       ],
     },
   },
@@ -105,6 +106,16 @@ export const enCopy: ContentCopy = {
         "React + Vite app with a Node.js backend and Google Maps / Routes API; a fast end-to-end delivery for Populi.",
       learnings: ["Google Maps / Routes API", "Route logistics", "Fast production deliveries"],
     },
+    santacruz: {
+      title: "Carnes Santa Cruz",
+      description:
+        "Corporate landing page built on WordPress / CMS for a premium meat boutique, delivered within a 3-month timeline following client requirements.",
+      problem:
+        "Establish a corporate digital footprint with an engaging product catalog, fast load times, and local SEO in a 3-month timeframe.",
+      solution:
+        "Tailored WordPress CMS development with 100% responsive design, WebP asset optimization, technical SEO, and production hosting configuration.",
+      learnings: ["Custom WordPress CMS", "Conversion & local SEO", "Phased delivery over 3 months"],
+    },
     devitech: {
       title: "Devitech landing page",
       description:
@@ -151,7 +162,7 @@ export const enCopy: ContentCopy = {
   },
   experiences: [
     {
-      position: "Full Stack Developer",
+      position: "Senior Full Stack & AI-Accelerated Engineer",
       period: "Nov 2021 – Present",
       description:
         "Fuel-management systems for 750+ Terpel stations; React/Next/RN/Electron stack, Node, Spring Boot and a migration to Go, with PostgreSQL, PL/SQL, and Kafka under goal-oriented Scrum.",
@@ -159,24 +170,24 @@ export const enCopy: ContentCopy = {
         "Operational gains on systems used by 750+ stations (−40% load, −50% delivery time)",
         "Frontend with React, Next.js, React Native, and Electron; backends in Node.js, Spring Boot, and a migration to Go",
         "Data and messaging with PostgreSQL, PL/SQL, and Kafka",
-        "Goal-adapted Scrum; CI/CD with Azure DevOps (−50% delivery times)",
+        "Goal-adapted Scrum; CI/CD and AI-assisted workflows (−50% cycle time)",
       ],
     },
     {
-      position: "Founder & Full Stack Engineer",
-      period: "Jan 2024 – Present",
+      position: "Founder & AI / Full Stack Engineer",
+      period: "Jan 2024 – Jan 2025",
       description:
         "Cross-platform EPUB and PDF reader with AI: React Native, Spring Boot, and FastAPI for agents, RAG, and indexing.",
       achievements: [
         "EPUB/PDF reading product with AI assistance in React Native",
         "Spring Boot and Python/FastAPI backends with a RAG pipeline",
-        "Clean architecture, sync, and mobile product flows",
+        "Accelerated development using agentic workflows (Cursor, Claude Code) and executable specs",
       ],
     },
     {
-      position: "Full Stack Developer",
+      position: "Full Stack Developer (Contract by Projects)",
       company: "Populi S.A. – Independent",
-      period: "2025 – Present",
+      period: "2024 – 2025",
       description:
         "Personally responsible for Populi's development as an independent; fast end-to-end deliveries at production quality.",
       achievements: [
@@ -186,7 +197,7 @@ export const enCopy: ContentCopy = {
       ],
     },
     {
-      position: "Full Stack Developer",
+      position: "Full Stack Developer (Consulting)",
       company: "Devitech – One-off project",
       period: "May 2025 – June 2025",
       description:
@@ -199,7 +210,19 @@ export const enCopy: ContentCopy = {
       ],
     },
     {
-      position: "Full Stack Developer",
+      position: "Web Developer (Independent)",
+      company: "Carnes Santa Cruz – Independent",
+      period: "Oct 2024 – Dec 2024",
+      description:
+        "Developed and deployed a corporate landing page in WordPress CMS for Carnes Santa Cruz within a 3-month delivery window.",
+      achievements: [
+        "Responsive corporate landing with meat cuts catalog and conversion focus",
+        "WebP asset optimization and fast load times",
+        "Production hosting setup and local technical SEO",
+      ],
+    },
+    {
+      position: "Full Stack Developer (Temporary Project)",
       company: "MoviSAI – Gov. of San Andrés",
       period: "Sep 2024 – Dec 2024",
       description:
@@ -210,7 +233,7 @@ export const enCopy: ContentCopy = {
       ],
     },
     {
-      position: "Frontend Developer",
+      position: "Frontend Developer (Freelance)",
       company: "Begima (Mexico) – Freelance",
       period: "Sep 2023 – Nov 2023",
       description: "Ecommerce platform and promotional landing focused on conversion.",
@@ -220,7 +243,7 @@ export const enCopy: ContentCopy = {
       ],
     },
     {
-      position: "Full Stack Developer",
+      position: "Full Stack Developer (Freelance)",
       period: "Jan 2022 – Jul 2022",
       description: "Reporting service for Etsy shops with Node.js.",
       achievements: [
@@ -229,7 +252,7 @@ export const enCopy: ContentCopy = {
       ],
     },
     {
-      position: "Frontend Developer",
+      position: "Frontend Developer (Freelance)",
       period: "Jan 2022 – Jul 2022",
       description: "Promotional landing with an optimized deploy on self-hosted infrastructure.",
       achievements: [

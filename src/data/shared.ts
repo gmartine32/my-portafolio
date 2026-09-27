@@ -36,6 +36,11 @@ export const skills = [
   "Nginx",
   "AWS",
   "Azure",
+  "AI-Augmented Development",
+  "RAG Pipelines",
+  "Prompt Engineering",
+  "Spec-Driven Development",
+  "Cursor & Claude Code",
   "SOLID Principles",
   "Clean Architecture",
   "Hexagonal Architecture",
@@ -70,6 +75,7 @@ export const PROJECT_IDS = [
   "premios-perrenque",
   "haceb",
   "odr",
+  "santacruz",
   "devitech",
   "kiexchange",
   "nvd-searcher",
@@ -79,7 +85,10 @@ export const PROJECT_IDS = [
 
 export type ProjectId = (typeof PROJECT_IDS)[number];
 
-type ProjectShared = Pick<Project, "image" | "images" | "tech" | "github" | "demo" | "featured"> & {
+type ProjectShared = Pick<
+  Project,
+  "image" | "images" | "tech" | "github" | "demo" | "featured" | "layout"
+> & {
   title: string;
 };
 
@@ -96,7 +105,13 @@ export const projectShared: Record<ProjectId, ProjectShared> = {
   papyria: {
     title: "Papyria",
     image: "/img/projects/papyria/01.webp",
-    images: ["/img/projects/papyria/01.webp", "/img/projects/papyria/02.webp"],
+    images: [
+      "/img/projects/papyria/01.webp",
+      "/img/projects/papyria/02.webp",
+      "/img/projects/papyria/03.webp",
+      "/img/projects/papyria/04.webp",
+      "/img/projects/papyria/05.webp",
+    ],
     tech: ["React Native", "Spring Boot", "Python", "FastAPI", "RAG"],
     github: "#",
     demo: "#",
@@ -148,9 +163,26 @@ export const projectShared: Record<ProjectId, ProjectShared> = {
   },
   odr: {
     title: "ODR – Rutas y transporte",
-    image: "/img/devitech.webp",
-    images: ["/img/devitech.webp"],
+    image: "/img/projects/odr/01.webp",
+    images: [
+      "/img/projects/odr/01.webp",
+      "/img/projects/odr/02.webp",
+    ],
     tech: ["React", "Vite", "Node.js", "Google Maps API"],
+    layout: "mobile",
+    github: "#",
+    demo: "#",
+    featured: true,
+  },
+  santacruz: {
+    title: "Carnes Santa Cruz",
+    image: "/img/projects/santacruz/01.webp",
+    images: [
+      "/img/projects/santacruz/01.webp",
+      "/img/projects/santacruz/02.webp",
+      "/img/projects/santacruz/03.webp",
+    ],
+    tech: ["WordPress", "CMS", "SEO", "Responsive Design"],
     github: "#",
     demo: "#",
     featured: true,
@@ -268,6 +300,10 @@ export const experienceShared = [
   {
     company: "Devitech – Proyecto puntual",
     tech: ["Next.js", "WordPress Headless", "Nginx", "VPS"],
+  },
+  {
+    company: "Carnes Santa Cruz – Independiente",
+    tech: ["WordPress", "CMS", "SEO", "Responsive Design"],
   },
   {
     company: "MoviSAI – Gob. de San Andrés",

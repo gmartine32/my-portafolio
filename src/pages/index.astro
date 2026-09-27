@@ -8,9 +8,9 @@ const siteBase = Astro.site || Astro.url.origin;
 const canonicalURL = new URL(Astro.url.pathname, siteBase);
 const pageTitle = "Espacio de Gian Martínez";
 const pageDescription =
-	"Full Stack Engineer. Portafolio interactivo con proyectos, experiencia y contacto.";
+	"Senior Full Stack & AI-Augmented Engineer. Portafolio interactivo con proyectos, experiencia y contacto.";
 const ogImage = new URL("/img/og/espacio-gian-martinez.jpg", siteBase);
-const ogImageAlt = "Espacio de Gian Martínez — Full Stack Engineer";
+const ogImageAlt = "Espacio de Gian Martínez — Senior Full Stack & AI-Augmented Engineer";
 ---
 
 <html lang="es">
@@ -24,7 +24,7 @@ const ogImageAlt = "Espacio de Gian Martínez — Full Stack Engineer";
 		<meta name="description" content={pageDescription} />
 		<meta
 			name="keywords"
-			content="Gian Martinez, Gian Martinez Frontend, Gian Martinez Software, Gian Martinez Developer, Ingeniero de Software, Full Stack Developer, React Developer"
+			content="Gian Martinez, Gian Martinez Frontend, Gian Martinez AI, AI-Augmented Developer, Senior Full Stack Engineer, Ingeniero de Software, React, Next.js, React Native, Spring Boot, Go, Cursor, Claude Code, RAG"
 		/>
 		<meta name="author" content="Gian Martínez" />
 		<meta property="og:title" content={pageTitle} />
@@ -46,13 +46,25 @@ const ogImageAlt = "Espacio de Gian Martínez — Full Stack Engineer";
 			"@context": "https://schema.org/",
 			"@type": "Person",
 			"name": "Gian Martínez",
-			"jobTitle": "Full Stack Engineer",
+			"jobTitle": "Senior Full Stack & AI-Augmented Engineer",
 			"url": "https://gianmartinez.space",
 			"sameAs": [
 				"https://www.linkedin.com/in/gianmartinezvilla",
 				"https://github.com/gmartine32"
 			],
-			"knowsAbout": ["Frontend Development", "Software Engineering", "React", "Next.js", "Astro", "Full Stack"],
+			"knowsAbout": [
+				"Frontend Development",
+				"Software Engineering",
+				"AI-Augmented Development",
+				"RAG Pipelines",
+				"Spec-Driven Development",
+				"React",
+				"Next.js",
+				"React Native",
+				"Spring Boot",
+				"Go",
+				"Full Stack"
+			],
 			"hasCredential": {
 				"@type": "EducationalOccupationalCredential",
 				"name": "Ingeniería de Sistemas",
